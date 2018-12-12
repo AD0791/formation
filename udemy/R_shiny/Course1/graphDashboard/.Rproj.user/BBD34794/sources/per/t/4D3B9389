@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1542207174385.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "981260439",
+    "id" : "4D3B9389",
+    "lastKnownWriteTime" : 1542209658,
+    "last_content_update" : 1542209658911,
+    "path" : "~/Documents/The-Master-Plan/udemy/R_shiny/graphDashboard/mygraphcode.R",
+    "project_path" : "mygraphcode.R",
+    "properties" : {
+        "cursorPosition" : "14,0",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

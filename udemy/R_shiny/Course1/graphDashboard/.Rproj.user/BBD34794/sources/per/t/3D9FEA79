@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1542209870729.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3661577982",
+    "id" : "3D9FEA79",
+    "lastKnownWriteTime" : 1542222042,
+    "last_content_update" : 1542222042347,
+    "path" : "~/Documents/The-Master-Plan/udemy/R_shiny/graphDashboard/graphdashboard.Rmd",
+    "project_path" : "graphdashboard.Rmd",
+    "properties" : {
+        "cursorPosition" : "36,17",
+        "scrollLine" : "9",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

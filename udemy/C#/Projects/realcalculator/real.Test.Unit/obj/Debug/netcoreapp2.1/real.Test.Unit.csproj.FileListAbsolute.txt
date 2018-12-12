@@ -1,0 +1,17 @@
+/Users/alexandrodisla/Projects/realcalculator/real.Test.Unit/obj/Debug/netcoreapp2.1/real.Test.Unit.csprojAssemblyReference.cache
+/Users/alexandrodisla/Projects/realcalculator/real.Test.Unit/obj/Debug/netcoreapp2.1/real.Test.Unit.csproj.CoreCompileInputs.cache
+/Users/alexandrodisla/Projects/realcalculator/real.Test.Unit/obj/Debug/netcoreapp2.1/real.Test.Unit.AssemblyInfoInputs.cache
+/Users/alexandrodisla/Projects/realcalculator/real.Test.Unit/obj/Debug/netcoreapp2.1/real.Test.Unit.AssemblyInfo.cs
+/Users/alexandrodisla/Projects/realcalculator/real.Test.Unit/bin/Debug/netcoreapp2.1/Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+/Users/alexandrodisla/Projects/realcalculator/real.Test.Unit/bin/Debug/netcoreapp2.1/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+/Users/alexandrodisla/Projects/realcalculator/real.Test.Unit/bin/Debug/netcoreapp2.1/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+/Users/alexandrodisla/Projects/realcalculator/real.Test.Unit/bin/Debug/netcoreapp2.1/real.Test.Unit.deps.json
+/Users/alexandrodisla/Projects/realcalculator/real.Test.Unit/bin/Debug/netcoreapp2.1/real.Test.Unit.runtimeconfig.json
+/Users/alexandrodisla/Projects/realcalculator/real.Test.Unit/bin/Debug/netcoreapp2.1/real.Test.Unit.runtimeconfig.dev.json
+/Users/alexandrodisla/Projects/realcalculator/real.Test.Unit/bin/Debug/netcoreapp2.1/real.Test.Unit.dll
+/Users/alexandrodisla/Projects/realcalculator/real.Test.Unit/bin/Debug/netcoreapp2.1/real.Test.Unit.pdb
+/Users/alexandrodisla/Projects/realcalculator/real.Test.Unit/bin/Debug/netcoreapp2.1/realcalculator.dll
+/Users/alexandrodisla/Projects/realcalculator/real.Test.Unit/bin/Debug/netcoreapp2.1/realcalculator.pdb
+/Users/alexandrodisla/Projects/realcalculator/real.Test.Unit/obj/Debug/netcoreapp2.1/real.Test.Unit.csproj.CopyComplete
+/Users/alexandrodisla/Projects/realcalculator/real.Test.Unit/obj/Debug/netcoreapp2.1/real.Test.Unit.dll
+/Users/alexandrodisla/Projects/realcalculator/real.Test.Unit/obj/Debug/netcoreapp2.1/real.Test.Unit.pdb

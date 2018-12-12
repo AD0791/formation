@@ -1,0 +1,8 @@
+INFO: deactivate-gfortran_osx-64.sh made the following environmental changes:
+-DEBUG_FFLAGS=-march=nocona -mtune=core2 -ftree-vectorize -fPIC -fstack-protector -O2 -pipe -march=nocona -mtune=core2 -ftree-vectorize -fPIC -fstack-protector -O2 -pipe -Og -g -Wall -Wextra -fcheck=all -fbacktrace -fimplicit-none -fvar-tracking-assignments
+-F95=/Users/alexandrodisla/anaconda3/bin/x86_64-apple-darwin13.4.0-gfortran
+-FC=/Users/alexandrodisla/anaconda3/bin/x86_64-apple-darwin13.4.0-gfortran
+-FFLAGS=-march=nocona -mtune=core2 -ftree-vectorize -fPIC -fstack-protector -O2 -pipe
+-FORTRANFLAGS=-march=nocona -mtune=core2 -ftree-vectorize -fPIC -fstack-protector -O2 -pipe
+-GFORTRAN=/Users/alexandrodisla/anaconda3/bin/x86_64-apple-darwin13.4.0-gfortran
+]0;~/Documents/The-Master-Plan/udemy/R_shiny/shinyEvaluationDashboard[?1034hAlexandros-MacBook-Pro:shinyEvaluationDashboard alexandrodisla$ 

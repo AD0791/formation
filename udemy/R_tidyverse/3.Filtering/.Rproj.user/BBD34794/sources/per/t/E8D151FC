@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1542553104134.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4106663659",
+    "id" : "E8D151FC",
+    "lastKnownWriteTime" : 1542554280,
+    "last_content_update" : 1542554280894,
+    "path" : "~/Documents/The-Master-Plan/udemy/R_tidyverse/3.Filtering/Filtering.R",
+    "project_path" : "Filtering.R",
+    "properties" : {
+        "cursorPosition" : "13,0",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

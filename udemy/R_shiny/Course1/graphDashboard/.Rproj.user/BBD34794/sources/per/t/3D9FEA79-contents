@@ -1,0 +1,44 @@
+---
+title: "Graph dashboard"
+output: 
+  flexdashboard::flex_dashboard
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(DT)
+source("mygraphcode.R")
+k = reactive(mmg(input$nNodes))
+```
+
+Input {.sidebar}
+-----------------------------------------------------------------------
+
+### Inputs
+
+```{r}
+numericInput("nNodes","how many nodes",60,min = 1,max = 10000)
+```
+
+Column 
+-----------------------------------------------------------------------
+
+### Graph
+
+```{r}
+renderVisNetwork({
+   k() %>%pg()
+})
+```
+
+### Data table
+```{r}
+renderDataTable({
+    k() %>% 
+    as_long_data_frame() %>%
+    datatable()
+})
+```
+
+

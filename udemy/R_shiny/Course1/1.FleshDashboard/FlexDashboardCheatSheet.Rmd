@@ -1,0 +1,37 @@
+---
+title: "Flex Dashboard Cheat Sheet"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns/rows
+    vertical_layout: fill/scroll
+    storyboard: true
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+
+```
+
+Header Level 1
+=====================================
+
+Header Level 2
+-------------------------------------
+
+### Header Level 3
+```{r}
+renderPlot({plot(cars)})
+```
+
+Page > Column > Rows or Tabs
+Page > Rows > Columns or Tabs
+
+Storyboard (using header level 3 to define the pages)
+*** 
+Commentary for story board
+
+{data-orientation=rows} L1
+{.sidebar} L1 Global, L2 Page
+{data-height=}{data-width=} L2
+{.tabset .tabset-fade} L2
+{.mobile}{.no-mobile} L3

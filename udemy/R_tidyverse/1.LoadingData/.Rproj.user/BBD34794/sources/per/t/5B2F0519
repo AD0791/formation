@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1542424300204.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2841617326",
+    "id" : "5B2F0519",
+    "lastKnownWriteTime" : 1542424179,
+    "last_content_update" : 1542424179,
+    "path" : "~/Documents/The-Master-Plan/udemy/R_tidyverse/1.LoadingData/LoadData.R",
+    "project_path" : "LoadData.R",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

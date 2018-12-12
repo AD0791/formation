@@ -1,0 +1,33 @@
+---
+title: "Evaluation_dashboard"
+output: flexdashboard::flex_dashboard
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+  source("msum.R")
+vstring = starwars%>%select_if(is.character)%>%names()
+```
+
+Input {.sidebar}
+-----------------------------------------------------------------------
+
+```{r}
+selectInput("fby", "Filter By",choices = vstring, selected = "name")
+textInput("fvalue", "Filter Value")
+selectInput("grvalue", "Groupe By",choices = vstring,multiple = T)
+```
+
+Output
+-----------------------------------------------------------------------
+
+### Chart 
+
+```{r}
+renderTable(
+  {
+    starwars%>%msum(fby = input$fby,fvalue = input$fvalue,
+                    grvalue = input$grvalue)
+  }
+)
+```

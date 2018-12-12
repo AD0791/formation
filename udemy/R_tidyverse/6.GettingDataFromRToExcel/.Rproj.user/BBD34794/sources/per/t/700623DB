@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1542650669393.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "16085617",
+    "id" : "700623DB",
+    "lastKnownWriteTime" : 1542650824,
+    "last_content_update" : 1542650824350,
+    "path" : "~/Documents/The-Master-Plan/udemy/R_tidyverse/6.GettingDataFromRToExcel/ExportData.R",
+    "project_path" : "ExportData.R",
+    "properties" : {
+        "cursorPosition" : "9,0",
+        "scrollLine" : "1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
