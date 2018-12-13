@@ -1,5 +1,4 @@
 ---
-
 title: "Template"
 
 output:
@@ -7,7 +6,6 @@ output:
   flexdashboard::flex_dashboard
 
 runtime: shiny
-
 ---
 
 
@@ -32,7 +30,6 @@ updateData <- reactive(
 
 
 Column {.sidebar}
-
 ------------------------------------------------------------------
 
 ```{r}
@@ -45,12 +42,10 @@ selectInput(inputId = "Metric",label = "Metric",choices = names(select_if(startD
 
 
 Column
-
 ------------------------------------------------------------------
 
 
 ### Plot
-
 ```{r}
 
 renderPlot({
@@ -68,7 +63,6 @@ updateData() %>%
 
 
 ### Table
-
 ```{r}
 
 renderDT(
