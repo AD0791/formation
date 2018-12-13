@@ -1,0 +1,6 @@
+/Users/spetz/Workspace/Packt/Full stack .NET Core web development/Project/Cubo/src/Cubo.Core/bin/Debug/netstandard1.4/Cubo.Core.deps.json
+/Users/spetz/Workspace/Packt/Full stack .NET Core web development/Project/Cubo/src/Cubo.Core/bin/Debug/netstandard1.4/Cubo.Core.dll
+/Users/spetz/Workspace/Packt/Full stack .NET Core web development/Project/Cubo/src/Cubo.Core/bin/Debug/netstandard1.4/Cubo.Core.pdb
+/Users/spetz/Workspace/Packt/Full stack .NET Core web development/Project/Cubo/src/Cubo.Core/obj/Debug/netstandard1.4/Cubo.Core.AssemblyInfo.cs
+/Users/spetz/Workspace/Packt/Full stack .NET Core web development/Project/Cubo/src/Cubo.Core/obj/Debug/netstandard1.4/Cubo.Core.dll
+/Users/spetz/Workspace/Packt/Full stack .NET Core web development/Project/Cubo/src/Cubo.Core/obj/Debug/netstandard1.4/Cubo.Core.pdb

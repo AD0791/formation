@@ -1,0 +1,16 @@
+/Users/spetz/Workspace/Packt/Full stack .NET Core web development/Project/Cubo/tests/Cubo.Tests.EndToEnd/bin/Debug/netcoreapp1.1/xunit.runner.visualstudio.dotnetcore.testadapter.dll
+/Users/spetz/Workspace/Packt/Full stack .NET Core web development/Project/Cubo/tests/Cubo.Tests.EndToEnd/bin/Debug/netcoreapp1.1/xunit.runner.utility.netstandard15.dll
+/Users/spetz/Workspace/Packt/Full stack .NET Core web development/Project/Cubo/tests/Cubo.Tests.EndToEnd/bin/Debug/netcoreapp1.1/xunit.runner.reporters.netstandard15.dll
+/Users/spetz/Workspace/Packt/Full stack .NET Core web development/Project/Cubo/tests/Cubo.Tests.EndToEnd/bin/Debug/netcoreapp1.1/Cubo.Tests.EndToEnd.deps.json
+/Users/spetz/Workspace/Packt/Full stack .NET Core web development/Project/Cubo/tests/Cubo.Tests.EndToEnd/bin/Debug/netcoreapp1.1/Cubo.Tests.EndToEnd.runtimeconfig.json
+/Users/spetz/Workspace/Packt/Full stack .NET Core web development/Project/Cubo/tests/Cubo.Tests.EndToEnd/bin/Debug/netcoreapp1.1/Cubo.Tests.EndToEnd.runtimeconfig.dev.json
+/Users/spetz/Workspace/Packt/Full stack .NET Core web development/Project/Cubo/tests/Cubo.Tests.EndToEnd/bin/Debug/netcoreapp1.1/Cubo.Tests.EndToEnd.dll
+/Users/spetz/Workspace/Packt/Full stack .NET Core web development/Project/Cubo/tests/Cubo.Tests.EndToEnd/bin/Debug/netcoreapp1.1/Cubo.Tests.EndToEnd.pdb
+/Users/spetz/Workspace/Packt/Full stack .NET Core web development/Project/Cubo/tests/Cubo.Tests.EndToEnd/obj/Debug/netcoreapp1.1/Cubo.Tests.EndToEnd.AssemblyInfo.cs
+/Users/spetz/Workspace/Packt/Full stack .NET Core web development/Project/Cubo/tests/Cubo.Tests.EndToEnd/obj/Debug/netcoreapp1.1/Cubo.Tests.EndToEnd.dll
+/Users/spetz/Workspace/Packt/Full stack .NET Core web development/Project/Cubo/tests/Cubo.Tests.EndToEnd/obj/Debug/netcoreapp1.1/Cubo.Tests.EndToEnd.pdb
+/Users/spetz/Workspace/Packt/Full stack .NET Core web development/Project/Cubo/tests/Cubo.Tests.EndToEnd/bin/Debug/netcoreapp1.1/Cubo.Api.dll
+/Users/spetz/Workspace/Packt/Full stack .NET Core web development/Project/Cubo/tests/Cubo.Tests.EndToEnd/bin/Debug/netcoreapp1.1/Cubo.Core.dll
+/Users/spetz/Workspace/Packt/Full stack .NET Core web development/Project/Cubo/tests/Cubo.Tests.EndToEnd/bin/Debug/netcoreapp1.1/Cubo.Core.pdb
+/Users/spetz/Workspace/Packt/Full stack .NET Core web development/Project/Cubo/tests/Cubo.Tests.EndToEnd/bin/Debug/netcoreapp1.1/Cubo.Api.pdb
+/Users/spetz/Workspace/Packt/Full stack .NET Core web development/Project/Cubo/tests/Cubo.Tests.EndToEnd/bin/Debug/netcoreapp1.1/appsettings.json

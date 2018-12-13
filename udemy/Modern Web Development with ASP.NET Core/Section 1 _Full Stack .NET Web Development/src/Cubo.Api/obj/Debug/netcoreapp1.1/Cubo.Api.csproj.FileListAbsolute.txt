@@ -1,0 +1,10 @@
+/Users/spetz/Workspace/Packt/Full stack .NET Core web development/Project/Cubo/src/Cubo.Api/bin/Debug/netcoreapp1.1/Cubo.Api.deps.json
+/Users/spetz/Workspace/Packt/Full stack .NET Core web development/Project/Cubo/src/Cubo.Api/bin/Debug/netcoreapp1.1/Cubo.Api.runtimeconfig.json
+/Users/spetz/Workspace/Packt/Full stack .NET Core web development/Project/Cubo/src/Cubo.Api/bin/Debug/netcoreapp1.1/Cubo.Api.runtimeconfig.dev.json
+/Users/spetz/Workspace/Packt/Full stack .NET Core web development/Project/Cubo/src/Cubo.Api/bin/Debug/netcoreapp1.1/Cubo.Api.dll
+/Users/spetz/Workspace/Packt/Full stack .NET Core web development/Project/Cubo/src/Cubo.Api/bin/Debug/netcoreapp1.1/Cubo.Api.pdb
+/Users/spetz/Workspace/Packt/Full stack .NET Core web development/Project/Cubo/src/Cubo.Api/bin/Debug/netcoreapp1.1/Cubo.Core.dll
+/Users/spetz/Workspace/Packt/Full stack .NET Core web development/Project/Cubo/src/Cubo.Api/bin/Debug/netcoreapp1.1/Cubo.Core.pdb
+/Users/spetz/Workspace/Packt/Full stack .NET Core web development/Project/Cubo/src/Cubo.Api/obj/Debug/netcoreapp1.1/Cubo.Api.AssemblyInfo.cs
+/Users/spetz/Workspace/Packt/Full stack .NET Core web development/Project/Cubo/src/Cubo.Api/obj/Debug/netcoreapp1.1/Cubo.Api.dll
+/Users/spetz/Workspace/Packt/Full stack .NET Core web development/Project/Cubo/src/Cubo.Api/obj/Debug/netcoreapp1.1/Cubo.Api.pdb
