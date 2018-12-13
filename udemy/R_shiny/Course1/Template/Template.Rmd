@@ -25,7 +25,7 @@ names(GBChoices) <- paste(names(startData),map(startData,~length(unique(.x))))
 updateData <- reactive(
 
   startData %>% group_by(!!! rlang::syms(input$GB)) %>% summarise_if(is.numeric,sum,na.rm=T))
-
+# 3 point exclamation vle di ou k gen plusieurs valeurs # nan ligne sa.
 ```
 
 
@@ -57,7 +57,7 @@ updateData() %>%
   geom_col()
 
 })
-
+# updateData is not a function, but le fait li gen     # reactive function ki appliquer ladanl. lew nan shiny # fow rellel tankou function
 ```
 
 
