@@ -18,4 +18,7 @@ do
 		?)
 			echo "script usage: $(basename $0) [-l] [-h] [-a somebvalue]" >&2
 			exit 1
+			;;
+	esac
+done
 
