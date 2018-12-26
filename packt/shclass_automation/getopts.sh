@@ -2,7 +2,8 @@
 set -e
 set -u
 set -o pipefail
-while getopts 'mbc:' OPTION; do
+while getopts 'mbc:' OPTION; 
+do
 	case "$OPTION" in 
 		m)
 			echo "shellscripting"
@@ -17,3 +18,4 @@ while getopts 'mbc:' OPTION; do
 		?)
 			echo "script usage: $(basename $0) [-l] [-h] [-a somebvalue]" >&2
 			exit 1
+
