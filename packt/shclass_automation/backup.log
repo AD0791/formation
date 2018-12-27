@@ -1,0 +1,52 @@
+Alexandros-MacBook-Pro:shclass_automation alexandrodisla$ ls
+backup.log
+file.txt
+fs.sh
+getopts.sh
+ps.sh
+s1.sh
+s2.sh
+stdout.txt
+string.sh
+string2.sh
+Alexandros-MacBook-Pro:shclass_automation alexandrodisla$ screen[K[K[K[K[K[Kls
+backup.log
+file.txt
+fs.sh
+getopts.sh
+ps.sh
+s1.sh
+s2.sh
+stdout.txt
+string.sh
+string2.sh
+Alexandros-MacBook-Pro:shclass_automation alexandrodisla$ cat backup.log 
+Alexandros-MacBook-Pro:shclass_automation alexandrodisla$ ls
+backup.log
+file.txt
+fs.sh
+getopts.sh
+ps.sh
+s1.sh
+s2.sh
+stdout.txt
+string.sh
+string2.sh
+Alexandros-MacBook-Pro:shclass_automation alexandrodisla$ screen[K[K[K[K[K[Kls
+backup.log
+file.txt
+fs.sh
+getopts.sh
+ps.sh
+s1.sh
+s2.sh
+stdout.txt
+string.sh
+string2.sh
+Alexandros-MacBook-Pro:shclass_automation alexandrodisla$ cat backup.log 
+Alexandros-MacBook-Pro:shclass_automation alexandrodisla$ clerar[K[K[Kar
+[3J[H[2JAlexandros-MacBook-Pro:shclass_automation alexandrodisla$ scrr[Keen 
+Alexandros-MacBook-Pro:shclass_automation alexandrodisla$ clear
+[3J[H[2JAlexandros-MacBook-Pro:shclass_automation alexandrodisla$ clearscreen [2Pclearat backup.log ls[Kexec &>>(tee -a backup.log) [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C.))[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C) [K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C>))o)v)e)r)w)r)i)t)e).)l)o)g)
+Alexandros-MacBook-Pro:shclass_automation alexandrodisla$ 
+Alexandros-MacBook-Pro:shclass_automation alexandrodisla$ 
