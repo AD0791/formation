@@ -10,11 +10,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/1.Basics-of-Analysing/loadandacctweets.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="870">
               <caret line="58" lean-forward="true" selection-start-line="58" selection-end-line="58" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/1.Basics-of-Analysing/collectdataonkeywords.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="390">
+              <caret line="27" column="68" selection-start-line="27" selection-start-column="68" selection-end-line="27" selection-end-column="68" />
             </state>
           </provider>
         </entry>
@@ -37,6 +46,7 @@
         <option value="$PROJECT_DIR$/tweepyAuth.py" />
         <option value="$PROJECT_DIR$/collectdataonkeywords.py" />
         <option value="$PROJECT_DIR$/loadandacctweets.py" />
+        <option value="$PROJECT_DIR$/1.Basics-of-Analysing/collectdataonkeywords.py" />
       </list>
     </option>
   </component>
@@ -107,7 +117,7 @@
       <updated>1546216122615</updated>
       <workItem from="1546216161749" duration="3432000" />
       <workItem from="1546276329356" duration="80000" />
-      <workItem from="1546276915613" duration="1947000" />
+      <workItem from="1546276915613" duration="2318000" />
     </task>
     <task id="LOCAL-00001" summary="datacamp, social media in python">
       <created>1546220237754</created>
@@ -130,15 +140,21 @@
       <option name="project" value="LOCAL" />
       <updated>1546280330407</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="basics = first part correction">
+      <created>1546280453983</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1546280453983</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5459000" />
+    <option name="totallyTimeSpent" value="5830000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="666" y="0" width="614" height="800" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.43006992" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -172,7 +188,8 @@
     <MESSAGE value="datacamp, social media in python" />
     <MESSAGE value="datacamp, social media in python part 2" />
     <MESSAGE value="basics = first part" />
-    <option name="LAST_COMMIT_MESSAGE" value="basics = first part" />
+    <MESSAGE value="basics = first part correction" />
+    <option name="LAST_COMMIT_MESSAGE" value="basics = first part correction" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -186,13 +203,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/1.Basics-of-Analysing/collectdataonkeywords.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="35" column="29" selection-start-line="35" selection-start-column="29" selection-end-line="35" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/1.Basics-of-Analysing/tweepyAuth.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
@@ -207,6 +217,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="870">
           <caret line="58" lean-forward="true" selection-start-line="58" selection-end-line="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1.Basics-of-Analysing/collectdataonkeywords.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="27" column="68" selection-start-line="27" selection-start-column="68" selection-end-line="27" selection-end-column="68" />
         </state>
       </provider>
     </entry>
