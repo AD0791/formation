@@ -25,6 +25,7 @@ class  Slistener(StreamListener):
    # Set the keyword argument track equals to keywords_to_track.
 
 from tweepy import Stream
+import tweepyAuth  # where the authentification took place api(auth)
 
 # Set up words to track
 keywords_to_track = ['#rstats','#python']
