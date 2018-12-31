@@ -97,7 +97,8 @@ seq(from = d1, by = "3 weeks", length.out = 2)[2]
 
 #Recipe: Perform preliminary analyses on time series data
 #--------------------------------------------------------
-wm <- read.csv("walmart.csv")
+wm <- read.csv("section 1/data/walmart.csv")
+View(wm)
 
 plot(wm$Adj.Close, type = "l")
 
