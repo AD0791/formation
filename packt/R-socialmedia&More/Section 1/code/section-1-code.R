@@ -91,6 +91,11 @@ seq(d1, d3, "day")
 
 seq(d1, d2, "2 months")
 
+# annnee fiscale. @AD0791
+ok = as.Date("1990/09/01")
+ok2= as.Date("2018/09/01")
+seq(ok,ok2,"year")
+
 seq(from = d1, by = "4 months", length.out = 4 )
 
 seq(from = d1, by = "3 weeks", length.out = 2)[2]
@@ -103,22 +108,27 @@ View(wm)
 plot(wm$Adj.Close, type = "l")
 
 d <- diff(wm$Adj.Close)
+View(d) #perdu yon observation car diff() =  x_{t}-x_{t-1}
 plot(d, type = "l")
 
 
 hist(d, prob = TRUE, ylim = c(0,0.8), main = "Walmart stock", col = "blue")
 lines(density(d), lwd = 3)
 
-wmm <- read.csv("walmart-monthly.csv")
+wmm <- read.csv("section 1/data/walmart-monthly.csv")
+View(wmm)
 wmm.ts <- ts(wmm$Adj.Close)
+View(wmm.ts)
 d <- diff(wmm.ts)
 wmm.return <- d/lag(wmm.ts, k=-1)
+View(wmm.return) ##################################### ki difference avec diff?
 hist(wmm.return, prob = TRUE, col="blue")
+
 diff(wmm$Adj.Close, lag = 2)
 
 #Recipe: Using time series objects
 #---------------------------------------------------
-s <- read.csv("ts-example.csv")
+s <- read.csv("section 1/data/ts-example.csv")
 
 s.ts <- ts(s)
 class(s.ts)
@@ -145,7 +155,7 @@ end(s.ts.m)
 
 frequency(s.ts.m)
 
-prices <- read.csv("prices.csv")
+prices <- read.csv("section 1/data/prices.csv")
 prices.ts <- ts(prices, start=c(1980,1), frequency = 12)
 
 plot(prices.ts)
@@ -155,13 +165,14 @@ legend("topleft", colnames(prices.ts), col = 1:2, lty = 1)
 
 #Recipe: Decomposing time series
 #-----------------------------
-prices <- read.csv("prices.csv")
+prices <- read.csv("section 1/data/prices.csv")
 
 prices.ts = ts(prices, start = c(1980,1), freq = 12)
+prices.ts
 plot(prices.ts[,2])
 
 prices.stl <- stl(log(prices.ts[,1]), s.window = "period")
-
+prices.stl
 plot(prices.stl)
 
 prices.dec <- decompose(log(prices.ts[,2]))
@@ -169,7 +180,7 @@ plot(prices.dec)
 
 #Recipe: Filtering time series data
 #---------------------------------
-s <- read.csv("ts-example.csv")
+s <- read.csv("section 1/data/ts-example.csv")
 
 n <- 7
 wts <- rep(1/n, n)
@@ -183,10 +194,10 @@ lines(s.filter2, col = "red", lwd = 3)
 
 #Recipe: Smoothing and forecasting using the Holt-Winters method
 #---------------------------------------------------------
-infy <- read.csv("infy-monthly.csv")
+infy <- read.csv("section 1/data/infy-monthly.csv")
 
 infy.ts <- ts(infy$Adj.Close, start = c(1999,3), freq = 12)
-
+infy.ts
 infy.hw <- HoltWinters(infy.ts)
 
 plot(infy.hw, col = "blue", col.predicted = "red")
@@ -204,10 +215,11 @@ head(infy.hw$fitted)
 library(forecast)
 infy.forecast <- forecast(infy.hw, h=20)
 plot(infy.forecast)
+infy.forecast
 
 #Recipe: Building an automated ARIMA model
 #--------------------------------------
-infy <- read.csv("infy-monthly.csv")
+infy <- read.csv("section 1/data/infy-monthly.csv")
 
 infy.ts <- ts(infy$Adj.Close, start = c(1999,3), freq = 12)
 
