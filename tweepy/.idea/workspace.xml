@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a7fe4200-3d12-4b3b-a92d-ea98adb23046" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/2.Processing-Twitter-Text/TweetItemtweetFlattening.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/2.Processing-Twitter-Text/tweet.pd.Dataframe.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/2.Processing-Twitter-Text/tweetFlatteningfunction.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="a7fe4200-3d12-4b3b-a92d-ea98adb23046" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,7 +132,7 @@
       <workItem from="1546276329356" duration="80000" />
       <workItem from="1546276915613" duration="2492000" />
       <workItem from="1546626054712" duration="741000" />
-      <workItem from="1546706411203" duration="2762000" />
+      <workItem from="1546706411203" duration="3016000" />
     </task>
     <task id="LOCAL-00001" summary="datacamp, social media in python">
       <created>1546220237754</created>
@@ -167,17 +162,24 @@
       <option name="project" value="LOCAL" />
       <updated>1546280453983</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="process twitter text - 0.25 progressiom">
+      <created>1546714157634</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1546714157635</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9507000" />
+    <option name="totallyTimeSpent" value="9761000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1898223" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1898223" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -210,7 +212,8 @@
     <MESSAGE value="datacamp, social media in python part 2" />
     <MESSAGE value="basics = first part" />
     <MESSAGE value="basics = first part correction" />
-    <option name="LAST_COMMIT_MESSAGE" value="basics = first part correction" />
+    <MESSAGE value="process twitter text - 0.25 progressiom" />
+    <option name="LAST_COMMIT_MESSAGE" value="process twitter text - 0.25 progressiom" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
