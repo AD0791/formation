@@ -107,7 +107,7 @@ _Answers_:
 
 --------------------------------------------------------
 
-## Lecture 3 
+## Lecture 3 (multiple containers)   
 
 > docker container run -d --name nginx nginx   
 
@@ -119,9 +119,9 @@ _Answers_:
 -> docker container stats --help  
 -> docker inspect name_container = gives you a json.   
 
-## Lecture 4  
-- docker run -it $$\neq$$ docker start  
-- docker run -ai $$\neq$$ docker exec -it $$\neq$$ docker run -it  
+## Lecture 4  (No need of ssh)  
+- docker run -it $\neq$ docker start  
+- docker run -ai $\neq$ docker exec -it $\neq$ docker run -it  
 - docker run -it: start new container interactively with an image  
 - docker exec -it : (for running containers) run additional command in 						existing container  
 
@@ -150,7 +150,43 @@ _msql = name of the container._
 -> alpine package manager is apk. 
 we can install bash.  
 
-> docker container run -it --name alpine alpine sh
 -> I install vim nano R bash python in alpine container. if you previously start the alpine container, this should work: docker container exec -it alpine bash
+> docker container run -it --name alpine alpine sh   
+
+## Lecture 5 (docker networks)  
+
+> docker run -p   
+**-p** expose the ports in your machine.  
+> docker port <container>  
+-> gives a quick output of what port are open for that container on your network.  
+-> two network : docker network and machine network  
+
+1. Docker Networks defaults  
+- each container connected to a private virtual network "brige"   
+- each v.n routes through NAT firewall on host ip
+- containers can talk to each other on a v.n without -p  
+2. docker networks cont.  
+-  defaults stettings can be customize
+- make new virtual networks
+- attach containers to more then one v.n (or none)   
+- skip v.n and use host ip (--net=host)  
+- docker netwok drivers to gain new abilities  
+
+> docker container run -p 80:80 --name webhost -d nginx  
+-> create the webapp  
+
+> docker container port webhost  
+-> output to the port in-used   
+
+> docker container inspect --format '{{ .NetworkSettings.IPAddress }}' webhost  
+**--format** a common option for formatting the output of command using "go templates", it's a cleaner way to filter (|grep).  __"inspect"__ is to go inside a container.   **{{ .NetworkSettings.IPAddress }}** is the actual node of that json output that we really want to look at.  
+
+> ifconfig en0   
+-> To see my active networks on my mac and my ports
+
+_the brige is the virtual network._
+
+<<<<< put the links at the end of each section >>>>>>>>>>>>>>>>>>>>>>>>>>
+<<<<<<<< MAKE THE GRAPH explaining the network concept>>>>>>>>>>>>>>>>>>
 
 
