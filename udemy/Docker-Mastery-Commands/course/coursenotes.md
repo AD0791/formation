@@ -183,10 +183,76 @@ we can install bash.
 
 > ifconfig en0   
 -> To see my active networks on my mac and my ports
+<<<<<<<< MAKE THE GRAPH explaining the network concept>>>>>>>>>>>>>>>>>>
+_the brige is the virtual network._    
 
-_the brige is the virtual network._
+## Lecture 6 Networks ClI management   
+- show network    
+- inspect a network    
+- create a network    
+- attach a network to a new container    
+- detach a network from container      
+
+> docker network rm networkid   
+To remove a network   
+
+> docker network ls    
+Check the avaliable network. In the most basics states, **you have 3 network (bridge (or docker0), host, none)**. __the none network doesn't have a driver__.     
+
+-> The bridge network is the default docker network that bridges through the NAT'ed firewall to the physical network that the host is connected to. __(host ip)__    
+
+> docker network inspect bridge     
+it return a json in the Command line. That json show details about this network and show the running containers.     
+
+-> The host network is a special network that skips the virtual networking of docker and attach a container directly to the host interface. it prevents the security boundaries of containarization to protect the interface of that container.    
+
+-> The none network is the equivalent of having an interface on your computer that is not attach to anything. remove eth0 and let you with the host network.   
+
+-> Network driver = built-in 3rd party extensions that give you a virtual network features.    
+
+> docker network create my_app_net   
+spawns a new virtual network for you to attach containers. In this case the new network willl be named my_app_net. you will that the default driver is bridge. It create his own subnet and gateway.    
+
+> docker container run -d --name new_nginx --network my_app_net nginx  
+**--network** will put the new_nginx app in the my_app_net network
+docker network inspect my_app_net
+
+> docker network --help   
+see the options.  
+
+> docker network connect networkid
+to connect containers on a network __networkid__. now these containers can be connected to two networks (the bridge and the new network).     
+
+> docker container disconnect networkid    
+to disconnect a container from  the additionnal network  
+
+> docker network create --help  
+To find help.   
+
+Good Practice {
+	- create your app on the same docker network    
+	- their inter-communication never leaves the host  
+	- all externallly exposed ports closed by defaults  
+	- must manually expose via -p, which is better default security  
+	- get better with swarm and overlay networks
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <<<<< put the links at the end of each section >>>>>>>>>>>>>>>>>>>>>>>>>>
-<<<<<<<< MAKE THE GRAPH explaining the network concept>>>>>>>>>>>>>>>>>>
-
-
