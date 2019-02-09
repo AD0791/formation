@@ -227,7 +227,9 @@ to connect containers on a network __networkid__. now these containers can be co
 to disconnect a container from  the additionnal network  
 
 > docker network create --help  
-To find help.   
+To find help. 
+
+-> **--driver** to specify a 3rd party driver  
 
 Good Practice {
 	- create your app on the same docker network    
@@ -235,10 +237,41 @@ Good Practice {
 	- all externallly exposed ports closed by defaults  
 	- must manually expose via -p, which is better default security  
 	- get better with swarm and overlay networks
-}
+}  
 
+## Lecture 7 Docker Networks: DNS 
 
+- DNS is the key to easy inter-container comms   
+- Default vs Custom networks     
+- how to use --link to enable DNS on default bridge network   
 
+-> new network
+> docker network create my_app_net   
+   docker network ls   
+
+-> forget IP's  
+Static IP's and using IP's for talking to comtainers is anti-patern. dou your best to avoid it.  Docker is to dynamique.  The solutions is Docker DNS.   
+
+-> Docker daemon has a built-in DNS server that containers use by default    
+
+> create two nginx app and put them on the same network (my_app_net)    
+docker container run -d --name my_nginx --network my_app_net nginx    
+docker container run -d --name new_nginx --network my_app_net nginx   
+
+> \#errata Ping isn't inside of the nginx image so we can get into the container this way. Instead of building a new image or exec bash as root inside of the container:      
+docker container exec my_nginx apt-get update
+docker container exec my_nginx apt-get install -y iputils-ping  
+docker container exec new_nginx apt-get update
+docker container exec new_nginx apt-get install -y iputils-ping  
+> \# Now you finish install **ping** in both containers. You can make these two containers communicates, either way you want, in the same network:   
+docker container exec -it my_nginx ping new_nginx  
+docker container exec -it new_nginx ping my_nginx   
+
+-> docker container create --help. You will see the **--link** option. Why? If you want to use the bridge network to connect the containers you want. 
+
+Good{
+	It's good practice (easier) to create another network to make your containers comms
+}   
 
 
 

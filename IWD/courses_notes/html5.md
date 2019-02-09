@@ -59,7 +59,7 @@ $<hi></hi>\forall i \in \{ 1,\cdots,6\}$
 ```html
 <a target="_value" href="xxx.html"><a>
 ```    
-**\_value or \_balnk** hyperlink will route you on another tab in your browser. **\_self** will keep you by default in the same tab.   
+**\_value or \_blank** hyperlink will route you on another tab in your browser. **\_self** will keep you by default in the same tab.   
 
 > Pro tips 
 Always specified the \_value of the targetted page in the hyperlinks. For example:  
@@ -68,16 +68,21 @@ Always specified the \_value of the targetted page in the hyperlinks. For exampl
 ```   
 ----------------------------------------
 
-# Page 3
+## Page 3
 
+> Paths = refer to how we point to folders and files in hyperlinks.  
+```HTML
+# tells the browser to go up one level in the file directory.
+"../ file.html"
+# tells the browser to go up two level in the file directory.
+"../../file.html"
+```  
+> client computer vs server computer  
 
-
-
-
-
-
-
-
+- server app turn computers into servers   
+- Response requested cycle: Client requested + server respond = Internet
+- hosting = putting your website live on the web #payed
+-  web browser = called client app
 
 
 
