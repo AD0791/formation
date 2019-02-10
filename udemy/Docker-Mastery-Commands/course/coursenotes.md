@@ -182,8 +182,10 @@ we can install bash.
 **--format** a common option for formatting the output of command using "go templates", it's a cleaner way to filter (|grep).  __"inspect"__ is to go inside a container.   **{{ .NetworkSettings.IPAddress }}** is the actual node of that json output that we really want to look at.  
 
 > ifconfig en0   
--> To see my active networks on my mac and my ports
-<<<<<<<< MAKE THE GRAPH explaining the network concept>>>>>>>>>>>>>>>>>>
+-> To see my active networks on my mac and my ports    
+
+![Docker Network Explain](../images/Dnetworkexplain.png)
+
 _the brige is the virtual network._    
 
 ## Lecture 6 Networks ClI management   
@@ -273,6 +275,51 @@ Good{
 	It's good practice (easier) to create another network to make your containers comms
 }   
 
+-------------------------------------------------
+### Assignements 2 (CLI Testing)  
+
+> docker container run --rm -it centos:7 bash  
+- The package manager for centos is yum # for example (yum update curl) 
+- **centos:7** specify the version of centos.  
+> docker container run --rm -it ubuntu:14.04 bash  
+- package manager of ubuntu is apt-get # you can do (apt-get update && apt-get install curl)  
+- **ubuntu:14.04** specify the version of the ubuntu.  
+
+-> **--rm** after we exit the bash inside the container. this container will atomaticly removes itself.  
+
+### Assignements 3 (DNS Round Robin Test)  
+
+-> the concept that you can have two different host with dns aliases that respond to the same dns name. On docker we can have multiple containers on a created network that respond to the same DNS address.   
+
+> docker network create dude   
+- create another network named dude  
+
+> docker container run -d --net dude --net-alias search elasticsearch:2
+- **--net** to specify the network we want this container running.  
+- **net-alias <nameofAlias>** to create the dns alias.    
+-> run it again to create 2 containers    
+
+> docker container run --rm --net dude alpine nslookup search   
+- **--rm** the container will be remove.  
+- **alpine nslookup search** docker will use the alpine image, run the os. nslookup is a built-in command (or command line program) on the CLI (Shell). nslookup will search for the dns with the alias: "search". In the end we will see the ip address with the alias name and the network. 
+
+> docker container run --rm --net dude centos curl -s search:9200   
+- **--rm** the container will be remove.  
+- **centos curl -s search:9200** docker will use the centos image, run the os. curl is built-in on the CLI. you can use the "-s" option of curl to look for the alias and the port: "search:9200". If we don't specify the port, he will not work.  Now we will receive a json output with the data.    
+----------------------     
+
+##### Links   
+- [Round Robin](https://en.wikipedia.org/wiki/Round-robin_DNS)  
+- [DNS-commic](https://howdns.works/episodes/)  
+- [DNS](https://dyn.com/blog/dns-why-its-important-how-it-works/)  
+- [Docker Format command and log output](https://docs.docker.com/config/formatting/)   
+- [ubuntu images vs ubuntu os](https://www.udemy.com/docker-mastery/learn/v4/questions/5390204)  
+- pacman package manager for archlinux based distros, alpine distro is apk. [package manager](https://www.digitalocean.com/community/tutorials/package-management-basics-apt-yum-dnf-pkg)    
+- [Docker ebook](https://github.com/mikegcoleman/docker101/blob/master/Docker_eBook_Jan_2017.pdf)   
+- [Brett website](https://www.bretfisher.com/docker-for-mac-commands-for-getting-into-local-docker-vm/)  
+---------  
+
+# Section 2
 
 
 
@@ -280,12 +327,9 @@ Good{
 
 
 
+\copyright {exp:copyright:Alexandro Disla}  
 
 
 
 
 
-
-
-
-<<<<< put the links at the end of each section >>>>>>>>>>>>>>>>>>>>>>>>>>
