@@ -182,8 +182,9 @@ we can install bash.
 **--format** a common option for formatting the output of command using "go templates", it's a cleaner way to filter (|grep).  __"inspect"__ is to go inside a container.   **{{ .NetworkSettings.IPAddress }}** is the actual node of that json output that we really want to look at.  
 
 > ifconfig en0   
--> To see my active networks on my mac and my ports    
+-> To see my active networks on my mac and my ports      
 
+-> Docker network graph:   
 ![Docker Network Explain](../images/Dnetworkexplain.png)
 
 _the brige is the virtual network._    
@@ -327,9 +328,41 @@ Good{
 
 
 
-\copyright {exp:copyright:Alexandro Disla}  
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+copyright:Alexandro Disla  
