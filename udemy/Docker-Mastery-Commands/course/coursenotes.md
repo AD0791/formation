@@ -322,6 +322,20 @@ Good{
 
 # Section 2
 
+## lecture 1 (Section overview)
+
+### Definition of an Image
+
+> An image in docker contains the app binaries and dependencies. The metadata about the image data and how to run the image.  
+
+> Official definition: AN image is an odered collection of root filesystem changes and the corresponding execution parameters fir use within a container runtime.
+
+-> Not a complete OS. No kernel, Kernel modules (e.g drivers)  
+-> small as one file (your app binary like golang static binary)
+-> big as ubuntu distro with apt, and apache, php, and more installed
+
+
+
 
 
 
