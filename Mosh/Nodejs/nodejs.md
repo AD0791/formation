@@ -15,6 +15,8 @@ N.B:
 - web app run on a web browser
 - mobile app run on a mobile
 - client app = frontend
+- Node is not a programming language
+- Node is not a framework
 
 ### node's importance  
 
@@ -36,4 +38,27 @@ N.B:
 - 2x request/sec
 - 35% faster reponse time
 
+## Node Architecture
 
+Before node, we could only run javascript codes inside the web browser. Every web browser has a javascript engine. The engine has for role to convert the code to machine code. The engine of:
+
+- Edge = Chakra
+- Firefox = SiperMonkey
+- Chrome = V8
+
+> Node is a runtime environment for executing javascript code. Node is build with the V8 engine. Node offers more modules that gives it more capapbilities than a web browser.
+
+## How node works
+
+Node has a non-blocking or asynchronous architecture. A single tread  can work with 2 request. They are asynchronous by default.
+
+> The Tread will not way for the execution of a query on the database. Instead it will take care of a new request. Then it will come back and handle the first request (when it finishes the query, the database will do a event queue and it act on it to serve the first client). 
+
+N.B:
+
+- The tread = allocated to a request.
+- The tread make a query for the database to execute.
+
+Important:
+
+> Node is ideal for i/o-instensive apps. It should not be use for cpu-intensive apps.
