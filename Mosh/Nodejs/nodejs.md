@@ -84,7 +84,9 @@ shello('Lelex');
 4. Asynchronous javascript
 5. Storing data in MongoDB
 6. AUthentification and authorization
-7.  HAndeling and logging errors
+7. HAndeling and logging errors
 8. Unit and integration testing
 9. Test driven developpment
 10. Deployment
+
+# Chapter 2: Node Module System
