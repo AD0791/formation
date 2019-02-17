@@ -90,3 +90,81 @@ shello('Lelex');
 10. Deployment
 
 # Chapter 2: Node Module System
+
+## Global Object
+
+```javascript
+console.log(); // part of the Global Object.
+// In fact
+window.console.log(); // why
+// window is the global object where this function
+// is defined.
+
+// In node we don't have this window object.
+// The object is called global
+global.console.log();
+```
+
+In a Browser:
+
+> When we declare a function or a variable. They are added to the Global Scope: "Window".
+
+In node:
+
+> When we declare a function or a variable. They are added to the Global Scope: "Global".
+
+## Modules 
+
+It is not a very best practice to define a function or objects on the globale scope. Why?
+
+> In a real world scenario, we are likely to work with multiple files. If we had declare two function with the same name. The second function will override the first declaration. So in order to maintain the application, it's best practice to work with modules to avoid this problem.
+
+Every files in the node application is considered as a module. In object oriented programming we would say they are private.
+
+Every node application has at least a file that we call the main module.
+
+Let's look inside a module.
+
+```javascript
+console.log(module);
+```
+
+```bash
+$ node app.js
+Module {
+  id: '.',
+  exports: {},
+  parent: null,
+  filename:
+   '/Users/alexandrodisla/Desktop/repo/formation/Mosh/Nodejs/first-app/app.js',
+  loaded: false,
+  children: [],
+  paths:
+   [ '/Users/alexandrodisla/Desktop/repo/formation/Mosh/Nodejs/first-app/node_modules',
+     '/Users/alexandrodisla/Desktop/repo/formation/Mosh/Nodejs/node_modules',
+     '/Users/alexandrodisla/Desktop/repo/formation/Mosh/node_modules',
+     '/Users/alexandrodisla/Desktop/repo/formation/node_modules',
+     '/Users/alexandrodisla/Desktop/repo/node_modules',
+     '/Users/alexandrodisla/Desktop/node_modules',
+     '/Users/alexandrodisla/node_modules',
+     '/Users/node_modules',
+     '/node_modules' ] }
+     ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
