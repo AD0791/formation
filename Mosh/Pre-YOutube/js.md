@@ -306,7 +306,8 @@ console.log((employeeMPCE.baseSalary)); // property
 // the fewer parameters a function has, the easier it is to maintain that function.
 ```
 
-#### Abstraction  
+#### Abstraction
+
 > It's when you can hide some of the properties and methods from the outside. This gives us a couple of benefits:  
 - make the interface simpler **(an object with few properties and methods is easier then an object with several properties and methods)**  
 - reduce the impact of change  
