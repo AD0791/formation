@@ -62,3 +62,29 @@ N.B:
 Important:
 
 > Node is ideal for i/o-instensive apps. It should not be use for cpu-intensive apps.
+
+## First Node Program
+
+```javascript
+function shello(name){
+    console.log('Hello '+name);
+}
+
+shello('Lelex');
+
+//console.log(window); Won't work. 
+// we don't have the document or window as in the browser.
+```
+
+## Course structure
+
+1. Node module system
+2. NPM
+3. REstful api with Express
+4. Asynchronous javascript
+5. Storing data in MongoDB
+6. AUthentification and authorization
+7.  HAndeling and logging errors
+8. Unit and integration testing
+9. Test driven developpment
+10. Deployment
