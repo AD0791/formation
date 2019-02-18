@@ -52,7 +52,7 @@ Before node, we could only run javascript codes inside the web browser. Every we
 
 Node has a non-blocking or asynchronous architecture. A single tread  can work with 2 request. They are asynchronous by default.
 
-> The Tread will not way for the execution of a query on the database. Instead it will take care of a new request. Then it will come back and handle the first request (when it finishes the query, the database will do a event queue and it act on it to serve the first client). 
+> The Tread will not wait for the execution of a query on the database. Instead it will take care of a new request. Then it will come back and handle the first request (when it finishes the query, the database will do a event queue and it act on it to serve the first client). 
 
 N.B:
 
@@ -149,7 +149,91 @@ Module {
      '/Users/alexandrodisla/node_modules',
      '/Users/node_modules',
      '/node_modules' ] }
-     ```
+```
+
+##  creating and loading modules
+
+In the my first app file, we had the logger.js to build a sort of log system. We want to export that logger.js into the app.js as a module. Earlier we saw that the module object is a json. In that json we can see the key 'export' who has an empty object literal.  
+
+```javascript
+let url= "http://mylogger.io/log"; // Private
+
+function log(message){
+    console.log(message);
+}
+
+module.exports.log = log; 
+// we can access the function log in the
+// app.js. In node = files are modules.
+// if we want to export the url (endpoint)
+// url is emplementation detail
+// module.exports.endpoint = url;
+```
+
+Let's see the content of module.exports object literal.
+
+```javascript
+const logger = require("./logger"); 
+// best practice to use "const"
+// require function help access the logger.js modules.
+
+console.log(logger);
+```
+
+```bash
+$ node app.js
+{ log: [Function: log] }
+```
+
+We can access the log function (similar to an OOP =  method).
+
+```javascript
+const logger = require("./logger");
+
+console.log(logger);
+
+logger.log("AD0791");
+// we can use the function created in logger.js
+```
+
+```bash
+$ node app.js
+{ log: [Function: log] }
+AD0791
+```
+
+> WIth npm i have install jshint on the terminal. Jshint will prevent mistakes on the writting of the code.
+
+We can access the log fonction directly without creating a log object like this.
+
+```javascript
+// logger.js
+let url= "http://mylogger.io/log"; // Private
+
+function log(message){
+    console.log(message);
+}
+
+module.exports= log; 
+
+// app.js
+const logger = require("./logger");
+
+console.log(logger);
+
+logger("AD0791");
+// we can use logger as afunction now
+```
+
+```bash
+$ node app.js
+[Function: log]
+AD0791
+```
+
+
+
+
 
 
 
