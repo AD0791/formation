@@ -334,10 +334,34 @@ Good{
 -> small as one file (your app binary like golang static binary)
 -> big as ubuntu distro with apt, and apache, php, and more installed
 
+[Docker image specification](https://github.com/moby/moby/blob/master/image/spec/v1.md)
 
+### Docker HUB Registry Images
 
+[Docker Hub](https://hub.docker.com)
 
+> docker image ls or docker images
 
+- get the list of images.
+
+You can get the official image and specify the version: 
+
+> docker pull nginx
+
+- **pull** docker will download the latest images.
+
+> docker pull nginx:1.11.9
+
+- **pull nginx:1.11.9** docker will get the exact version of nginx, you want.
+ 
+
+docker pull nginx:1.11.9-alpine
+
+- **pull nginx:1.11.9-alpine** that means it come from a base image from alpine (linux distro)
+
+[List of Official IMAGES](https://github.com/docker-library/official-images/tree/master/library)
+
+### Discover the image catch
 
 
 
