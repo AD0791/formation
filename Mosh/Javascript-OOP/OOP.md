@@ -530,16 +530,22 @@ function watch(){
         if(runtime){
             throw new Error("is running");
         }
+        // we change the runtime state so the error
+        // will be catch
         runtime = true; // true means 1
-        startime = new Date();
+        startime = new Date(); // time object
     };
     this.stop = function(){
         if(!runtime){
             throw new Error("not running");
-        } // the calculus logic
-        runtime=false;
-        endtime= new Date();
-        const sec=(endtime-startime)/1000;
+        } ///// the calculus logic
+        runtime=false; 
+        // the state of the run is changed so the error
+        // will be catch
+        endtime= new Date(); //time object
+        // Date() object has getTime() method
+        // getTime() return time in millisecondes without a comma
+        const sec=(endtime.getTime()-startime.getTime())/1000;
         duration+=sec;
     };
     this.reset=function(){
@@ -549,7 +555,7 @@ function watch(){
         duration=0;
     };
     Object.defineProperty(this,'duration',{
-        // a getter tos expose duration
+        // a getter to expose duration
         get:
         function(){
             return duration;
@@ -562,13 +568,63 @@ const stopwatch = new watch();
 // The key here is the Date() function-object
 // and the implementation of the calculus
 // endtime et startime  = new Date()
-// diviser par mille pour voyer li en seconde
-// Date() object has getTime() method
-// getTime() return time in milliseconde sans virgules
-// that's  why "on divise par milles ""
 ```
 
+## Chapter 2: Prototypes
 
+### Inheritance (prototypical,multilevel)
 
+> Inheritance is one of the 4 core concept of object oriented programming that enable an object to take on the properties and the methods of another object.
 
+It makes it easy to reuse codes in different part of an application.
+
+Classical Relation of Inheritance :
+
+- base/super/parent = is-a = derived/sub/child
+
+In javascript we don't have classes. We only have objects. In this case, talking about inheritance, the proper concept is prototypical inheritance.
+
+Prototypical Relation of Inheritance:
+
+- Parent Object = is-a = Child object
+
+> Almost every object in javascript have a prototype or parent.
+
+```javascript
+let x = {};
+// this object x has a prototype called "Object".
+//
+// In console we can see
+> x
+< {}
+> Object.prototype
+< {}
+> Object.getPrototypeOf(x)
+< {}
+//
+//
+let x = {};
+let y = {};
+// x and y have the same prototype
+> Object.getPrototypeOf(x) == Object.getPrototypeOf(y)
+< true
+```
+
+Every object that we create in javascript. Directly or indirectly inherit from "Object". Object is the root of all objects in javascript. And it doesn't have a prototype or parent.
+
+When we are looking for property or a method in an object. Javascript will look for these in the protoype of that object (most probably Object).
+
+> Javascript will walks up the prototype chain to find the target member.
+
+Multilevel of Inheritance
+
+```javascript
+let myarray = [];
+// myarray derives from the prototype="Array"
+// prototype="Array" derives from Object
+```
+
+> object created by a given constructor will have the same prototype.
+
+Property Descriptors
 
