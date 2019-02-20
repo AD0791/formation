@@ -231,13 +231,86 @@ $ node app.js
 AD0791
 ```
 
+## Module Wrapper
 
+The  functions or variables, define in a module, are scope to that module. They are not visible from the outside.
 
+```javascript
+// let's create a mistake on the logger.js
+let x=; // errata
+let url= "http://mylogger.io/log"; // Private
 
+function log(message){
+    console.log(message);
+}
 
+module.exports= log; 
+//
+//app.js
+const logger = require("./logger");
 
+console.log(logger);
 
+logger("AD0791");
+```
 
+We will see the wrapper function node use to read the codes inside our modules.
+
+```bash
+# we will see the syntax error
+SyntaxError: Unexpected token ;
+    at new Script (vm.js:79:7)
+    at createScript (vm.js:251:10)
+    at Object.runInThisContext (vm.js:303:10)
+    at Module._compile (internal/modules/cjs/loader.js:656:28)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:699:10)
+    at Module.load (internal/modules/cjs/loader.js:598:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:537:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:529:3)
+    at Module.require (internal/modules/cjs/loader.js:636:17)
+    at require (internal/modules/cjs/helpers.js:20:18)
+####
+# we will see the head of the wrapper function
+$ node app.js
+/Users/alexandrodisla/Desktop/repo/formation/Mosh/Nodejs/first-app/logger.js:1
+# There is the wrapper function with the mistake
+(function (exports, require, module, __filename, __dirname) { let x=;
+```
+
+- **__filename** indicate file path and name.
+- **__dirname** indicate the dir path and name. 
+
+```javascript
+// app.js
+const logger = require("./logger");
+
+console.log(logger);
+
+logger("AD0791");
+//
+//logger.js
+// these are inside the Node module wrapper function
+console.log(__filename); 
+console.log(__dirname);
+
+let url= "http://mylogger.io/log"; // Private
+
+function log(message){
+    console.log(message);
+}
+
+module.exports= log; 
+```
+
+```bash
+$ node app.js
+/Users/alexandrodisla/Desktop/repo/formation/Mosh/Nodejs/first-app/logger.js
+/Users/alexandrodisla/Desktop/repo/formation/Mosh/Nodejs/first-app
+[Function: log]
+AD0791
+```
+
+Node itself come with a bunch of useful modules
 
 
 
