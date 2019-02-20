@@ -563,6 +563,9 @@ const stopwatch = new watch();
 // and the implementation of the calculus
 // endtime et startime  = new Date()
 // diviser par mille pour voyer li en seconde
+// Date() object has getTime() method
+// getTime() return time in milliseconde sans virgules
+// that's  why "on divise par milles ""
 ```
 
 
