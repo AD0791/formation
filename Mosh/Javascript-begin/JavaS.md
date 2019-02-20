@@ -2,7 +2,7 @@
 
 -----------------
 
-# Chapter 1: Getting Started
+## Chapter 1: Getting Started
 
 > Javascript is a programming, scripting and markup languages.
 
@@ -239,7 +239,49 @@ console.log(square(2));
 // square.
 ```
 
-# Chapter 3: Operators
+## Chapter 3: Operators
 
+we have different kind of operator.
 
+> variable or constant + operator = expression.
 
+With this expression:
+
+> expressions -> logic or Algorithms.
+
+list of operators:
+
+- Arithmetic
+- Assignement
+- Comparison
+- Logical
+- Bitwise
+
+### Arithmetic Operator
+
+```javascript
+let x = 10;
+let y = 11;
+
+// arithmetic 
+console.log(x+y);
+//x+y is an expression.
+// An expression is a piece of code that produce a value.
+console.log(x-y);
+console.log(x/y);
+console.log(x*y);
+console.log(x%y); // modulo
+console.log(x**y); // exponantiel
+
+// incrementation
+console.log(x++); // 10
+//another behavior
+console.log(++x); // 11
+
+// decrimentation
+console.log(x--); // 10
+//another behavior
+console.log(--x); // 9
+```
+
+### Assignement Operator
