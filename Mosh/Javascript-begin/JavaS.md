@@ -285,3 +285,174 @@ console.log(--x); // 9
 ```
 
 ### Assignement Operator
+
+```javascript
+// Assignement operator
+let x = 10;
+// increment operator
+x++;
+ // is the same as 
+ x = x + 1;
+ // other possibility
+x = x+5;
+x+=5;
+x = x*3;
+x*=3;
+// all the arithmetic operator
+//  has this shorthand combination pattern
+// with the assignment operator
+```
+
+### comparison operator
+
+```javascript
+// comparison operator
+let x = 100;
+//list of operator
+
+// relational
+console.log(x>0);
+console.log(x<0);
+console.log(x>=0);
+console.log(x<=0);
+//equality
+console.log(x===100);
+console.log(x!==100);
+//logical
+console.log(x>0 && x<101); // a et b
+console.log(x>0 || x>100); // a ou b
+```
+
+> The result of an expression that include comparison operator is a boolean (true or false).
+
+### Equality operator
+
+> The strict equality  operator insures to us that both side have the same type and value.  
+The lose equality operator doesn't care about the types machine. If the types aren't the same, it will convert the type we have on the right side to match what we have on the left side. And then it will check if the values are equal.
+
+The same reflexion applies to strict inequality or lose inequality.
+
+```javascript
+//strict equality
+console.log(0===false);
+
+//lose equality operator
+console.log(0==false);
+// false is convert naturally to 0. 
+// remember true is 1 and false is 0.
+
+// In console
+[Log] false (main.js, line 3)
+[Log] true (main.js, line 6)
+
+// analogicly
+
+//strict inequality
+console.log(0!==false);
+
+//lose inequality operator
+console.log(0!=false);
+
+//strict equality
+console.log(0!==false);
+
+//lose equality operator
+console.log(0!=false);
+
+//in console 
+[Log] true (main.js, line 3)
+[Log] false (main.js, line 6)
+```
+
+In any given situation, The strict way is more precise and accurate.
+
+### Ternary operator
+
+
+```javascript
+let p = 110;
+let t = p > 100 ? 'gold' : 'silver';
+// ? and : are the ternary operator
+// ? 'gold' mean if expression true then gold be display
+// : 'silver' if not sylver will be dislplay
+console.log(t);
+// console
+[Log] gold (main.js, line 5)
+
+let p = 3;
+let t = p > 100 ? 'gold' : 'silver';
+// ? and : are the ternary operator
+// ? 'gold' mean if expression true then gold be display
+// : 'silver' if not sylver will be dislplay
+console.log(t);
+//console
+[Log] silver (main.js, line 7)
+```
+
+### logical operator
+
+```javascript
+console.log(true&&true); 
+// is true, only in this case.
+// maths a et b (logic matrix)
+console.log(true||false);
+// is true, if one of the operand is true
+// a ou b
+
+console.log(!true);
+// will return false
+// non a 
+```
+
+### logical operator with non-boolean
+
+The result of a logical expression is not necessarly a true or false. That depends entirely on the value of the operands.
+
+In javascript, we have the concept of falsy or truthy
+
+falsy:
+
+- false
+- undefined
+- null
+- 0 
+- false
+- '' or ""
+- NaN
+
+Anything that is not falsy is truthy
+
+```javascript
+false||"a"
+// javascript will evaluate "a"
+// "a" is not an empty string so
+//"a" is truthy and will be return
+false||1
+// 1 is a truthy and will be return
+
+// short-circuting
+false||1||2
+// the evaluation will stop right after
+// false||1
+// 1 will be return
+```
+
+Real world example:
+
+```javascript
+let usercolor = 'red';
+let defaultcolor = 'blue';
+let currentColor = usercolor || defaultcolor;
+
+console.log(currentColor);
+// in console
+[Log] red (main.js, line 5)
+////
+let usercolor = ''; // or undifined (they are falsy)
+let defaultcolor = 'blue';
+let currentColor = usercolor || defaultcolor;
+
+console.log(currentColor);
+// in console
+[Log] blue (main.js, line 5)
+```
