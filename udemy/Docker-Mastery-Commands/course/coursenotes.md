@@ -363,9 +363,30 @@ docker pull nginx:1.11.9-alpine
 
 ### Discover the image catch
 
+- image layers
+- union file system
+- history and inspect commands
+- copy on write
 
 
+> docker history nginx:latest
 
+**history** docker will show the layers of changes made in the latest nginx image.
+
+> docker history mysql
+
+**history** docker will show the layers of changes made in the msql image.
+
+docker image inspect nginx
+
+**inspect** gives us the metadata of that image.
+
+- images are made up of file system changes and metadata.
+- each layer is uniquely identified and only stored once a host
+- this saves storage space on host and transfert time on push/pull
+- A container is just a single read/write layer on top of image
+
+[image and layers](https://docs.docker.com/storage/storagedriver/)
 
 
 

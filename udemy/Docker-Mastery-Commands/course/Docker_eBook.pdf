@@ -336,7 +336,7 @@ Good{
 
 [Docker image specification](https://github.com/moby/moby/blob/master/image/spec/v1.md)
 
-### Docker HUB Registry Images
+## Lecture 2 (Docker HUB Registry Images)
 
 [Docker Hub](https://hub.docker.com)
 
@@ -361,7 +361,13 @@ docker pull nginx:1.11.9-alpine
 
 [List of Official IMAGES](https://github.com/docker-library/official-images/tree/master/library)
 
-### Discover the image catch
+## Lecture 3 (Discover the image catch)
+
+[Images and Containers from Docker docs](https://docs.docker.com/storage/storagedriver/)
+
+
+
+
 
 
 
