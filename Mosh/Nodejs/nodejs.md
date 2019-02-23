@@ -330,6 +330,33 @@ For example:
 
 Let's work the path module:
 
+```javascript
+// Import the built-in Path module
+const path = require('path');
+
+let pobject = path.parse(__filename);
+
+console.log(pobject);
+```
+
+```bash
+$ node app.js
+{ root: '/',
+  dir:
+   '/Users/alexandrodisla/Desktop/repo/formation/Mosh/Nodejs/first-app',
+  base: 'app.js',
+  ext: '.js',
+  name: 'app' }
+```
+
+  to see the avalaible modules:
+
+  ```bash
+$ ls node_modules
+inherits        path            process         util
+```
+
+
 
 
 
