@@ -299,7 +299,7 @@ function log(message){
     console.log(message);
 }
 
-module.exports= log; 
+module.exports= log;
 ```
 
 ```bash
@@ -311,6 +311,24 @@ AD0791
 ```
 
 Node itself come with a bunch of useful modules
+
+## Path Module
+
+Node have a list of built-in objects and modules. 
+YOu can find the exhuasting list in the [Node Website](https://nodejs.org/en/docs/). YOu will click on the latest version.
+
+For example:
+
+- file system: to work with files
+- HTTP: to create web server
+- OS: to work wit operating system
+- path: gives us a bunch of utility function for working with paths
+- process: to gives information about the current process
+- QueryStrings: which is very useful in building http services
+- stream: to work with streams of data
+
+
+Let's work the path module:
 
 
 

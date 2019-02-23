@@ -1,5 +1,6 @@
-const logger = require("./logger");
+// Import the built-in Path module
+const path = require('path');
 
-console.log(logger);
+let pobject = path.parse(__filename);
 
-logger("AD0791");
+console.log(pobject);
