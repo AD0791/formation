@@ -456,3 +456,8 @@ console.log(currentColor);
 // in console
 [Log] blue (main.js, line 5)
 ```
+
+### Bitewise Operator
+
+
+### operator precedence
