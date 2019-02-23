@@ -626,5 +626,75 @@ let myarray = [];
 
 > object created by a given constructor will have the same prototype.
 
-Property Descriptors
+### Property Descriptors
 
+```javascript
+let person = {name: "Alexandro"};
+console.log(Object.keys(person));
+// in console
+[Log] ["name"] (1) (oop.js, line 2)
+// but the toLocaleString method is not available to
+// us inside the editor. We can't access the property 
+// defined in Object-based.
+> person.toLocaleString()
+< "[object Object]"
+```
+
+> IN javascript, ou properties have attributes attach to them. It prevent a property of being enumerated.
+
+```javascript
+let person = {name: "Alexandro"};
+let obas = Object.getPrototypeOf(person);
+let desc = Object.getOwnPropertyDescriptor(obas,'toString');
+console.log(desc);
+// In console
+[Log] {value: function, writable: true, enumerable: false, configurable: true} (oop.js, line 4)
+// we see that this method is not enumerable.
+```
+
+And the previous chapter we used ```Object.definePropeerty()``` to define the attributes getters and setters. Now as we can see, we can define more attributes.
+
+```javascript
+// Writable = false (object is readonly)
+let person = {name: "Alexandro"};
+Object.defineProperty(person,'name',{
+    writable:false
+});
+
+person.name = 'Lelex';
+console.log(person);
+// console
+// the name didn't changed
+[Log] {name: "Alexandro"} (oop.js, line 7)
+///////
+// read-only and we will hide the keys
+let person = {name: "Alexandro"};
+Object.defineProperty(person,'name',{
+    writable:false,
+    enumerable:false
+});
+
+person.name = 'Lelex';
+console.log(Object.keys(person));
+// in console
+// the keys won't be display
+[Log] [] (0) (oop.js, line 8)
+//////
+// read-only, hiding keys and unconfigurable
+let person = {name: "Alexandro"};
+Object.defineProperty(person,'name',{
+    writable:false,
+    enumerable:false,
+    configurable: false
+});
+
+delete person.name; 
+console.log(person);
+// in console
+// the name won't be deleted
+[Log] {name: "Alexandro"} (oop.js, line 9)
+```
+
+> By default all those attribute are truth which means all property are writable, enumerable and configurable.
+
+## Constructor Property
