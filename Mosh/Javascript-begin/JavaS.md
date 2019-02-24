@@ -100,7 +100,7 @@ irate = 10;
 console.log(irate)
 ```   
 
-> Best practice:  If you don't need to reassing the value of a variable. Use "const" when you a declaring and initiate the value of the variable.
+> Best practice:  If you don't need to reassine the value of a variable. Use "const" when you a declaring and initiate the value of the variable.
 
 ## Primtives and References types 
 
@@ -172,7 +172,8 @@ print('hi!')
 - Array
 - function
 
-#### Object   
+#### Object
+
 > when we are dealing with multiple related variables. we can put these variables inside of an object. Objects have properties.
 
 ```javascript
@@ -536,5 +537,72 @@ console.log(b);
 
 ## Chapter 2: Control Flow
 
+### COnditional Statements
 
+IN javascript we have two type of conditional statements.
+
+- if and else
+- switch and case
+
+#### If and Else
+
+```javascript
+// basics structure
+if(condition){
+    // one or multiple
+    statements;
+}
+else if(anothercondition){
+    // one or multiple
+    statements;
+}
+// we can have multiple else if
+else if(yetanothercondition){
+    // one or multiple
+    statements;
+}
+else{
+    // if nun of the previous condition are true
+    // one or multiple
+    statements;
+}
+// what we call condition here is a mixed of expression and operators.
+```
+
+A practical example:
+
+```javascript
+let hour = 22;
+
+if(hour>=6&&hour<12){
+    console.log('Good morning');
+}
+else if(hour>=12&&hour<=18){
+    console.log('Good Morning');
+}
+else{
+    console.log('Good Evening');
+}
+```
+
+#### Switch and case
+
+```javascript
+let variable;
+
+switch(variable){
+    case 'value':
+        statements;
+        break;
+    // Multiple case
+    case 'value2':
+        statements;
+        break;
+    // the default doesn't need a break
+    default:
+        statements;
+}
+```
+
+With switch and case we can compare the value of a variable against different value.
 
