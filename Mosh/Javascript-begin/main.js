@@ -1,5 +1,12 @@
-let usercolor = ''; // or undifined (they are falsy)
-let defaultcolor = 'blue';
-let currentColor = usercolor || defaultcolor;
+let a = "blue";
+let b = " red";
 
-console.log(currentColor);
+let c = " ";
+
+// overwrite logic:
+c = a;
+a = b;
+b= c;
+
+console.log(a);
+console.log(b);

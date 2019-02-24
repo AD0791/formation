@@ -459,5 +459,82 @@ console.log(currentColor);
 
 ### Bitewise Operator
 
+[Decimal TO binary](https://www.electronics-tutorials.ws/binary/bin_2.html)
+
+```javascript
+// bitewise OR is different than logical or ||
+// bitewise AND is different than logical or &&
+console.log(1|2); // R
+console.log(1&2); // R2
+// decimal to binary
+// 1 = 00000001
+// 2 = 00000010
+// the evaluation process:
+// R = 00000011 = 3 // becuz of the OR
+//R2 = 00000000 = 0 // becuz of the AND
+
+//in  console
+[Log] 3 (main.js, line 3)
+[Log] 0 (main.js, line 4)
+```
+
+Lets implement a real life example:
+
+```javascript
+// Access controle System
+// read, write, execute
+// 00000100 read  = 4
+// 0000010 read and write = 2
+// 00000001 execute = 1
+
+const readperm = 4;
+const writeperm = 2;
+const eperm = 1;
+
+// permission recorded
+let myperm = 0;
+// we add permission with bitewise OR operator
+myperm = myperm | readperm | writeperm | eperm;
+
+// evaluation
+// check permission with the bitewise AND operators
+let message =(myperm & readperm) ? "yes" : "no";
+
+console.log(message);
+// in console
+[Log] yes (main.js, line 20)
+```
 
 ### operator precedence
+
+```javascript
+// P.E.M.D.A.S
+
+let x = 2+3+4*3;
+console.log(x);
+// 17
+```
+
+### EXercise - Chapter 1
+
+Swapping Value of 2 variables
+
+```javascript
+let a = "blue";
+let b = " red";
+
+let c = " ";
+
+// overwrite logic:
+c = a;
+a = b;
+b= c;
+
+console.log(a);
+console.log(b);
+```
+
+## Chapter 2: Control Flow
+
+
+
