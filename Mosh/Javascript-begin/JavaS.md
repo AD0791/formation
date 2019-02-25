@@ -516,7 +516,7 @@ console.log(x);
 // 17
 ```
 
-### EXercise - Chapter 1
+### EXercise - Chapter 3
 
 Swapping Value of 2 variables
 
@@ -535,11 +535,11 @@ console.log(a);
 console.log(b);
 ```
 
-## Chapter 2: Control Flow
+## Chapter 4: Control Flow
 
 ### COnditional Statements
 
-IN javascript we have two type of conditional statements.
+IN javascript we have two type of conditional statements:
 
 - if and else
 - switch and case
@@ -606,3 +606,285 @@ switch(variable){
 
 With switch and case we can compare the value of a variable against different value.
 
+### Loop 
+
+#### For Loop
+
+we use loop to repeat an action over a number of time. In javascript we have:
+
+- for loops
+- while loops
+- Do while loops
+- for in loops
+- for of loops
+
+```javascript
+for(initializexpr;condition;incrementexpr){
+    // this loop will run as long as the condition will evaluate to true.
+    statements;
+}
+```
+
+Incrementation
+
+```javascript
+// i is the loop varaible
+for(let i =0;i<5;i++){
+    console.log("Hello World");
+}
+```
+
+```javascript
+for(let i =0;i<5;i++){
+    if(i%2!==0){
+        console.log(i);
+    }
+}
+```
+
+Decrementation
+
+```javascript
+for(let i=5;i>=0;i--){
+    if(i%2!==0){
+        console.log(i);
+    }
+}
+```
+
+#### While Loop
+
+In for loops, the lopp variable is part of the loop itself. In a while loop you have to declare this variable externally.
+
+```javascript
+// firt the loop variable
+let lvar;
+while(conditon){
+    statements;
+}
+```
+
+We will make a while loop equivalent to the previous for loop.
+
+```javascript
+let i = 0;
+while(i<=5){
+    if(i%2!==0){
+        console.log(i);
+    i++;
+    }
+}
+
+let i = 5;
+while(i>=0){
+    if(i%2!==0){
+        console.log(i);
+    i--;
+    }
+}
+```
+
+#### DO While loop
+
+Do not make this mistake!
+
+```javascript
+let i=0;
+while(i<=5){
+    if(i%2!==0){
+        console.log(i);
+    i++;
+    }
+}
+
+let i = 0;
+// we will get an error in this case. We can't reassign this loop variable.
+```
+
+A do while loop:
+
+```javascript
+let lvar;
+do{
+    staements;
+}while(condition);
+```
+
+Do while loop are always at least executed once. even if the condition is evaluate to false.
+
+```javascript
+let i = 0;
+do{
+    if(i%2!==0){
+        console.log(i);
+    i++;
+    }
+}while(i<=5);
+// this code will be well executed.
+
+// Now let put an error in the logic
+let i = 9;
+do{
+    if(i%2!==0){
+        console.log(i);
+    i++;
+    }
+}while(i<=5);
+// the console will return 9. becuz it's an odd number. The do will be execute. but the while condition is not correct.
+
+// If you used a while loop:
+let i=9;
+while(i<=5){
+    if(i%2!==0){
+        console.log(i);
+    i++;
+    }
+}
+// The condition isn't correct now. The code will not be executed.
+```
+
+#### Infinite loops
+
+You must avoid them. It can crash the browser and your pc.
+
+Here's how you can create them:
+
+```javascript
+let i = 0;
+while(i<0){
+    console.log(i)
+    // This will create an infinite loop
+    //i++; we forget to increment
+}
+// you can have infinite loop with 
+// do while, for loops
+```
+
+- You can't write ```while(true)```.
+- don't forget ton increment or decrement.
+- take good care of the condition you are using.
+
+#### For In and For OF loops
+
+we Use them to iterate inside of an object or an array.
+
+```javascript
+const person = {
+    name:"Lelex",
+    age:27;
+}
+
+for(let k in person){
+    console.log(k, person[k]);
+}
+
+// ARRAY
+const per = ['b','c','d','e'];
+
+for(i in per){
+    console.log(i,per[i]);
+}
+// in console
+[Log] 0 – "b" (main.js, line 4)
+[Log] 1 – "c" (main.js, line 4)
+[Log] 2 – "d" (main.js, line 4)
+[Log] 3 – "e" (main.js, line 4)
+```
+
+The ideal way to iterate over an Array is with the for-of loop.
+
+```javascript
+// For-In
+const per = ['b','c','d','e'];
+
+for(i in per){
+    console.log(i,per[i]);
+}
+// in console
+[Log] 0 – "b" (main.js, line 4)
+[Log] 1 – "c" (main.js, line 4)
+[Log] 2 – "d" (main.js, line 4)
+[Log] 3 – "e" (main.js, line 4)
+
+// For-Of
+const per = ['b','c','d','e'];
+
+for(i of per){
+    console.log(i);
+}
+[Log] b (main.js, line 4)
+[Log] c (main.js, line 4)
+[Log] d (main.js, line 4)
+[Log] e (main.js, line 4)
+```
+
+> best practice: YOu should use a for-in loop to iterate over element inside an object and a for-of loop to iterate over element inside an array.
+
+#### Break and continue
+
+```javascript
+//BREAK
+let i = 0;
+while(i<=10){
+    if(i===5){
+        break;
+    }
+    console.log(i);
+    i++;
+}
+// In console
+[Log] 0 (main.js, line 6)
+[Log] 1 (main.js, line 6)
+[Log] 2 (main.js, line 6)
+[Log] 3 (main.js, line 6)
+[Log] 4 (main.js, line 6)
+
+//CONTINUE
+let i = 0;
+while(i<=10){
+    // if(i===5){
+    //     break;
+    // }
+    if(i%2 ===0){
+        i++; 
+        continue;
+    }
+    console.log(i);
+    i++;
+}
+//In console
+[Log] 1 (main.js, line 10)
+[Log] 3 (main.js, line 10)
+[Log] 5 (main.js, line 10)
+[Log] 7 (main.js, line 10)
+[Log] 9 (main.js, line 10)
+```
+
+> With the break keyword we jump out of a loop. With the continue keyword, we continue to another iteration.
+
+
+## Exercise - Chapter 4
+
+1. function that return the max of two number.
+
+```javascript
+function toMax(num1,num2){
+    if(num1>num2){
+         res = num1;
+    }
+    else{
+         res = num2;
+    }
+    return res;
+}
+// in console
+> toMax(123,500)
+< 500
+> toMax(600,500)
+< 600
+
+//OtherWay: conditional operator (ternary)
+function toMax(num1,num2){
+    return (num1>num2)? num1:num2;
+}
+```

@@ -1,11 +1,5 @@
-let hour = 22;
+function toMax(num1,num2){
+    return (num1>num2)? num1:num2;
+}
 
-if(hour>=6&&hour<12){
-    console.log('Good morning');
-}
-else if(hour>=12&&hour<=18){
-    console.log('Good Morning');
-}
-else{
-    console.log('Good Evening');
-}
+
