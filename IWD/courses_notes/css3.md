@@ -138,6 +138,11 @@ In css we have 4 catefories to set colors:
 
 ## CSS StylingText
 
+```Test-Transform:value;``` transforms your text into the value you entered.
+
+- UPPERCASE
+- Lowercase
+- Capitalize
 
 
 
