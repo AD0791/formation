@@ -888,3 +888,153 @@ function toMax(num1,num2){
     return (num1>num2)? num1:num2;
 }
 ```
+
+2. Landscape or portrait.
+
+```javascript
+// we will get an answer
+function Islandscape(width,height){
+    return (width>height) ? "Landscape":"Portrait";
+}
+// in console
+> Islandscape(500,10)
+< "Landscape"
+> Islandscape(5,10)
+< "Portrait"
+
+// More easy and Pro
+function Islandscape(width,height){
+    return (width>height);
+}
+//in console
+> Islandscape(5,10)
+< false
+> Islandscape(500,10)
+< true
+```
+
+3. The Fizz Buzz algorithm
+
+- Number divisible by 3  = fizz.
+- Number divisible by 5 = Buzz.
+- Number divisible by 3 and 5 = fizzbuzz.
+- else return same number.
+- catch non-number error: NOt a number.
+
+```javascript
+function fizzbuzz(num){
+    let answer;
+    if(isNaN(num) || typeof(num)==='boolean'){
+        throw Error("It's not a number");
+    }
+    else if(num%3 === 0 && num%5===0){
+        answer = "fizzbuzz";
+    }
+    else if(num%3 === 0){
+        answer = "fizz";
+    }
+    else if(num%5 === 0){
+        answer = "buzz";
+    }
+    else{
+        answer = num;
+    }
+    return answer;
+}
+// in console
+> fizzbuzz(false)
+< Error: It's not a number
+> fizzbuzz(true)
+< Error: It's not a number
+> fizzbuzz('lelex')
+< Error: It's not a number
+> fizzbuzz(15)
+< 15
+> fizzbuzz(5)
+< 5
+> fizzbuzz(3)
+< 3
+
+// Mosh answer take.
+// better way to do the if statement
+if(typeof(num)!=='number')
+// the code became
+
+function fizzbuzz(num){
+    let answer;
+    if(typeof(num)!=='number'){
+        throw Error("It's not a number");
+    }
+    else if(num%3 === 0 && num%5===0){
+        answer = "fizzbuzz";
+    }
+    else if(num%3 === 0){
+        answer = "fizz";
+    }
+    else if(num%5 === 0){
+        answer = "buzz";
+    }
+    else{
+        answer = num;
+    }
+    return answer;
+}
+```
+
+4. Demerit points
+
+- speed limits <= 70km -> ok
+- 5km over the limit -> point: 1. Use Math.floor()
+- [70,75[ -> ok
+- 80 -> point: 2
+- more 12 points -> license suspended. (>130)
+
+```javascript
+function checkspeed(speed){
+    const speedlim = 70;
+    const ppoint = 5;
+    let ans;
+    if(speed<75){  // speedlim+ppoint
+        ans = "OK";
+    }
+    else{
+        const point=Math.floor((speed-speedlim)/ppoint);
+        if(point>=12){
+            ans = "License suspended";
+        }
+        else{
+            ans=console.log("Points:", point);
+        }
+    }
+    return ans;    
+}
+// in console
+> checkspeed(72)
+< "OK"
+> checkspeed(715)
+< "License suspended"
+> checkspeed(126)
+[Log] Points: – 11 (main.js, line 14)
+```
+
+5. Even and ODD Number.
+
+```javascript
+function snum(limit){
+    let ans;
+    if(typeof(limit)!=='number'){
+        throw Error('Please enter a number');
+    }
+    for(let i=0;i<limit;i++){
+        if(i%2===0){
+            ans=console.log(i+" Even Number");
+        }
+        else{
+            ans=console.log(i+" ODD Number");
+        }
+    }
+}
+```
+
+
+
