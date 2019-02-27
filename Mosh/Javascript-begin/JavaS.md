@@ -1036,5 +1036,72 @@ function snum(limit){
 }
 ```
 
+6. Count truthy
 
+Create a function that count the truthy.
+
+> Remember the list of FALSY value in javascript:
+
+- false
+- ''
+- null
+- undefined
+- NaN
+- 0
+
+```javascript
+function countruthy(arr){
+    let n=0;
+    for(let value of arr){
+        if(value){ // if truthy
+            n++ // the count will increment
+        }
+    }
+    return  n;
+}
+```
+
+7. Show strings properties in an object.
+
+```javascript
+const amen = {
+    name: "Valerie",
+    money: 30000,
+    function:"Business Woman"
+}
+
+function spro(obj){
+    let ans;
+    for(let key in obj){
+        if(typeof(obj[key])==="string"){
+            ans = console.log(key,obj[key]);
+        }
+    }
+    return ans;
+}
+
+// In console
+> spro(amen)
+[Log] name – "Valerie" (main.js, line 16)
+[Log] function – "Business Woman" (main.js, line 16)
+```
+
+8. Some of Multiple of 3 or 5
+
+```javascript
+function mulsum(limit){
+    let ans=0;
+    for(let i = 0;i<=limit;i++){
+        if(i%3===0||i%5===0){
+            ans += i;
+        }
+    } // you must 
+    return ans; // return the ans out of the loop 
+}
+// In console
+> mulsum(10)
+< 33
+> mulsum(100)
+< 2418
+```
 

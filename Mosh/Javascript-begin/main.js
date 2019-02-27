@@ -1,14 +1,9 @@
-function snum(limit){
-    let ans;
-    if(typeof(limit)!=='number'){
-        throw Error('Please enter a number');
-    }
-    for(let i=0;i<limit;i++){
-        if(i%2===0){
-            ans=console.log(i+" Even Number");
+function mulsum(limit){
+    let ans=0;
+    for(let i = 0;i<=limit;i++){
+        if(i%3===0||i%5===0){
+            ans += i;
         }
-        else{
-            ans=console.log(i+" ODD Number");
-        }
-    }
+    } // you must 
+    return ans; // return the ans out of the loop 
 }
