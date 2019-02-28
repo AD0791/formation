@@ -1105,3 +1105,152 @@ function mulsum(limit){
 < 2418
 ```
 
+9. Calculate the average grade.
+
+- return the grades of any given array
+- 1-59: F
+- 60-69:D
+- 70-79: C
+- 80-89: B
+- 90-100: A
+
+```javascript
+let a = [90,90,90,80]
+
+function ravgrds(grades){
+    // grades is an array
+    let notes="";
+    let sum = 0;
+    let deno = grades.length;
+    let avg = 0;
+    for(let g=0;g<grades.length;g++){
+        sum += grades[g];
+        avg = sum / deno;
+    }
+    if(avg<60){
+        notes = "F";
+    }
+    else if(avg<70){
+        notes="D";
+    }
+    else if(avg<80){
+        notes="C"
+    }
+    else if(avg<90){
+        notes="B"
+    }
+    else{
+        notes="A"
+    }
+    return console.log(notes,avg);
+}
+
+ravgrds(a);
+// console
+[Log] B – 87.5 (main.js, line 28)
+
+
+// better way
+// your function shouldn't handle to much things.
+
+let a = [90,90,90,80]
+// average calculation
+function calavg(aw){
+    let sum=0;
+    for(let val of aw ){
+        sum+=val;
+    }
+    return sum/aw.length;
+}
+// grade system
+function calgrades(score){
+    const avg = calavg(score);
+    if(avg<60){
+        notes = "F";
+    }
+    if(avg<70){
+        notes="D";
+    }
+    if(avg<80){
+        notes="C"
+    }
+    if(avg<90){
+        notes="B"
+    }
+    else{
+        notes =  "A";
+    }
+    return notes;
+}
+console.log(calgrades(a),calavg(a));
+[Log] B – 87.5 (main.js, line 35)
+```
+
+> For-of work well when we want the value not the index.
+
+10. Show stars.
+
+```javascript
+function showstars(rows){
+    let ans;
+    for(let r=1;r<=rows;r++){
+        let pat="";
+        for(let i =0;i<r;i++){
+            pat+="*";
+        }
+        ans = console.log(pat);       
+    }
+    return ans;
+}
+
+showstars(10);
+// console
+[Log] * (main.js, line 8)
+[Log] ** (main.js, line 8)
+[Log] *** (main.js, line 8)
+[Log] **** (main.js, line 8)
+[Log] ***** (main.js, line 8)
+[Log] ****** (main.js, line 8)
+[Log] ******* (main.js, line 8)
+[Log] ******** (main.js, line 8)
+[Log] ********* (main.js, line 8)
+[Log] ********** (main.js, line 8)
+```
+
+11. Prime Numbers. 
+
+- divide by 1 and themselves
+
+```javascript
+function showprime(limit){
+    let ans;
+    // 2 is first prime number
+    for(let n=2;n<=limit;n++){ 
+        let isprime = true;
+        // 2 to current_number[n]
+        for(let f=2;f<n;f++){
+            if(n%f===0){
+                isprime = false;
+                break
+            }
+        } 
+        if(isprime){
+            ans = console.log(n);
+        }      
+    }
+    return ans;
+}
+
+showprime(10);
+// console
+[Log] 2 (main.js, line 14)
+[Log] 3 (main.js, line 14)
+[Log] 5 (main.js, line 14)
+[Log] 7 (main.js, line 14)
+```
+
+
+
+
+
+

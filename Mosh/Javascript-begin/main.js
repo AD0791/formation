@@ -1,9 +1,20 @@
-function mulsum(limit){
-    let ans=0;
-    for(let i = 0;i<=limit;i++){
-        if(i%3===0||i%5===0){
-            ans += i;
-        }
-    } // you must 
-    return ans; // return the ans out of the loop 
+function showprime(limit){
+    let ans;
+    // 2 is first prime number
+    for(let n=2;n<=limit;n++){ 
+        let isprime = true;
+        // 2 to current_number[n]
+        for(let f=2;f<n;f++){
+            if(n%f===0){
+                isprime = false;
+                break
+            }
+        } 
+        if(isprime){
+            ans = console.log(n);
+        }      
+    }
+    return ans;
 }
+
+showprime(10);
