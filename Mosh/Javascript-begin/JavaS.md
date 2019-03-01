@@ -1236,7 +1236,7 @@ function showprime(limit){
         } 
         if(isprime){
             ans = console.log(n);
-        }      
+        }
     }
     return ans;
 }
@@ -1247,7 +1247,39 @@ showprime(10);
 [Log] 3 (main.js, line 14)
 [Log] 5 (main.js, line 14)
 [Log] 7 (main.js, line 14)
+
+// better way
+
+function showprime(limit){
+    let ans;
+    // 2 is first prime number
+    for(let n=2;n<=limit;n++){ 
+        if(isprime(n)){
+            ans = console.log(n);
+        }
+    }
+    return ans;
+}
+
+function isprime(n){
+    // 2 to current_number[n]
+    for(let f=2;f<n;f++){
+        if(n%f===0){
+            return false;
+        }
+    }
+    return true; 
+}
+
+
+showprime(10);
+// console
+[Log] 2 (main.js, line 6)
+[Log] 3 (main.js, line 6)
+[Log] 5 (main.js, line 6)
+[Log] 7 (main.js, line 6)
 ```
+
 
 
 
