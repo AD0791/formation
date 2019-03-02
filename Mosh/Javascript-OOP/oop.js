@@ -1,9 +1,11 @@
-let person = {name: "Alexandro"};
-Object.defineProperty(person,'name',{
-    writable:false,
-    enumerable:false,
-    configurable: false
-});
+function Cercle(radius){
+    this.radius = radius;
+}
 
-delete person.name; 
-console.log(person);
+const circle = new Cercle(1);
+
+console.log(Cercle.prototype);
+
+let array = [1,2];
+
+console.log(array.prototype);

@@ -15,8 +15,8 @@ Languages that support OOP:
 - Java  
 - Ruby  
 - Python  
-- Javascript 
-- R, PHP, ... 
+- Javascript
+- R, PHP, ...
 
 The (popular) frameworks are designed with OOP concepts (for example Angular).
 
@@ -652,7 +652,7 @@ console.log(desc);
 // we see that this method is not enumerable.
 ```
 
-And the previous chapter we used ```Object.definePropeerty()``` to define the attributes getters and setters. Now as we can see, we can define more attributes.
+And the previous chapter we used ```Object.defineProperty()``` to define the attributes getters and setters. Now as we can see, we can define more attributes.
 
 ```javascript
 // Writable = false (object is readonly)
@@ -688,7 +688,7 @@ Object.defineProperty(person,'name',{
     configurable: false
 });
 
-delete person.name; 
+delete person.name;
 console.log(person);
 // in console
 // the name won't be deleted
@@ -698,3 +698,41 @@ console.log(person);
 > By default all those attribute are truth which means all property are writable, enumerable and configurable.
 
 ## Constructor Property
+
+Constructor also have a prototype property.
+
+```javascript
+function Cercle(radius){
+    this.radius = radius;
+}
+
+const circle = new Cercle(1);
+
+console.log(Cercle.prototype);
+// console
+[Log] Cercle {} (oop.js, line 7)
+// {} is the prototype of the cercle constructor
+// Object do the same
+> Object.prototype
+< {}
+```
+
+```javascript
+let array = [];
+console.log(array.prototype);
+// you will see that
+> Array.prototype
+< [] (0)
+// Array and array has the same prototype.
+```
+
+> object in javascript can have the same constructor prototype.
+
+
+
+
+
+
+
+
+
