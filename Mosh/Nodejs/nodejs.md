@@ -358,9 +358,28 @@ inherits        path            process         util
 
 ## OS Module
 
+os is another built-in module of Node.
 
+```javascript
+// Import the built-in Path module
+const os = require('os');
 
+let tm = os.totalmem();
+let fm = os.freemem();
+ 
+//Template string seems to not work
+// 'total memory: ${tm}'
+console.log('total memory: ',tm);
+console.log('free memory:', fm);
+```
 
+```bash
+$ node app.js
+total memory:  8589934592
+free memory: 493510656
+```
+
+## File system module
 
 
 

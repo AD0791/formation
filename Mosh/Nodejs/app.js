@@ -3,5 +3,7 @@ const os = require('os');
 
 let tm = os.totalmem();
 let fm = os.freemem();
-
-console.log(tm,fm);
+ 
+//Template string 
+console.log('total memory: ',tm);
+console.log('free memory:', fm);
