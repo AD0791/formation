@@ -1,9 +1,18 @@
-// Import the built-in Path module
-const os = require('os');
+const fs = require('fs');
 
-let tm = os.totalmem();
-let fm = os.freemem();
- 
-//Template string 
-console.log('total memory: ',tm);
-console.log('free memory:', fm);
+// asyncronous way
+// we muse use the "callback function" argument
+// Asynchronous readdir(3) - read a directory.
+
+
+const afs  = fs.readdir('./',function(err,files){
+    let result;
+    if(err){
+        throw new Error('You made a mistake');
+    }
+    else{
+        result = console.log('Results: ',files);
+    }
+    return result;
+});
+

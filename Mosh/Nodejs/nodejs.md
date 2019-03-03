@@ -358,7 +358,7 @@ inherits        path            process         util
 
 ## OS Module
 
-os is another built-in module of Node.
+os is another built-in module of Node. Let's look at some of the methods.
 
 ```javascript
 // Import the built-in Path module
@@ -380,6 +380,78 @@ free memory: 493510656
 ```
 
 ## File system module
+
+Everything in the file sytem module is synchronous and asynchronous. In a real world application you should work with the asynchronous methods.
+
+```javascript
+const fs = require('fs');
+
+// for simplicity we use the syncronuous method
+const files = fs.readdirSync('./'); 
+console.log(files);
+```
+
+```bash
+$ node app.js
+[ 'Recap', 'app.js', 'nodejs.md' ]
+```
+
+We need a callback function for the asyncronous method in node.
+
+```javascript
+const fs = require('fs');
+
+// asyncronous way
+// we muse use the "callback function" argument
+// Asynchronous readdir(3) - read a directory.
+
+
+const afs  = fs.readdir('./',function(err,files){
+    let result;
+    if(err){
+        throw new Error('You made a mistake');
+    }
+    else{
+        result = console.log('Results: ',files);
+    }
+    return result;
+});
+```
+
+```bash
+$ node app.js
+Results:  [ 'Recap', 'app.js', 'nodejs.md' ]
+```
+
+let's simulate an error
+
+```javascript
+// wrong arg for the path
+const afs  = fs.readdir('$',function(err,files){
+    let result;
+    if(err){
+        throw new Error('You made a mistake');
+    }
+    else{
+        result = console.log('Results: ',files);
+    }
+    return result;
+});
+```
+
+```bash
+$ node app.js
+/Users/alexandrodisla/Desktop/repo/formation/Mosh/Nodejs/app.js:20
+        throw new Error('You made a mistake');
+        ^
+
+Error: You made a mistake
+    at /Users/alexandrodisla/Desktop/repo/formation/Mosh/Nodejs/app.js:20:15
+    at FSReqWrap.oncomplete (fs.js:141:20)
+```
+
+## Events Module
+
 
 
 
