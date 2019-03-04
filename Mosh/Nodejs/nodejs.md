@@ -452,12 +452,293 @@ Error: You made a mistake
 
 ## Events Module
 
+An Event will gives us a signal that something has happened in our application. Http module is used to build a web server.
+
+Set the difference between a __class__ and an __Object__.
+
+> Metaphore: A Class is a Human. AN object is an actual person.
+
+- A class defines the properties and (the methods) the behavior of a concept.
+- An object is an actual instance of that class.
+
+You must register the listener before you raise an event.
+
+```javascript
+// by convention, we put an uppercase at the start
+// of a variable to indicate that we are using a
+// class. Eventemitter is a class.
+
+// A class is a container for properties and methods
+
+const Eventemitter = require('events');
+
+// create an instance to use the class
+// by we will create a new object
+
+const emitter = new Eventemitter();
+
+// register a listener
+// on or addListener
+
+emitter.on('messagelogged',function(){
+    console.log('Listener is loaded')
+});
 
 
+// raise an event
+// making a noise - signalling that an event has happen
+emitter.emit('messagelogged');
+```
+
+```bash
+$ node app.js
+Listener is loaded
+```
+
+### Events Arguments
+
+```javascript
+const Eventemitter = require('events');
+
+const emitter = new Eventemitter();
 
 
+emitter.on('messagelogged',function(arg){
+    console.log('Listener is loaded '+ arg)
+});
 
 
+emitter.emit('messagelogged',{id:1,url:'http://'});
+```
+
+```bash
+$ node app.js
+Listener is loaded [object Object]
+```
+
+> In ES6 we have that feature called arrow function.
+
+```javascript
+const Eventemitter = require('events');
+
+const emitter = new Eventemitter();
+
+// arrow function
+emitter.on('messagelogged',(arg)=>{
+    console.log('Listener is loaded '+ arg)
+});
+
+
+emitter.emit('messagelogged',{id:1,url:'http://'});
+
+// we will have the same output
+```
+
+### Extending Eventemitter
+
+```javascript
+//logger.js
+const Eventemitter = require('events');
+const emitter = new Eventemitter();
+
+let url='http://mylogger.io/log';
+
+function log(message){
+    console.log(message);
+    // raise an event
+    emitter.emit('messagelogged',{id:1,url:'http://'});
+}
+
+//export the module
+module.exports = log;
+
+//app.js
+
+const Eventemitter = require('events');
+const emitter = new Eventemitter();
+
+
+// registry the listener
+emitter.on('messagelogged',(arg)=>{
+    console.log('Listener is loaded '+ arg)
+});
+
+// load the logger.js
+const log = require('./logger.js');
+log('message');
+```
+
+The call back function on the listener will not be called.
+
+```bash
+$ node app.js
+message
+```
+
+WHy? It's because we are working with two eventemitter objects. They are completely different.
+
+> best practice: It's very rare to work directly with the eventemitter. Instead you want to create a class that have all capabilities of the events class and more.
+
+Since we are using the same class, the call back function will be displayed.
+
+```javascript
+// logger.js
+const Eventemitter = require('events');
+let url='http://mylogger.io/log';
+
+// class- first letter is uppercase by convention
+// when creating a method in a class
+// no need for the word "function"
+// extends Eventemitter allow to our class to inherit
+// from the Eventemitter (events class) class 
+// all the properties and methods.
+// that's why we use the pointer this.emit
+class Logger extends Eventemitter{
+     log(message){
+        console.log(message);
+        // raise an event
+        this.emit('messagelogged',{id:1,url:'http://'});
+    }
+}
+
+//export the module
+module.exports = Logger;
+
+// app.js
+
+// we really don't need the following in app.js
+//const Eventemitter = require('events');
+
+// load the logger.js
+// we will get the class and instantiate an object
+const Logger = require('./logger.js');
+const logger = new Logger();
+
+// since Logger class is a child of Eventemitter
+// or events class
+// registry the listener
+logger.on('messagelogged',(arg)=>{
+    console.log('Listener is loaded '+ arg)
+});
+
+
+logger.log('message');
+```
+
+```bash
+$ node app.js
+message
+Listener is loaded [object Object]
+```
+
+## HTTP module
+
+We can create a web server that listen to a http request in a given port.
+
+```javascript
+const http = require('http');
+
+// this server has the same capabilitise of 
+// an event emitter
+const server  = http.createServer();
+
+// register a listener
+server.on('connection', (socket)=>{
+    console.log('new connection...');
+});
+
+//every time there's a new connection
+// the server will raise an event
+// create a port - event raise
+server.listen(3000);
+
+console.log('listening on port 3000..');
+```
+
+we run the app in the terminal and we go to our browser to add the ```localhost:3000```.
+
+```bash
+$ node app.js
+# the port is active
+listening on port 3000..
+# we made a connection in our browser
+new connection...
+# we did a refresh of the page
+new connection...
+# to cancel that connection in the terminal
+^C
+```
+
+In real world application we are not going to respond to the connection event to build an http server. We have a better practical ways.
+
+```javascript
+const http = require('http');
+
+// this server has the same capabilitise of 
+// an event emitter
+// a call back function to handle request and response
+const server  = http.createServer((req,res)=>{
+    if(req.url === '/'){
+        res.write('Nodejs is a beast');
+        res.end();
+    }
+});
+
+//every time there's a new connection
+// the server will raise an event
+// create a port - event raise
+server.listen(3000);
+
+console.log('listening on port 3000..');
+```
+
+In this case Node is a beast, will be display in our localhost in the browser.
+
+```bash
+$ node app.js
+listening on port 3000..
+^C
+```
+
+If we want to build a backend service for our application. We need to handle various route.
+
+```javascript
+const http = require('http');
+
+// this server has the same capabilitise of 
+// an event emitter
+// a call back function to handle request and response
+const server  = http.createServer((req,res)=>{
+    if(req.url === '/'){
+        res.write('Nodejs is a beast');
+        res.end();
+    }
+    // lets add another route
+    if(req.url ==='/api/courses'){
+        res.write(JSON.stringify([1,2,3,4]));
+        res.end();
+    }
+});
+
+//every time there's a new connection
+// the server will raise an event
+// create a port - event raise
+server.listen(3000);
+
+console.log('listening on port 3000..');
+```
+
+```bash
+$ node app.js
+listening on port 3000..
+^C
+```
+
+Now we have two route or directories in our web app. 
+-  ```localhost:3000``` wher we display a simple message "nodejs is a beast"
+- ```localhost/api/courses``` where we write a simple json to be send to our database. for now this json will be display in the browser.
+
+> in a real world, we will not be using that http module to build our backend. why? if we want to add multiple route the code as it is will be complexe. Instead we will use a framework as **express**. Internally express is build on top of the http module in node.
 
 
 

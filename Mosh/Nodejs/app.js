@@ -1,18 +1,23 @@
-const fs = require('fs');
+const http = require('http');
 
-// asyncronous way
-// we muse use the "callback function" argument
-// Asynchronous readdir(3) - read a directory.
-
-
-const afs  = fs.readdir('./',function(err,files){
-    let result;
-    if(err){
-        throw new Error('You made a mistake');
+// this server has the same capabilitise of 
+// an event emitter
+// a call back function to handle request and response
+const server  = http.createServer((req,res)=>{
+    if(req.url === '/'){
+        res.write('Nodejs is a beast');
+        res.end();
     }
-    else{
-        result = console.log('Results: ',files);
+    // lets add another route
+    if(req.url ==='/api/courses'){
+        res.write(JSON.stringify([1,2,3,4]));
+        res.end();
     }
-    return result;
 });
 
+//every time there's a new connection
+// the server will raise an event
+// create a port - event raise
+server.listen(3000);
+
+console.log('listening on port 3000..');
