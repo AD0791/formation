@@ -728,6 +728,213 @@ console.log(array.prototype);
 
 > object in javascript can have the same constructor prototype.
 
+## Prototype vs Instance member
+
+If you have a copies of the same object.
+With the same methods and properties, you're going to waste your computer memory.
+
+The javascript engine will check the prpoerties and methods of an objects or the prototype of that object to find the require property or method, we are asking for.
+
+We handle that by looking for the prototype of that object, to store some properties or methods.
+
+```javascript
+function Cercle(radius){
+    this.radius = radius;
+}
+
+// let's put the draw method on the prototype of the
+// Cerccle object.
+Cercle.prototype.draw = function(){
+    console.log('draw');
+};
+
+const c1 = new Cercle(1);
+const c2  = new Cercle(2);
+// in console
+Cercle = $1
+radius: 1
+Cercle Prototype
+constructor: function(radius)
+draw()
+Object Prototype
+```
+
+The draw method is now on the Cercle prototype. And we can access it because of the prototypycal inheritance.
+
+```javascript
+function Cercle(radius){
+    // instance members
+    this.radius = radius;
+}
+// let's put the draw method on the prototype of the
+// Cerccle object.
+// prototype members
+Cercle.prototype.draw = function(){
+    console.log('draw');
+};
+
+const c1 = new Cercle(1);
+const c2  = new Cercle(2);
+
+// let's access the draw method
+
+c1.draw();
+// in console
+[Log] draw (oop.js, line 8)
+```
+
+We have two kind of properties and methods in javascript.
+
+- Instance (property and method) members.
+- Prototype (property and method) members.
+
+```c1.toString()``` will output the object and the prototype of that object: ```"[object Object]"```. c1 as an instance of Cercle object inherit this method from the prototype Object. We can oeverride this methode like this.
+
+```javascript
+function Cercle(radius){
+    this.radius = radius;
+}
+
+// let's put the draw method on the prototype of the
+// Cercle object.
+Cercle.prototype.draw = function(){
+    console.log('draw');
+};
+
+const c1 = new Cercle(1);
+const c2  = new Cercle(2);
+
+// let's access the draw method
+
+Cercle.prototype.toString = function(){
+    return "Cercle with the radius "+ this.radius;
+}
+// in console
+> c1.toString()
+< "Cercle with the radius 1"
+```
+
+So ```Cercle.prototype``` is a way for us to modify the prototype as we see fit.
+
+We can easily reference a property or method (instance member) in our protoype method (prototype member). We use this prototype method to add function in the prototype of that Cercle object.
+
+```javascript
+function Cercle(radius){
+    this.radius = radius;
+    this.move = function(){
+        console.log('Move like a beast');
+    }
+}
+
+// let's put the draw method on the prototype of the
+// Cercle object.
+Cercle.prototype.draw = function(){
+    this.move();
+    console.log('draw');
+};
+
+const c1 = new Cercle(1);
+const c2  = new Cercle(2);
+
+// // let's access the draw method
+c1.draw();
+// Cercle.prototype.toString = function(){
+//     return "Cercle with the radius "+ this.radius;
+// }
+// in console
+[Log] Move like a beast (oop.js, line 4)
+[Log] draw (oop.js, line 12)
+```
+
+We can also reference a protoype member in an instance member.
+
+```javascript
+function Cercle(radius){
+    this.radius = radius;
+    this.move = function(){
+        this.draw();
+        console.log('Move like a beast');
+    }
+}
+
+// let's put the draw method on the prototype of the
+// Cercle object.
+Cercle.prototype.draw = function(){
+    // this.move();
+    console.log('draw');
+};
+
+const c1 = new Cercle(1);
+const c2  = new Cercle(2);
+
+c1.move();
+// Cercle.prototype.toString = function(){
+//     return "Cercle with the radius "+ this.radius;
+// }
+// in console
+[Log] draw (oop.js, line 13)
+[Log] Move like a beast (oop.js, line 5)
+```
+
+### Iterating instance and prototype members
+
+```javascript
+function Cercle(radius){
+    // instance members
+    this.radius = radius;
+    this.move = function(){
+        console.log('Move like a beast');
+    }
+}
+
+// you can create an object first 
+// than define a prototype
+const c1 = new Cercle(1);
+
+
+//prototypes members
+Cercle.prototype.draw = function(){
+    console.log('draw');
+};
+
+c1.draw();
+// in console
+[Log] draw (oop.js, line 16)
+```
+
+Iterate instance over prototype members:
+
+```console.log(Object.keys(c1));``` only return instance members: ```[Log] ["radius", "move"] (2) (oop.js, line 19)```.
+
+But the ```for(let k in c1){console.log(k)};``` will return the instance and the prototype members.
+
+> In javascript, they use the word own instead of instance. **Own members vs prototype member**.
+
+```javascript
+// in console
+// draw is a prototype method
+> c1.hasOwnProperty('draw')
+< false
+> c1.hasOwnProperty('move')
+< true
+> c1.hasOwnProperty('radius')
+< true
+```
+
+## Avoid Extending the built-in Objects
+
+> Don't modify objects you don't own. Don't override methods and properties. Don't add new methods and properties in the built-in objects. Don't remove existing properties and methods. To avoid create all sort of issues.
+
+- libraries dependencies can be compromised.
+- ended up with the same named method or property with differant implementation.
+- debugging issue
+- etc.
+
+## Chapter 2 - Exercises
+
+> You should put property or method in the prototype as an optimization technique.
+
+
 
 
 
