@@ -2,9 +2,9 @@
 
 ----------------------
 
-## Chapter 1: Getting Started
+# Chapter 1: Getting Started
 
-### What's OOP?
+## What's OOP
 
 > OOP is a programming paradigm (style of programming) centered around objects rather than functions.  OOP is not a programming language or a tool.
 
@@ -20,7 +20,7 @@ Languages that support OOP:
 
 The (popular) frameworks are designed with OOP concepts (for example Angular).
 
-### 4 Pillars of OOP
+## 4 Pillars of OOP
 
 1. Encapsulation  
 2. Abstraction  
@@ -28,6 +28,7 @@ The (popular) frameworks are designed with OOP concepts (for example Angular).
 4. Polymorphism  
 
 > Before OOP we had uniquely procedural programming (functional programming). It's a straight forward style programming where you are only using functions on the variables (the data).  
+
  **RIsk Of Spaghetti codes: To much interdependancy between the functions. That's where OOP solved the problem. In OOP, we group the related functions and variables into a unit called object. We refer to these variables as properties and the functions as methods.**
 
  1. Encapsulation
@@ -87,7 +88,7 @@ Benefits of OOP:
 - inheritance = eliminate redundant code  
 - polymorphism = refactor ugly switch and case (conditional statements) statements
 
-### Course Structure
+## Course Structure
 
 - Objects
 - Prototypes
@@ -95,9 +96,9 @@ Benefits of OOP:
 - ES6 Classes
 - Modules
 
-## CHapter 2: Objects
+# CHapter 2: Objects
 
-### Objects literal
+## Objects literal
 
 > An object in javascript is a collection of key value pairs.
 
@@ -136,7 +137,7 @@ circle["draw"];
 
 Object literal is a simple way to define an object. But **we can also define an object with factories and constructors**.
 
-### Factories and constructors (property)
+## Factories and constructors (property)
 
 > With object literal, if we want to create a new similar object you would have to duplicate the object. It's not a good practice to do so. If an object have more then one method we shouldn't duplicate them. (Now when an object have more then one method, it is said that this object has a behavior). The object literal way is very limited.  
 
@@ -230,7 +231,7 @@ new Number(); // vs the Number literal : 1, 2, 3, ...
 // it's cleaner (good practice) to use those literals than their object equivalant.
 ```
 
-### Functions are objects
+## Functions are objects
 
 ```javascript
 function Cercle(r,u,t){
@@ -277,7 +278,7 @@ const slik = new autre1(1,1,1);
 < anonymous {r: 1, u: 1, t: 1, trace: function}
 ```
 
-### Value VS reference types  
+## Value VS reference types  
 
 Primitives or value types:
 
@@ -353,7 +354,7 @@ console.log(o);
 [Log] {value: 11} (index.js, line 7)
 ```  
 
-### Adding and removing Properties  
+## Adding and removing Properties  
 
 > Objects in javascript are dynamic. That's mean after you create them, you can add or delete properties.  
 
@@ -408,7 +409,7 @@ const pname = "centre location";
 // autre[pname] = {key:value};
 ```  
 
-### Enumerating properties
+## Enumerating properties
 
 We will a for loop to extract the methods and the properties.
 
@@ -447,7 +448,7 @@ if("r" in autre){
 }
 ```  
 
-### Abstraction  
+## Abstraction  
 
 > Hide the details and show the essentials.
 
@@ -503,7 +504,7 @@ autre.dloc = 1; // we access and set the value externally
 
 A getter is a function that we use to get a property (read-only property). A setter is a function that will allow us to set a property form the outside.
 
-## Chapter 1-Exercises
+# Chapter 1-Exercises
 
  1. Make a stop watch
 
@@ -570,9 +571,9 @@ const stopwatch = new watch();
 // endtime et startime  = new Date()
 ```
 
-## Chapter 2: Prototypes
+# Chapter 2: Prototypes
 
-### Inheritance (prototypical,multilevel)
+## Inheritance (prototypical,multilevel)
 
 > Inheritance is one of the 4 core concept of object oriented programming that enable an object to take on the properties and the methods of another object.
 
@@ -626,7 +627,7 @@ let myarray = [];
 
 > object created by a given constructor will have the same prototype.
 
-### Property Descriptors
+## Property Descriptors
 
 ```javascript
 let person = {name: "Alexandro"};
@@ -930,13 +931,83 @@ But the ```for(let k in c1){console.log(k)};``` will return the instance and the
 - debugging issue
 - etc.
 
-## Chapter 2 - Exercises
+# Chapter 2 - Exercises
 
-> You should put property or method in the prototype as an optimization technique.
+> You should put property or method in the prototype as an optimization technique. Your object must always be on a valid state. The big picture, sometimes when you want to optimize your code. You are going to create issues in the process of doing so.
 
-'''javascript
+```javascript
+// watch object - constructor function
+function watch(){
+    // we most expose these private properties
+    // as read-only.
+    let startime=0;
+    let endtime=0;
+    let runtime = false; 
+    let duration = 0;
+    // getter to expose the duration property as readonly.
+    Object.defineProperty(this,'duration',{
+        get: function(){
+            return duration;
+        },
+        // this implementation has a weakness
+        // we can simply modify externally the value
+        // of the duration
+        set: function(value){
+            duration = value;
+        }
+    });
+    // getter to expose the 3 other privates properties
+    // as readonly.
+    Object.defineProperty(this,'startime',{
+        get: function(){
+            return startime;
+        }
+    });
+    Object.defineProperty(this,'endtime',{     
+        get: function(){
+            return endtime;
+        }
+    });
+    Object.defineProperty(this,'runtime',{
+        get: function(){
+            return runtime;
+        }
+    });
+}
 
+ watch.prototype.start = function(){
+    if(this.runtime){
+        throw new Error("is running");
+    }
+    this.runtime = true; 
+    this.startime = new Date(); 
+};
+watch.prototype.stop = function(){
+    if(!this.runtime){
+        throw new Error("not running");
+    } 
+    this.runtime=false; 
+    this.endtime= new Date(); 
+    const sec=(this.endtime.getTime()-this.startime.getTime())/1000;
+    // in order to record the duration, we had to use
+    // a setter.
+    this.duration+=sec;
+};
+watch.prototype.reset=function(){
+    this.startime = 0;
+    this.endtime= 0;
+    this.runtime=false;
+    this.duration=0;
+};
+
+const stopwatch = new watch();
 ```
+
+It was a bad idea to do this implementation for this object. It brokes the abstraction principle. Premature optimization is the root of all evils.
+
+# Chapter 3: Prototypical INheritance
+
+
 
 
 
