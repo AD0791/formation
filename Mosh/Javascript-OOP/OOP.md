@@ -934,7 +934,9 @@ But the ```for(let k in c1){console.log(k)};``` will return the instance and the
 
 > You should put property or method in the prototype as an optimization technique.
 
+'''javascript
 
+```
 
 
 
