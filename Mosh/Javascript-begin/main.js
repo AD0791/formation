@@ -1,24 +1,31 @@
-function showprime(limit){
-    let ans;
-    // 2 is first prime number
-    for(let n=2;n<=limit;n++){ 
-        if(isprime(n)){
-            ans = console.log(n);
-        }      
+// showaddress
+
+// object literal
+let address = {street:1, city:"P-au-P",zipcode:"ht6141"}
+// factory
+function addres(s,c,z){
+    return{
+        s,
+        c,
+        z
+    };
+}
+const loc =  addres(2,"Jacmel","56045"); 
+// constructor
+function Addre(res,loca,zip){
+    this.res = res,
+    this.loca = loca,
+    this.zip = zip
+}
+const lok = new Addre(3,'Cap-Haitien','0009');
+
+// show addresss
+function showAddress(ad){
+    for(let k in ad){
+        console.log(k,ad[k]);
     }
-    return ans;
 }
 
-function isprime(n){
-    // 2 to current_number[n]
-    for(let f=2;f<n;f++){
-        if(n%f===0){
-            return false;
-        }
-    }
-    return true; 
-}
-
-
-showprime(50);
-
+showAddress(address);
+showAddress(loc);
+showAddress(lok);
