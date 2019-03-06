@@ -44,7 +44,7 @@ Basics?
 - A string: is a sequence of character.
 - //: is used to add comment.
 
-### Separation concern 
+### Separation concern
 
 > Just as Css, you can create a separate .js files (.css and the case of css). Then you will have to link this file to the index.html file or the main html file with an link tag (anchor or hyperlink tag). We want to separate html, which is all about content, from javascript which is all about behavior.
 
@@ -61,7 +61,7 @@ Now we link the index.js to the html like this.
 <script src="index.js"></script>
 ```
 
-# Chapter 2: Variables
+## Chapter 2: Variables
 
 > In programming we use variable to store data temporarily in the computers memory.
 
@@ -88,7 +88,7 @@ let FirstName =  "Alex"
 let LastName = "Disla"
 ```  
 
-## Constant  
+### Constant  
 
 -> They are constant variables  
 
@@ -102,14 +102,14 @@ console.log(irate)
 
 > Best practice:  If you don't need to reassine the value of a variable. Use "const" when you a declaring and initiate the value of the variable.
 
-## Primtives and References types 
+### Primtives and References types 
 
 We have two caterogies:
 
 - primitives/value types  
 - references types
 
-### Primitives
+#### Primitives
 
 1. string
 2. number
@@ -166,7 +166,7 @@ print('hi!')
 
 > javascript is a dynamic language
 
-### Reference Types  
+#### Reference Types  
 
 - Object
 - Array
@@ -1280,8 +1280,72 @@ showprime(10);
 [Log] 7 (main.js, line 6)
 ```
 
+## Chapter 3 : Objects
 
+> For all the litterature for this chapter, we must reference the javascript OOP documentation
 
+### basics
+
+Put related variables inside an object
+
+```javascript
+const circle = {
+    radius: 1,
+    location: {
+        x:1,
+        y:2
+    },
+    isVisible:true,
+    draw: function(){
+        console.log('draw');
+    }
+};
+// dot notation
+// bracket notion
+
+circle.draw();
+```
+
+Object Oriented Programming style of programming.
+
+### Factory function and constructor function
+
+```javascript
+// Factory function
+function createCercle(radius){
+    return {
+        // radius:radius,
+        // for simplicity
+        radius,
+        // for simplicity you can do
+        // draw() {console.log('draw')}
+        draw: function(){
+        console.log('draw');
+        }
+    };
+}
+const circle1 = createCercle(1);
+```
+
+Type of notation convention
+
+- Camel Notation: ```abcDefgHijk```
+- Pascal Notation: ```AbcDefgHijk```
+
+Working with constructor function, you should work with camel notation.
+
+```javascript
+// constructor function
+function Cercle(radius){
+    this.radius = radius,
+    this.draw: function(){
+        console.log('draw');
+    }
+}
+const circle2 = new Cercle(1);
+
+// the new operator will create an empty object. The function will point the properties and methods to this empty objects.
+```
 
 
 

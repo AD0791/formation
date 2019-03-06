@@ -20,5 +20,5 @@ function isprime(n){
 }
 
 
-showprime(10);
+showprime(50);
 
