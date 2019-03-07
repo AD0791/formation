@@ -1743,9 +1743,9 @@ function addres(s,c,z){
 const loc =  addres(2,"Jacmel","56045"); 
 // constructor
 function Addre(res,loca,zip){
-    this.res = res,
-    this.loca = loca,
-    this.zip = zip
+    this.res = res;
+    this.loca = loca;
+    this.zip = zip;
 }
 const lok = new Addre(3,'Cap-Haitien','0009');
 
@@ -1775,5 +1775,545 @@ showAddress(lok);
 Constructor function should have pascal notation.
 
 3. Object Equality
+
+2 objects are equals.
+
+```javascript
+
+// object literal
+let address = {street:1, city:"P-au-P",zipcode:"ht6141"}
+// factory
+function addres(s,c,z){
+    return{
+        s,
+        c,
+        z
+    };
+}
+const loc =  addres(2,"Jacmel","56045"); 
+// constructor
+function Addre(res,loca,zip){
+    this.res = res;
+    this.loca = loca;
+    this.zip = zip;
+}
+const lok = new Addre(3,'Cap-Haitien','0009');
+const lok1  = new Addre(3,'Cap-Haitien','0009');
+
+// Equal Objects
+function eqObjects(ad1,ad2){
+    let ans;
+    for(let i in ad1){
+        for(let j in ad2){
+            if(ad1[i] === ad2[j]){
+                ans = true;
+            }
+            else{
+                ans = false;
+            }
+        }
+    }
+    return console.log(ans);
+}
+
+eqObjects(loc,lok);
+eqObjects(loc,loc);
+eqObjects(lok,lok1);
+
+// in console
+[Log] false (main.js, line 36)
+[Log] true (main.js, line 36)
+[Log] true (main.js, line 36)
+```
+
+But 2 objects are the same is different.
+
+```javascript
+
+/ constructor
+function Addre(res,loca,zip){
+    this.res = res,
+    this.loca = loca,
+    this.zip = zip
+}
+const lok = new Addre(3,'Cap-Haitien','0009');
+const lok1  = new Addre(3,'Cap-Haitien','0009');
+
+// Are the same
+function aresame(a1,a2){
+    return a1 === a2;
+}
+
+// in console
+> aresame(lok,lok)
+< true
+> aresame(lok1,lok)
+< false
+```
+
+> Two objects can be equals but they are two different objects in memory.
+
+4. Blog post object
+
+```javascript
+let blogPost = {
+    title: `my blog`,
+    body: `body blog`,
+    author: `Alex`,
+    views: function viewS(log){
+        return log;
+    },
+    comments: [{
+        author:`A viewer`,
+        body: `Empty comment`
+    },{
+        author:`A viewer`,
+        body: `Empty comment`
+    }],
+    islive: true
+};
+```
+
+A scenario for building a blogging engine
+
+```javascript
+
+// constructor function
+
+function BlogPost(titre,auteur,body){
+    this.titre = titre;
+    this.auteur = auteur;
+    this.body = body;
+    // initialize 
+    this.views = 0;
+    this.comments=[];
+    this.islive = false;
+}
+
+let  post = new BlogPost(`Post`,`Lelex`,`Javascript is
+a good programming language...`);
+
+console.log(post);
+
+// in console
+[Log] BlogPost {titre: "Post", auteur: "Lelex", body: "Javascript is↵a good programming language...", views: 0, comments: [], …} (main.js, line 17)
+> post.auteur
+< "Lelex"
+> post.body
+< "Javascript is
+a good programming language..."
+```
+
+5. Price range object
+
+```javascript
+let priceRange = [{
+    label:'$',
+    tooltip:'inexpensive'
+    minprice: 5,
+    maxprice: 49
+},{
+    label:'$$',
+    tooltip:'expensive'
+    minprice: 50,
+    maxprice: 150
+}],{
+    label:'$$$',
+    tooltip:'Very-expensive'
+    minprice: 151,
+    maxprice: 500
+};
+```
+
+We had these 4 properties for filtering possibilities.
+
+## Chapter 6 - Arrays
+
+- adding new elements
+- finding elements
+- removing elements
+- splitting arrays
+- combining arrays
+
+## Adding new elements 
+
+```javascript
+const n = [3,4];
+
+// end
+n.push(5,6);
+console.log(n);
+// beginning
+n.unshift(1,2);
+console.log(n);
+// middle
+// the splice method is a bit tricky
+// 3 args: start position, numbers of element
+// to delete and then element to be added.
+n.splice(2,0,`Array basics`);
+console.log(n); 
+
+// in console
+[Log] [3, 4, 5, 6] (4) (main.js, line 5)
+[Log] [1, 2, 3, 4, 5, 6] (6) (main.js, line 8)
+[Log] [1, 2, "Array basics", 3, 4, 5, 6] (7) (main.js, line 14)
+```
+
+> const keyword doesn't stop us from modifying the content of an array.
+
+### Finding Elements
+
+```javascript
+const n = [3,4];
+const N = [3,3,3,5,6,77,8,66,77];
+
+// indexof
+// return -1 if false
+i = n.indexOf(6);
+console.log(i);
+
+j = n.indexOf(4);
+console.log(j);
+
+// latest index of
+k = N.lastIndexOf(3);
+l = N.lastIndexOf(77);
+
+console.log(k);
+console.log(l);
+
+// How includes work
+console.log(n.indexOf(1)!==-1);
+// better way
+console.log(n.includes(1));
+
+// indexof has an interesting second args
+// the 6 means that the search will start at the 
+// 6 index
+console.log(N.indexOf(77,6));
+
+// in console
+[Log] -1 (main.js, line 7)
+[Log] 1 (main.js, line 10)
+[Log] 2 (main.js, line 16)
+[Log] 8 (main.js, line 17)
+[Log] false (main.js, line 20)
+[Log] false (main.js, line 22)
+[Log] 8 (main.js, line 27)
+```
+
+finding reference types
+
+```javascript
+const courses = [{id:1,name:"a"},{id:2,name:"b"}]
+// The includes methods doesn't work
+
+
+// find method
+// 2 way for using callback function
+// arrow function
+const course = courses.find((c)=>{
+    return c.name === 'a';
+})
+
+const course1 = courses.find(function(c){
+    return c.id === 2;
+})
+
+// find index will return the index
+
+const course2 = courses.findIndex((c)=>{
+    return c.name === 'a';
+})
+
+const course3 = courses.findIndex(function(c){
+    return c.id === 2;
+})
+
+console.log(course);
+console.log(course1);
+console.log(course2);
+console.log(course3);
+// in console
+> course.includes({id:1,name:"a"})
+< false
+
+[Log] {id: 1, name: "a"} (main.js, line 26)
+[Log] {id: 2, name: "b"} (main.js, line 27)
+[Log] 0 (main.js, line 28)
+[Log] 1 (main.js, line 29)
+```
+
+> [Finding Elements](https://www.google.com/search?client=firefox-b-d&q=array+find+javascript)
+
+A function used as an argument of another function is called a predicat or callback function.
+
+```c=>c.name==="a"``` is the ultimate shorthand in this case.
+
+### Removing Elements
+
+```javascript
+const n = [1,2,3,4,5];
+const N = [1,2,3,45,65,657,78,78,798];
+console.log(n);
+// remove from the End
+let a = n.pop();
+console.log(a);
+// remove from the beginning
+let b = n.shift();
+console.log(b);
+// remove from the middle
+// start index 2 remove 3 elements
+console.log(N.splice(2,3));
+// in console
+[Log] [1, 2, 3, 4, 5] (5) (main.js, line 3)
+[Log] 5 (main.js, line 6)
+[Log] 1 (main.js, line 9)
+[Log] [3, 45, 65] (3) (main.js, line 12)
+```
+
+Emptying an array:
+
+we can reassign the variable to an empty array but there is a catch
+
+```javascript
+let n  = [1,2,3];
+let o = n;
+
+// reassignment
+n = [];
+
+// in console
+> n
+< [] (0)
+> o
+< [1, 2, 3] (3)
+```
+
+The garbage collector would normally erase the first array ```[1,2,3]```. But the fact that we have another variable pointing to that object, it still will be in memory.
+
+Les solutions:
+
+```javascript
+let n  = [1,2,3];
+let o = n;
+
+// pick one
+// solution 2
+n.length = 0;
+
+// solution 3
+n.slice(0,n.length);
+
+// solution 4
+while(n.length>0){
+    n.pop();
+}
+// console
+> o
+< [] (0)
+> n
+< [] (0)
+```
+
+### Combining and Slicing Arrays
+
+```javascript
+const f  = [1,2,3];
+const n  = [4,5,6];
+
+const com = f.concat(n);
+
+// a copy of an array .slice()
+// slice - default value is start index 0 
+// and number to be deleted or return 0
+const slice = com.slice();
+
+const slice1 = com.slice(1);
+const slice2 = com.slice(0,3);
+const slice3 = com.slice(0,4);
+
+
+console.log(com);
+console.log(slice);
+console.log(slice1);
+console.log(slice2);
+console.log(slice3);
+
+// in console
+[Log] [1, 2, 3, 4, 5, 6] (6) (main.js, line 16)
+[Log] [1, 2, 3, 4, 5, 6] (6) (main.js, line 17)
+[Log] [2, 3, 4, 5, 6] (5) (main.js, line 18)
+[Log] [1, 2, 3] (3) (main.js, line 19)
+[Log] [1, 2, 3, 4] (4) (main.js, line 20)
+```
+
+An object is copied by his reference
+
+```javascript
+const f  = [{id:1},2,3];
+const n  = [4,5,6];
+
+const com = f.concat(n);
+const slice = com.slice();
+
+console.log(com);
+console.log(slice);
+
+// a change
+com[0].id = 100;
+
+
+console.log(com);
+console.log(slice);
+
+// in console
+[Log] [{id: 1}, 2, 3, 4, 5, 6] (6) (main.js, line 7)
+[Log] [{id: 1}, 2, 3, 4, 5, 6] (6) (main.js, line 8)
+[Log] [{id: 100}, 2, 3, 4, 5, 6] (6) (main.js, line 14)
+[Log] [{id: 100}, 2, 3, 4, 5, 6] (6) (main.js, line 15)
+```
+
+the Spread operator
+
+```javascript
+const f  = [{id:1},2,3];
+const n  = [4,5,6];
+// spread operator
+const com = [...f, ...n];
+
+const copy = [...com];
+
+console.log(com);
+console.log(copy);
+// in console
+[Log] [{id: 1}, 2, 3, 4, 5, 6] (6) (main.js, line 8)
+[Log] [{id: 1}, 2, 3, 4, 5, 6] (6) (main.js, line 9)
+```
+
+### Iterating an Array
+
+Iterating in an array with a for-of loop.
+
+```javascript
+const f  = [{id:1},2,3];
+const n  = [4,5,6];
+// spread operator
+const com = [...f, ...n];
+
+// for of
+for(let k of com){
+    console.log(k);
+}
+
+// for each
+com.forEach((m)=>{
+    console.log(m);
+});
+// you can display the index
+com.forEach((m,index)=>{
+    console.log(index,m);
+});
+
+// for in way can gives you index
+// almost like the for each method
+
+// in console
+[Log] {id: 1} (main.js, line 8)
+[Log] 2 (main.js, line 8)
+[Log] 3 (main.js, line 8)
+[Log] 4 (main.js, line 8)
+[Log] 5 (main.js, line 8)
+[Log] 6 (main.js, line 8)
+[Log] {id: 1} (main.js, line 13)
+[Log] 2 (main.js, line 13)
+[Log] 3 (main.js, line 13)
+[Log] 4 (main.js, line 13)
+[Log] 5 (main.js, line 13)
+[Log] 6 (main.js, line 13)
+[Log] 0 – {id: 1} (main.js, line 17)
+[Log] 1 – 2 (main.js, line 17)
+[Log] 2 – 3 (main.js, line 17)
+[Log] 3 – 4 (main.js, line 17)
+[Log] 4 – 5 (main.js, line 17)
+[Log] 5 – 6 (main.js, line 17)
+```
+
+### Joining arrays
+
+```javascript
+const f  = [{id:1},2,3];
+const n  = [4,5,6];
+// spread operator
+const com = [...f, ...n];
+
+console.log(com);
+
+// const joined = com.join(',');
+// the string arg is optional
+const joined = com.join();
+console.log(joined);
+// in console
+[Log] [{id: 1}, 2, 3, 4, 5, 6] (6) (main.js, line 6)
+[Log] [object Object],2,3,4,5,6 (main.js, line 11)
+```
+
+Split is use in the case of strings
+
+```javascript
+const mess = 'This is the work of the strings';
+const parts = mess.split('');
+// with spacing
+const parts1 = mess.split(' ');
+
+console.log(parts);
+console.log(parts1);
+//in console
+// return an array
+[Log] ["T", "h", "i", "s", " ", "i", "s", " ", "t", "h", …] (31) (main.js, line 18)
+[Log] ["This", "is", "the", "work", "of", "the", "strings"] (7) (main.js, line 19)
+```
+
+```javascript
+const f  = [{id:1},2,3];
+const n  = [4,5,6];
+// spread operator
+const com = [...f, ...n];
+
+console.log(com);
+
+// const joined = com.join(','); 
+// the string arg is optional
+const joined = com.join('-');
+console.log(joined);
+// in console
+[Log] [{id: 1}, 2, 3, 4, 5, 6] (6) (main.js, line 6)
+[Log] [object Object]-2-3-4-5-6 (main.js, line 11)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

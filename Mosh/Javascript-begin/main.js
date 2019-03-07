@@ -1,31 +1,20 @@
-// showaddress
+const f  = [{id:1},2,3];
+const n  = [4,5,6];
+// spread operator
+const com = [...f, ...n];
 
-// object literal
-let address = {street:1, city:"P-au-P",zipcode:"ht6141"}
-// factory
-function addres(s,c,z){
-    return{
-        s,
-        c,
-        z
-    };
-}
-const loc =  addres(2,"Jacmel","56045"); 
-// constructor
-function Addre(res,loca,zip){
-    this.res = res,
-    this.loca = loca,
-    this.zip = zip
-}
-const lok = new Addre(3,'Cap-Haitien','0009');
+console.log(com);
 
-// show addresss
-function showAddress(ad){
-    for(let k in ad){
-        console.log(k,ad[k]);
-    }
-}
+// useful to build url slugged
+const joined = com.join('-');
+console.log(joined);
 
-showAddress(address);
-showAddress(loc);
-showAddress(lok);
+
+
+// const mess = 'This is the work of the strings';
+// const parts = mess.split('');
+// // with spacing
+// const parts1 = mess.split(' ');
+
+// console.log(parts);
+// console.log(parts1);
