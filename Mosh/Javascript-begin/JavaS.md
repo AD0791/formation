@@ -2340,22 +2340,268 @@ console.log(courses);
 In this code if we used a lowercase ```'java'```, we won't see the change because of the position of uppercase N versus lowercase j on the ascii table.
 
 
+### Testing the elements of an Array
+
+```javascript
+const n  = [-1,-2,-3,-4,-5,-6,-67,7];
+const p = [5,-10];
+
+// every() will check every element 
+// all the element are required to pass the test.
+const atLeast = p.every(value=>{
+    return value>=0;
+});
+
+// some() 
+// at least one element is supposed to past the
+// test
+const aOne = n.some(value=>{
+    return value>=0;
+});
+
+console.log(atLeast);
+console.log(aOne);
+
+// in console
+[Log] false (main.js, line 17)
+[Log] true (main.js, line 18)
+```
+
+### Filtering an array
+
+```javascript
+const n  = [1,-2,3,-4,5,6,-67,7];
+
+const f = n.filter(value=>{
+    return value>=0;
+});
+
+console.log(f);
+
+// in console
+[Log] [1, 3, 5, 6, 7] (5) (main.js, line 7)
+```
+
+### Mapping an Array
+
+```javascript
+const n  = [1,-2,3,-4,5,6,-67,7];
+const items = n.map(value=>{
+    return '<li>'+value+'</li>';
+});
+const html = '<ul>'+items.join('')+'</ul>';
+console.log(html);
+// in console
+[Log] <ul><li>1</li><li>-2</li><li>3</li><li>-4</li><li>5</li><li>6</li><li>-67</li><li>7</li></ul> (main.js, line 6)
+```
+
+Map to objects
+
+```value => ({value});```
+
+```javascript
+const n  = [1,-2,3,-4,5,6,-67,7];
+const items = n.map(value=>{
+    return {value};
+});
+
+console.log(items);
+// in console
+[Log] [{value: 1}, {value: -2}, {value: 3}, {value: -4}, {value: 5}, {value: 6}, {value: -67}, {value: 7}] (8) (main.js, line 6)
+```
+
+> Chaining
+
+```javascript
+const var = k.methdod().method2();
+// or By convention
+const var = k
+    .methdod()
+    .method2();
+```
+
+```javascript
+const n  = [1,-2,3,-4,5,6,-67,7];
+const items = n
+    .map(value=>{
+        return {value};
+    })
+    .filter(obj =>{
+        return obj.value>1;
+    }
+);
+
+console.log(items);
+// in console
+[Log] [{value: 3}, {value: 5}, {value: 6}, {value: 7}] (4) (main.js, line 11)
+```
+
+We chained the mapping method with a filter method because the mapping outputed an array.
+
+### Reducing an array
+
+```javascript
+const num  = [1,-2,3,-4,5,6,67,7];
+
+let s = 0;
+for(let n of num){
+     s+=n;
+}
+console.log(s);
+
+// second argument set to 0
+// but it won't affect the actual calculation
+// a= 0, b = 1 => a = 1
+// a = 1, b = -2 => a = -1
+// without the 0
+// a = 1 the begining of the array directly
+let ac = num.reduce((past,next)=>{
+    return past+next;
+},0);
+console.log(ac);
+// In console
+[Log] 83 (main.js, line 7)
+[Log] 83 (main.js, line 18)
+```
+
+## Exercise - chapter 6
+
+1. Array from Range
+
+```javascript
+function arrRange(min,max){
+    const arr = [];
+    for(let k = min; k<=max;k++){
+       arr.push(k);
+    }
+    return arr;
+}
+
+const numbers = arrRange(-1,10);
+console.log(numbers);
+// in console
+> arrRange(-1,10)
+< [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, …] (12)
+> arrRange(0,10)
+< [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, …] (11)
+> arrRange(0,100)
+< [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, …] (101)
+```
+
+2. Make Own Includes
+
+```javascript
+function incluD(array,tosearch){
+    for(let i of array){
+        if(i === tosearch){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+}
+
+const testarr = [1,2,4,5,4,5,6,6,5,4,23];
+const  test1 = incluD(testarr,22);
+console.log(test1);
+
+// in console
+[Log] false (main.js, line 14)
+```
+
+3. Except
+
+```javascript
+function except(array,torem){
+    const output = [];
+    for(let el of array){
+        if(!torem.includes(el)){
+            output.push(el);
+        }
+    }
+    return output;
+}
+
+const testarr = [1,2,4,5,4,5,6,6,5,4,23];
+const  test1 = except(testarr,[23,5,2]);
+console.log(test1);
+
+// in console
+[Log] [1, 4, 4, 6, 6, 4] (6) (main.js, line 13)
+```
+
+4. Moving an Element
+
+```javascript
+function move(array,index,offset){
+    const position = index+offset;
+    if(position>array.length || position<0){
+        console.error('Invalid offset.');
+        return;
+        // the rest of the function won't be execute
+    }
+    const output = [...array];
+    // delete 
+    const element = output.splice(index,1)[0];
+    // addd
+    output.splice(position,0,element);
+    return output;
+}
+
+const testarr = [1,2,5,4,6,5,4,23];
+console.log(testarr);
+const  test1 = move(testarr,1,1);
+console.log(test1);
+
+// in console
+[Log] [1, 2, 5, 4, 6, 5, 4, 23] (8) (main.js, line 15)
+[Log] [1, 5, 2, 4, 6, 5, 4, 23] (8) (main.js, line 17)
+```
+
+5. Count Occurences
+
+```javascript
+// basic
+function count(array,search){
+    let count =0;
+    for(let k of array){
+        if(k === search){
+            count++
+        }
+    }
+    return count;
+}
+
+const testarr = [1,2,5,4,6,5,4,23];
+console.log(testarr);
+const  test1 = count(testarr,4);
+console.log(test1);
+
+// inconsole
+[Log] [1, 2, 5, 4, 6, 5, 4, 23] (8) (main.js, line 13)
+[Log] 2 (main.js, line 15)
+```
+
+```javascript
+// clean
+function count(array,search){
+    return array.reduce((acc,current)=>{
+        const occ = (current === search)? 1:0;
+        return acc + occ;
+    },0);
+}
 
 
+const testarr = [1,2,5,4,6,5,4,23];
+console.log(testarr);
+const  test1 = count(testarr,4);
+console.log(test1);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+// in console
+[Log] [1, 2, 5, 4, 6, 5, 4, 23] (8) (main.js, line 18)
+[Log] 2 (main.js, line 20)
+```
 
 
 

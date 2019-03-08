@@ -1,13 +1,13 @@
-const courses = [{id:1,name:'Node'},{id:2,
-    name:'Java'}];
-console.log(courses);
+// clean
+function count(array,search){
+    return array.reduce((acc,current)=>{
+        const occ = (current === search)? 1:0;
+        return acc + occ;
+    },0);
+}
 
-courses.sort((a,b)=>{
-    const A = a.name.toUpperCase();
-    const B = b.name.toUpperCase();
-    if(A<B){return -1;};
-    if(A>B){return 1;};
-    return 0;    
-});
 
-console.log(courses);
+const testarr = [1,2,5,4,6,5,4,23];
+console.log(testarr);
+const  test1 = count(testarr,4);
+console.log(test1);
