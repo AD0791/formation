@@ -2291,9 +2291,53 @@ console.log(joined);
 [Log] [object Object]-2-3-4-5-6 (main.js, line 11)
 ```
 
+### Sorting arrays
 
+```javascript
+const f  = [{id:1},2,3];
+const n  = [4,5,6];
+// spread operator
+const com = [...f, ...n];
+console.log(com);
+// sort an array
+// send the first at the last 
+com.sort()
+console.log(com);
+// revert an array
+// change the complete order
+com.reverse();
+console.log(com);
 
+//in console
+[Log] [{id: 1}, 2, 3, 4, 5, 6] (6) (main.js, line 5)
+[Log] [2, 3, 4, 5, 6, {id: 1}] (6) (main.js, line 9)
+[Log] [{id: 1}, 6, 5, 4, 3, 2] (6) (main.js, line 13)
+```
 
+with Objects:
+
+```javascript
+const courses = [{id:1,name:'Node'},{id:2,
+    name:'Java'}];
+console.log(courses);
+
+courses.sort((a,b)=>{
+    const A = a.name.toUpperCase();
+    const B = b.name.toUpperCase();
+    if(A<B){return -1;};
+    if(A>B){return 1;};
+    return 0;
+});
+
+console.log(courses);
+// in console
+[Log] [{id: 1, name: "Node"}, {id: 2, name: "Java"}] (2) (main.js, line 3)
+[Log] [{id: 2, name: "Java"}, {id: 1, name: "Node"}] (2) (main.js, line 11)
+```
+
+> [ascii](http://www.asciitable.com/)
+
+In this code if we used a lowercase ```'java'```, we won't see the change because of the position of uppercase N versus lowercase j on the ascii table.
 
 
 

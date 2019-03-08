@@ -1,20 +1,13 @@
-const f  = [{id:1},2,3];
-const n  = [4,5,6];
-// spread operator
-const com = [...f, ...n];
+const courses = [{id:1,name:'Node'},{id:2,
+    name:'Java'}];
+console.log(courses);
 
-console.log(com);
+courses.sort((a,b)=>{
+    const A = a.name.toUpperCase();
+    const B = b.name.toUpperCase();
+    if(A<B){return -1;};
+    if(A>B){return 1;};
+    return 0;    
+});
 
-// useful to build url slugged
-const joined = com.join('-');
-console.log(joined);
-
-
-
-// const mess = 'This is the work of the strings';
-// const parts = mess.split('');
-// // with spacing
-// const parts1 = mess.split(' ');
-
-// console.log(parts);
-// console.log(parts1);
+console.log(courses);
