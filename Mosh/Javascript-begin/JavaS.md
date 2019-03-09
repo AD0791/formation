@@ -2603,7 +2603,166 @@ console.log(test1);
 [Log] 2 (main.js, line 20)
 ```
 
+6. Get max
+
+```javascript
+// old school way
+function getmax(array){
+    if(array.length ===0){
+        return undefined;
+    }
+    let ans = 0;
+    for(let i = 0;i<array.length;i++){
+        if(array[i]<array[i+1]){
+            ans = array[i+1];
+        }
+        if(array[i]!==0){
+            ans = array[i];
+        }
+    }
+    return ans;
+}
 
 
+
+const testarr = [1,2,5,4,6,5,4,23,300,-100];
+console.log(testarr);
+const  test1 = getmax(testarr);
+console.log(test1);
+
+// in console
+[Log] [1, 2, 5, 4, 6, 5, 4, 23, 300, -100] (10) (main.js, line 14)
+[Log] 300 (main.js, line 16)
+// case testarr = []
+[Log] [] (0) (main.js, line 17)
+[Log] undefined (main.js, line 19)
+```
+
+```javascript
+// mosh
+function getmax(arr){
+    if(arr.length === 0 ){
+        return undefine
+    }
+    let max = arr[0];
+    for(let i = 1;i<array.length;i++){
+        if(array[i]>max){
+            max = array[i+1];
+        }
+    }
+    return max;
+}
+// clean  
+function getmax(array){
+    if(array.length ===0){
+        return undefined;
+    }
+   return array.reduce((a,c)=>(a>c)?a:c);
+}
+```
+
+7. Movies
+
+- all the movie in 2018 with rating > 4
+- sort them by their rating
+- descending order
+- pick their title
+
+```javascript
+const movies = [
+    {titre:'a',year:2018,rating:4.5},
+    {titre:'b',year:2018,rating:4.7},
+    {titre:'c',year:2018,rating:3},
+    {titre:'d',year:2017,rating:4.5}
+];
+console.log(movies);
+
+const  film = movies
+    .filter(m=>m.year===2018&&m.rating>=4)
+    .sort((a,b)=>a.rating-b.rating)
+    .reverse()
+    .map(m=>m.titre);
+console.log(film);
+// in console
+[Log] [{titre: "a", year: 2018, rating: 4.5}, {titre: "b", year: 2018, rating: 4.7}, {titre: "c", year: 2018, rating: 3}, {titre: "d", year: 2017, rating: 4.5}] (4) (main.js, line 7)
+[Log] ["b", "a"] (2) (main.js, line 14)
+```
+
+## Chapter 7 - Functions
+
+### Function declaration vs expressions
+
+In javascript we have two ways to define a function.
+
+- function declasration
+- function expression (named or anonymous)
+
+```javascript
+// function declaration
+function walk(){
+    console.log('walk');
+}
+walk();
+
+// function named expression
+
+// can be a const
+// similar to R
+let run = function action(){
+    console.log('Flash mode');
+}
+run();
+
+// function anonymous expression
+let speed = function(){
+    console.log('Usain Bolt is scared')
+}
+speed();
+
+// remmeber function are object.
+
+// in console
+[Log] walk (main.js, line 3)
+[Log] Flash mode (main.js, line 12)
+[Log] Usain Bolt is scared (main.js, line 18)
+```
+
+Hoisting
+
+> The difference between the function declaration and the function expression:  
+We can call the function ```walk``` using the function declaration syntax before the definition of the function. But this isn't possible with the function expression syntax.
+
+```javascript
+// function declaration
+walk();
+function walk(){
+    console.log('walk');
+}
+
+// function named expression
+run();
+let run = function action(){
+    console.log('Flash mode');
+}
+
+// function anonymous expression
+speed();
+let speed = function(){
+    console.log('Usain Bolt is scared')
+}
+
+// in console (2 errors)
+[Log] walk (main.js, line 4)
+[Error] ReferenceError: Cannot access uninitialized variable.
+    Global Code (main.js:8)
+[Error] ReferenceError: Cannot access uninitialized variable.
+    Global Code (main.js:8)
+```
+
+definition of hoisting: At runTime the javascript engine will move all the function declaration at the top. They will be executed (interporeted first).
+
+> [Hoisting](https://www.w3schools.com/js/js_hoisting.asp)
+
+### Arguments
 
 
