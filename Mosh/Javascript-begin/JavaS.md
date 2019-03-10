@@ -1,4 +1,4 @@
-# Begin:Javascript
+# Begin: Javascript
 
 -----------------
 
