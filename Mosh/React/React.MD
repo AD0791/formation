@@ -91,3 +91,18 @@ We suggest that you begin by typing:
 
 Happy hacking!
 ```
+
+we will get a lightweight developpment server, webpack for bundeling our files and babel for compiling our javscript code etc. However if you need to do some configuration on your code, ou can do `npm run eject`.
+
+To start the app
+
+```bash
+# on the directory of the app
+$ npm start
+# to quit
+$ control + c
+```
+
+> In our react-app folder, we have the node_modules which contains the third party libraries and react itself. The public folder is where we have the public asset of our application.
+
+In the index.html, we will see the div tag `<div id='root'></div>`. It's the container for running our application.
