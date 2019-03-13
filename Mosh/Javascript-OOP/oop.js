@@ -1,4 +1,5 @@
 function Shape() {}
+
 Shape.prototype.duplicate = function () {
     console.log('duplicate');
 }
@@ -7,11 +8,10 @@ Shape.prototype.duplicate = function () {
 function Circle(radius) {
     this.radius = radius;
 }
-
-// the implicit relation with Objectbased
-// Circle.prototype = Object.create(Object.Prototype)
-// we can make it inherit from shapebased
+// we reset the prototype 
 Circle.prototype = Object.create(Shape.prototype);
+//  we should also reset the constructor
+Circle.prototype.constructor = Circle;
 
 Circle.prototype.draw = function () {
     console.log('draw');

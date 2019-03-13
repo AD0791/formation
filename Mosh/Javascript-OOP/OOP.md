@@ -1093,3 +1093,59 @@ oop.js:24:1
 > cercle.duplicate()
 [Log] duplicate (oop.js, line 3)
 ```
+
+## Resetting the constructor
+
+```javascript
+// we comment this line
+//Circle.prototype = Object.create(Shape.prototype);
+// we can see the equivalence
+> new Circle(1)
+< Circle {radius: 1, draw: function}
+> new Circle.prototype.constructor(1)
+< Circle {radius: 1, draw: function}
+```
+
+By doing this:`Circle.prototype = Object.create(Shape.prototype);` we resset the prototype of this object. As we can see
+
+```javascript
+[Log] Shape {duplicate: function} (oop.js, line 24)
+[Log] Shape {radius: 1, draw: function, duplicate: function} (oop.js, line 25)
+> new Circle.prototype.constructor(1)
+< Shape {duplicate: function}
+> new Circle(1)
+< Shape {radius: 1, draw: function, duplicate: function}
+```
+
+> As best practice
+
+```javascript
+function Shape() {}
+
+Shape.prototype.duplicate = function () {
+    console.log('duplicate');
+}
+
+
+function Circle(radius) {
+    this.radius = radius;
+}
+// we reset the prototype
+Circle.prototype = Object.create(Shape.prototype);
+//  we should also reset the constructor
+Circle.prototype.constructor = Circle;
+
+Circle.prototype.draw = function () {
+    console.log('draw');
+}
+
+const cercle = new Circle(1);
+const forme = new Shape();
+
+console.log(forme);
+console.log(cercle);
+
+// console
+[Log] Shape {duplicate: function} (oop.js, line 23)
+[Log] Circle {radius: 1, draw: function, duplicate: function} (oop.js, line 24)
+```
