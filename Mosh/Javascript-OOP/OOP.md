@@ -1224,3 +1224,201 @@ console.log(cercle);
 ```
 
 ## Intermidiate function inheritance
+
+```javascript
+function Shape(color) {
+    this.color = color;
+}
+
+Shape.prototype.duplicate = function () {
+    console.log('duplicate');
+}
+
+
+function Circle(radius, color) {
+    this.radius = radius;
+    // Inherit a property from the call method
+    Shape.call(this, color);
+}
+
+Circle.prototype = Object.create(Shape.prototype);
+Circle.prototype.constructor = Circle;
+
+Circle.prototype.draw = function () {
+    console.log('draw');
+}
+
+// will inherit from shape
+function Square(size) {
+    this.size = size;
+}
+
+Square.prototype = Object.create(Shape.prototype);
+Square.prototype.constructor = Square;
+
+
+
+
+const cercle = new Circle(1, "red");
+const forme = new Shape("blue");
+const carree = new Square(1);
+
+console.log(forme);
+console.log(cercle);
+
+// in console
+[Log] Shape {color: "blue", duplicate: function} (oop.js, line 38)
+[Log] Circle {radius: 1, color: "red", draw: function, duplicate: function} (oop.js, line 39)
+> carree
+< Square {size: 1, duplicate: function}
+```
+
+There is a better way to set the inheritance.
+
+```javascript
+// An intermediate funciton to handle the inheritance
+function extend(Child, Parent) {
+    Child.prototype = Object.create(Parent.prototype);
+    Child.prototype.constructor = Child;
+}
+
+// parent
+function Shape(color) {
+    this.color = color;
+}
+Shape.prototype.duplicate = function () {
+    console.log('duplicate');
+}
+
+// child
+function Circle(radius, color) {
+    this.radius = radius;
+    // Inherit a property from the call method
+    Shape.call(this, color);
+}
+Circle.prototype.draw = function () {
+    console.log('draw');
+}
+// child-parent
+extend(Circle, Shape);
+
+// CHild
+function Square(size) {
+    this.size = size;
+}
+// child-parent
+extend(Square, Shape);
+
+
+
+const cercle = new Circle(1, "red");
+const forme = new Shape("blue");
+const carree = new Square(1);
+
+console.log(forme);
+console.log(cercle);
+console.log(carree);
+// in console
+[Log] Shape {color: "blue", duplicate: function} (oop.js, line 40)
+[Log] Circle {radius: 1, color: "red", duplicate: function} (oop.js, line 41)
+[Log] Square {size: 1, duplicate: function} (oop.js, line 42)
+```
+
+## Method Overriding
+
+> If we had a situation that we want to change a method or behavior inherit from a parent-object. we call that method overriding.
+
+```javascript
+// An intermediate funciton to handle the inheritance
+function extend(Child, Parent) {
+    Child.prototype = Object.create(Parent.prototype);
+    Child.prototype.constructor = Child;
+}
+
+// parent
+function Shape(color) {
+    this.color = color;
+}
+Shape.prototype.duplicate = function () {
+    console.log('duplicate');
+}
+
+// child
+function Circle(radius) {
+    this.radius = radius;
+}
+Circle.prototype.draw = function () {
+    console.log('draw');
+}
+// child-parent
+extend(Circle, Shape);
+
+// overriding method
+// this must absolutely be place after the
+// intermediate inheritence function
+Circle.prototype.duplicate = function () {
+    console.log('I have override this method');
+}
+
+const cercle = new Circle(1);
+const forme = new Shape("blue");
+
+
+console.log(forme);
+console.log(cercle);
+// in console
+[Log] Shape {color: "blue", duplicate: function} (oop.js, line 36)
+[Log] Circle {radius: 1, duplicate: function} (oop.js, line 37)
+> cercle.duplicate()
+[Log] I have override this method (oop.js, line 29)
+```
+
+We can use another trick
+
+```javascript
+// An intermediate funciton to handle the inheritance
+function extend(Child, Parent) {
+    Child.prototype = Object.create(Parent.prototype);
+    Child.prototype.constructor = Child;
+}
+
+// parent
+function Shape(color) {
+    this.color = color;
+}
+Shape.prototype.duplicate = function () {
+    console.log('duplicate');
+}
+
+// child
+function Circle(radius) {
+    this.radius = radius;
+}
+Circle.prototype.draw = function () {
+    console.log('draw');
+}
+// child-parent
+extend(Circle, Shape);
+
+// More to it
+Circle.prototype.duplicate = function () {
+    Shape.prototype.duplicate.call(this);
+    console.log('I have override this method');
+}
+
+const cercle = new Circle(1);
+const forme = new Shape("blue");
+
+
+console.log(forme);
+console.log(cercle);
+
+// in console
+[Log] Shape {color: "blue", duplicate: function} (oop.js, line 35)
+[Log] Circle {radius: 1, duplicate: function} (oop.js, line 36)
+> cercle.duplicate()
+[Log] duplicate (oop.js, line 12)
+[Log] I have override this method (oop.js, line 28)
+```
+
+## Polymorphim
