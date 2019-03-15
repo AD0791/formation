@@ -1,36 +1,40 @@
-// An intermediate funciton to handle the inheritance
-function extend(Child, Parent) {
-    Child.prototype = Object.create(Parent.prototype);
-    Child.prototype.constructor = Child;
+// html element object
+// parent 
+function HtmlElement() {
+    this.click = function () {
+        console.log("click");
+    };
+}
+HtmlElement.prototype.focus = function () {
+    console.log('focus');
 }
 
-// parent
-function Shape(color) {
-    this.color = color;
-}
-Shape.prototype.duplicate = function () {
-    console.log('duplicate');
-}
-
-// child
-function Circle(radius) {
-    this.radius = radius;
-}
-Circle.prototype.draw = function () {
-    console.log('draw');
-}
-// child-parent
-extend(Circle, Shape);
-
-// More to it
-Circle.prototype.duplicate = function () {
-    Shape.prototype.duplicate.call(this);
-    console.log('I have override this method');
+// html select object 
+// Child
+function HtmlSelect(items = []) {
+    this.items = items;
+    this.addItems = function (item) {
+        this.items.push(item);
+    }
+    this.removeItems = function (item) {
+        this.items.splice(this.items.indexof(item), 1);
+    }
 }
 
-const cercle = new Circle(1);
-const forme = new Shape("blue");
+// normally we would do this
+// because we know with this method 
+// we won't inherit the click method
+// HtmlSelect.prototype = Object.create(HtmlElement.prototype);
+
+HtmlSelect.prototype = new HtmlElement();
+// reset the constructor
+HtmlSelect.prototype.constructor = HtmlSelect;
 
 
-console.log(forme);
-console.log(cercle);
+
+
+const h = new HtmlElement();
+const s = new HtmlSelect();
+
+console.log(h); // parent
+console.log(s); // child

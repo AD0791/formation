@@ -1421,4 +1421,345 @@ console.log(cercle);
 [Log] I have override this method (oop.js, line 28)
 ```
 
-## Polymorphim
+## Polymorphism
+
+Polymorphism means many form. It's a very powerful technique in oop.
+
+```javascript
+// Polymorphism
+// An intermediate funciton to handle the inheritance
+function extend(Child, Parent) {
+    Child.prototype = Object.create(Parent.prototype);
+    Child.prototype.constructor = Child;
+}
+
+// parent
+function Shape(color) {
+    this.color = color;
+}
+Shape.prototype.duplicate = function () {
+    console.log('duplicate');
+}
+
+// child
+function Circle(radius) {
+    this.radius = radius;
+}
+Circle.prototype.draw = function () {
+    console.log('draw');
+}
+// child-parent
+extend(Circle, Shape);
+Circle.prototype.duplicate = function () {
+    Shape.prototype.duplicate.call(this);
+    console.log('I have override this method circle style');
+}
+
+//Child
+function Square() {}
+extend(Square, Shape);
+
+Square.prototype.duplicate = function () {
+    Shape.prototype.duplicate.call(this);
+    console.log('duplicate for the Square');
+}
+
+
+
+const sq = new Square();
+const cercle = new Circle(1);
+const forme = new Shape("blue");
+
+
+console.log(forme);
+console.log(cercle);
+console.log(sq);
+
+// polimorphism of the duplicate methode
+// between the parent and child
+
+const array = [new Circle(1), new Square];
+// this possible because of OOP and polymorphism
+for (let s of array) {
+    s.duplicate();
+}
+// In console
+[Log] Shape {color: "blue", duplicate: function} (oop.js, line 46)
+[Log] Circle {radius: 1, duplicate: function} (oop.js, line 47)
+[Log] Square {duplicate: function} (oop.js, line 48)
+[Log] duplicate (oop.js, line 13)
+[Log] I have override this method circle style (oop.js, line 27)
+[Log] duplicate (oop.js, line 13)
+[Log] duplicate for the Square (oop.js, line 36)
+```
+
+## When to use inheritance
+
+Very practicle for code reuse but you can easily put to much complexity in your code.
+
+Different type of mystake:
+
+- Wrong hierarchy between your parent and child object.
+- Can get easily complexe (hierachy)
+
+> **Avoid creating inheritance hierachies** because they are very fragiles. Do not go more than 1 level of inheritance. **Favor composition OVER inheritance**.
+
+## Mixings (COMPOSITION)
+
+```javascript
+// Mixing
+// we are now defining one feature as an object
+
+const canEat = {
+    eat: function () {
+        this.hunger--,
+            console.log('eating');
+    }
+};
+
+const canWalk = {
+    walk: function () {
+        console.log('walk');
+    }
+};
+
+// we are going to use Object.assign to copy
+// properties and methods
+// from one object to another object
+
+const Person = Object.assign({}, canEat, canWalk);
+console.log(Person);
+// in console
+[Log] {eat: function, walk: function} (oop.js, line 26)
+```
+
+```javascript
+// Mixing
+// we are now defining one feature as an object
+
+const canEat = {
+    eat: function () {
+        this.hunger--,
+            console.log('eating');
+    }
+};
+const canWalk = {
+    walk: function () {
+        console.log('walk');
+    }
+};
+
+// a constructor function to build the Person object
+function Person(name) {
+    this.name = name;
+}
+Object.assign(Person.prototype, canEat, canWalk);
+
+//as we see, we point
+//directly to the prototype of
+// the constructor function
+const moun = new Person('Lelex');
+console.log(moun);
+// in console
+[Log] Person {name: "Lelex", eat: function, walk: function} (oop.js, line 26)
+```
+
+We use another feature as an object and use another constructor function
+
+```javascript
+// Mixing
+// we are now defining one feature as an object
+const canEat = {
+    eat: function () {
+        this.hunger--,
+            console.log('eating');
+    }
+};
+const canWalk = {
+    walk: function () {
+        console.log('walk');
+    }
+};
+
+// Another feature
+const canSwim = {
+    swim() {
+        console.log('swim');
+    }
+};
+
+// a constructor function to build the Person object
+function Person(name) {
+    this.name = name;
+}
+Object.assign(Person.prototype, canEat, canWalk);
+
+// a new constructor
+
+function Goldfish(size) {
+    this.size = size;
+}
+Object.assign(Goldfish.prototype, canEat, canSwim);
+
+// now
+
+const moun = new Person('Lelex');
+console.log(moun);
+const poisson = new Goldfish(1.2);
+console.log(poisson);
+// in console
+[Log] Person {name: "Lelex", eat: function, walk: function} (oop.js, line 38)
+[Log] Goldfish {size: 1.2, eat: function, swim: function} (oop.js, line 40)
+```
+
+We can now create a function called mixing to make the code more readable.
+
+```javascript
+// Mixing function
+function mixing(target, ...sources) {
+    // ...sources is an array of argument
+    // rest operator
+    Object.assign(target, ...sources);
+    // now ...sources is the spread operator
+    // it will spread the element of the array
+}
+// we are now defining one feature as an object
+const canEat = {
+    eat: function () {
+        this.hunger--,
+            console.log('eating');
+    }
+};
+const canWalk = {
+    walk: function () {
+        console.log('walk');
+    }
+};
+
+// Another feature
+const canSwim = {
+    swim() {
+        console.log('swim');
+    }
+};
+
+// a constructor function to build the Person object
+function Person(name) {
+    this.name = name;
+}
+mixing(Person.prototype, canEat, canWalk);
+
+// a new constructor
+
+function Goldfish(size) {
+    this.size = size;
+}
+mixing(Goldfish.prototype, canEat, canSwim);
+
+// now
+
+const moun = new Person('Lelex');
+console.log(moun);
+const poisson = new Goldfish(1.2);
+console.log(poisson);
+// in console
+[Log] Person {name: "Lelex", eat: function, walk: function} (oop.js, line 45)
+[Log] Goldfish {size: 1.2, eat: function, swim: function} (oop.js, line 47)
+```
+
+# Exercise - Chapter 3
+
+1. Exercise on prototypical inheritance
+
+```javascript
+// html element object
+// parent
+function HtmlElement() {
+    this.click = function () {
+        console.log("click");
+    };
+}
+HtmlElement.prototype.focus = function () {
+    console.log('focus');
+}
+
+// html select object
+// Child
+function HtmlSelect(items = []) {
+    this.items = items;
+    this.addItems = function (item) {
+        this.items.push(item);
+    }
+    this.removeItems = function (item) {
+        this.items.splice(this.items.indexof(item), 1);
+    }
+}
+
+// normally we would do this
+HtmlSelect.prototype = Object.create(HtmlElement.prototype);
+HtmlSelect.prototype.constructor = HtmlSelect;
+
+
+// with this implementation we will not inherit the
+// click method from the parent object
+
+const h = new HtmlElement();
+const s = new HtmlSelect();
+
+console.log(h); // parent
+console.log(s); // child
+// in console
+[Log] HtmlElement {click: function, focus: function} (oop.js, line 34)
+[Log] HtmlSelect {items: [], addItems: function, removeItems: function, focus: function} (oop.js, line 35)
+```
+
+```javascript
+// html element object
+// parent
+function HtmlElement() {
+    this.click = function () {
+        console.log("click");
+    };
+}
+HtmlElement.prototype.focus = function () {
+    console.log('focus');
+}
+
+// html select object
+// Child
+function HtmlSelect(items = []) {
+    this.items = items;
+    this.addItems = function (item) {
+        this.items.push(item);
+    }
+    this.removeItems = function (item) {
+        this.items.splice(this.items.indexof(item), 1);
+    }
+}
+
+// normally we would do this
+// because we know with this method
+// we won't inherit the click method
+// HtmlSelect.prototype = Object.create(HtmlElement.prototype);
+
+HtmlSelect.prototype = new HtmlElement();
+// reset the constructor
+HtmlSelect.prototype.constructor = HtmlSelect;
+
+
+
+
+const h = new HtmlElement();
+const s = new HtmlSelect();
+
+console.log(h); // parent
+console.log(s); // child
+// in console
+[Log] HtmlElement {click: function, focus: function} (oop.js, line 39)
+[Log] HtmlSelect {items: [], addItems: function, removeItems: function, click: function, …} (oop.js, line 40)
+```
+
+2. Exercise on Polymorphism
+
+```javascript
+```
