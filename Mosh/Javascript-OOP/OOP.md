@@ -1762,4 +1762,114 @@ console.log(s); // child
 2. Exercise on Polymorphism
 
 ```javascript
+// html element object
+// parent
+function HtmlElement() {
+    this.click = function () {
+        console.log("click");
+    };
+}
+HtmlElement.prototype.focus = function () {
+    console.log('focus');
+}
+
+
+// html select object
+// Child
+function HtmlSelect(items = []) {
+    this.items = items;
+    this.addItems = function (item) {
+        this.items.push(item);
+    }
+    this.removeItems = function (item) {
+        this.items.splice(this.items.indexof(item), 1);
+    }
+    this.render = function () {
+        return `
+        <select>${this.items.map(item=>`
+        <option>${item}</option>`).join('')}</select>`;
+    }
+}
+HtmlSelect.prototype = new HtmlElement();
+HtmlSelect.prototype.constructor = HtmlSelect;
+
+// Html image element object
+// child of html element
+function HtmlImageElement(src) {
+    this.src = src;
+    this.render = function () {
+        // template literal allow us to pass argument
+        // in a string
+        return `<img src="${this.src}"/>`
+    }
+}
+HtmlImageElement.prototype = new HtmlElement();
+HtmlImageElement.prototype.constructor = HtmlImageElement;
+
+
+
+const h = new HtmlElement();
+const s = new HtmlSelect();
+const hims = new HtmlImageElement();
+
+
+console.log(h); // parent
+console.log(s); // child
+console.log(hims); // child
+
+// in console
+[Log] HtmlElement {click: function, focus: function} (oop.js, line 52)
+[Log] HtmlSelect {items: [], addItems: function, removeItems: function, render: function, click: function, …} (oop.js, line 53)
+[Log] HtmlImageElement {src: undefined, render: function, click: function, focus: function} (oop.js, line 54)
 ```
+
+# Chapter 4 : ES6 Classes
+
+There is a new way on implementing object in ES6 with using classes. There are not quite the same as other programming languages.
+
+```javascript
+// function constructor
+function Circle(radius) {
+    this.radius = radius;
+    this.draw = function () {
+        console.log('draw');
+    }
+}
+
+// how you build class
+class Cercle {
+    constructor(radius) {
+        this.radius = radius;
+        this.move = function () {
+            console.log('will not be in the prototype');
+        }
+    }
+    // let's define a method
+    dessin() {
+        console.log('dessin');
+    }
+}
+
+const ci = new Circle(1);
+const ce = new Cercle(2);
+
+console.log(ci);
+console.log(ce);
+
+// All the method of ce or Cercle,
+// define like the dessin method,
+//will end up on the
+// prototype.
+// if we don't want that you have to do it like
+// move method, define on the constructor()
+
+// in console
+[Log] Circle {radius: 1, draw: function} (oop.js, line 26)
+[Log] Cercle {radius: 2, move: function} (oop.js, line 27)
+> typeof Cercle
+< "function"
+
+// class in javascript is a sugar of prototypes
+```
+
+## Hoisting
