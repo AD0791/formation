@@ -1,6 +1,9 @@
-const cercle = new Circle();
+class Circle {
+    draw() {
+        console.log(this);
+    }
+};
 
-// class declaration
-class Circle {}
-// class expression
-const square = class {};
+const c = new Circle();
+const draw = c.draw;
+draw();

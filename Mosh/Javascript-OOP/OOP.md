@@ -1885,13 +1885,13 @@ function sayHello() {
 }
 // function expression
 const goodBye = function() {
-  console.log("Good bey my friend");
+  console.log("Good bye my friend");
 };
 // becuase it's a function expression
 // we have to put a semi-column at the end
 ```
 
-> Unlike function, class declaration and class expression are not hoisted.
+> Unlike function, class declaration and class expression are not hoisted. So the following won't work.
 
 ```javascript
 const cercle = new Circle();
@@ -1904,3 +1904,166 @@ const square = class {};
 [Error] ReferenceError: Cannot access uninitialized variable.
 	Global Code (oop.js:1)
 ```
+
+## Static Method
+
+```javascript
+class Circle {
+    constructor(radius) {
+        this.radius = radius;
+    }
+    // instance method
+    // draw method is link to this specific
+    // Circle
+    draw() {
+        console.log('Draw');
+    }
+    // Static Method
+    // it won't be avalaible for an instance of this
+    // class
+    static parse(str) {
+
+    }
+}
+
+const cercle = new Circle(1);
+console.log(cercle);
+console.log(cercle.parse());
+// in console
+[Log] Circle {radius: 1} (oop.js, line 20)
+[Error] TypeError: cercle.parse is not a function. (In 'cercle.parse()', 'cercle.parse' is undefined)
+	Global Code (oop.js:21)
+```
+
+How to see the static method in action. To call static object, we don't need to call an instance of a class.
+
+```javascript
+class Circle {
+  constructor(radius) {
+    this.radius = radius;
+  }
+  // instance method
+  // draw method is link to this specific
+  // Circle
+  draw() {
+    console.log("Draw");
+  }
+  // Static Method
+  // it won't be avalaible for an instance of this
+  // class
+  static parse(str) {
+    console.log(str);
+  }
+}
+
+const cercle = new Circle(1);
+console.log(cercle);
+console.log(Circle.parse("Static"));
+
+// In console
+[Log] Circle {radius: 1} (oop.js, line 20)
+[Log] Static (oop.js, line 15)
+```
+
+Static objects are utility objects that are not bound to a particular objects.
+
+```javascript
+class Circle {
+    constructor(radius) {
+        this.radius = radius;
+    }
+    draw() {
+        console.log('Draw');
+    }
+    static parse(str) {
+        const radius = JSON.parse(str).radius;
+        return new Circle(1);
+    }
+}
+
+const cercle = Circle.parse('{"radius ": 1}');
+console.log(cercle);
+
+// in console
+[Log] Circle {radius: 1} (oop.js, line 15)
+```
+
+## The this keyword
+
+```javascript
+const Circle = function () {
+    this.draw = function () {
+        console.log(this);
+    }
+};
+
+const c = new Circle();
+
+const draw = c.draw;
+
+c.draw();
+console.log(c.draw);
+// will refer the window object
+draw();
+
+// in console
+[Log] Circle {draw: function} (oop.js, line 3)
+[Log] function () { (oop.js, line 17)
+        console.log(this);
+    }
+[Log] Window {document: #document, NaN: NaN, window: Window, Infinity: Infinity, undefined: undefined, …} (oop.js, line 3)
+```
+
+```javascript
+'use strict'
+
+const Circle = function () {
+    this.draw = function () {
+        console.log(this);
+    }
+};
+
+const c = new Circle();
+
+const draw = c.draw;
+
+// method call
+c.draw();
+
+console.log(c.draw);
+
+//function call
+// by default this
+// will refer the window object
+// if i use strict mode we will get undefined
+draw();
+
+// in console
+[Log] Circle {draw: function} (oop.js, line 5)
+[Log] function () { (oop.js, line 16)
+        console.log(this);
+    }
+[Log] undefined (oop.js, line 5)
+```
+
+Strict mode prevent us from modifying the window object.
+
+> By default the body of our classes are in strict mode. As we can see:
+
+```javascript
+class Circle {
+    draw() {
+        console.log(this);
+    }
+};
+
+const c = new Circle();
+const draw = c.draw;
+draw();
+
+// in console
+[Log] undefined (oop.js, line 3)
+```
+
+## Private Members
+
