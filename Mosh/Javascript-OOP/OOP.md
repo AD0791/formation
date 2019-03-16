@@ -2067,3 +2067,68 @@ draw();
 
 ## Private Members
 
+Abstraction means hiding the details and the complexity in order to show the essentials.
+
+### Using Symbols
+
+In ES6 symbol is another primitives. A symbol is essentially an unique identifier.
+
+```javascript
+const _radius = Symbol();
+
+class Circle {
+    constructor(radius) {
+        this[_radius] = radius;
+    }
+    draw() {
+        console.log("draw");
+    }
+};
+
+const c = new Circle(1);
+// we can't access the radius property by code
+console.log(c);
+console.log(Object.getOwnPropertyNames(c));
+console.log(Object.getOwnPropertySymbols(c));
+
+// let's get the value of the radius property
+let key = Object.getOwnPropertySymbols(c)[0];
+console.log(key);
+console.log(c[key]);
+// in console
+[Log] Circle {Symbol(): 1} (oop.js, line 14)
+[Log] [] (0) (oop.js, line 15)
+[Log] [Symbol()] (1) (oop.js, line 16)
+[Log] Symbol() (oop.js, line 20)
+[Log] 1 (oop.js, line 21)
+```
+
+```javascript
+const _radius = Symbol();
+const _draw = Symbol();
+class Circle {
+    constructor(radius) {
+        // bracket notation
+        this[_radius] = radius;
+    }
+    // make this method private
+    // this isn't an array
+    [_draw]() {
+        console.log("draw");
+    }
+};
+
+const c = new Circle(1);
+// we can't access the radius property or the
+// _draw method by code
+console.log(c);
+// in console
+[Log] Circle (oop.js, line 18)
+Symbol(): 1
+Circle Prototype
+constructor: function()
+Symbol()()
+Object Prototype
+```
+
+### Using WeakMaps
