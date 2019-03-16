@@ -1873,3 +1873,34 @@ console.log(ce);
 ```
 
 ## Hoisting
+
+We know that in javascript. There is two way to define a function.
+
+> Function declaration are hoisted. THis means that they are putted on top of the code at run time. In contrast function expression are not hoisted.
+
+```javascript
+// function declaration
+function sayHello() {
+  console.log("hello world");
+}
+// function expression
+const goodBye = function() {
+  console.log("Good bey my friend");
+};
+// becuase it's a function expression
+// we have to put a semi-column at the end
+```
+
+> Unlike function, class declaration and class expression are not hoisted.
+
+```javascript
+const cercle = new Circle();
+
+// class declaration
+class Circle {}
+// class expression
+const square = class {};
+// in console
+[Error] ReferenceError: Cannot access uninitialized variable.
+	Global Code (oop.js:1)
+```
