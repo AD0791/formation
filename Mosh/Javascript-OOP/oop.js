@@ -9,15 +9,19 @@ class Circle {
     });
   }
 
-  accessRadius() {
-    // to access the radius property
-    // we reference the key here
+  // let's access radius property as read-only
+  // a new way to implement a getters
+  get radius() {
     return _radius.get(this);
   }
-  accDraw() {
-    return _draw.get(this)();
+  // a setters
+  set radius(value) {
+    if (value <= 0) {
+      throw new Error('Invalid Entry')
+    };
+    _radius.set(this, value);
   }
 }
 
 const c = new Circle(1);
-console.log(c.accDraw());
+console.log(c.radius);
