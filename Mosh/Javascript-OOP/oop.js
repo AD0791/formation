@@ -1,18 +1,23 @@
-const _radius = Symbol();
-const _draw = Symbol();
+const _radius = new WeakMap();
+const _draw = new WeakMap();
 class Circle {
-    constructor(radius) {
-        // bracket notation
-        this[_radius] = radius;
-    }
-    // make this method private
-    // this isn't an array
-    [_draw]() {
-        console.log("draw");
-    }
-};
+  constructor(radius) {
+    _radius.set(this, radius);
+    // ()=> or function()
+    _draw.set(this, () => {
+      console.log("draw");
+    });
+  }
+
+  accessRadius() {
+    // to access the radius property
+    // we reference the key here
+    return _radius.get(this);
+  }
+  accDraw() {
+    return _draw.get(this)();
+  }
+}
 
 const c = new Circle(1);
-// we can't access the radius property or the
-// _draw method by code
-console.log(c);
+console.log(c.accDraw());

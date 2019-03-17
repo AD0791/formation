@@ -2132,3 +2132,62 @@ Object Prototype
 ```
 
 ### Using WeakMaps
+
+A weakmap is essentially a dictionary where keys are objects and values can be anything.
+
+
+```javascript
+const _radius = new WeakMap();
+const _draw = Symbol();
+class Circle {
+  constructor(radius) {
+    _radius.set(this, radius);
+  }
+  [_draw]() {
+    console.log("draw");
+  }
+  accessRadius() {
+    // to access the radius property
+    // we reference the key here
+    return _radius.get(this);
+  }
+}
+
+const c = new Circle(1);
+console.log(c.accessRadius());
+// in console
+[Log] 1 (oop.js, line 18)
+```
+
+```javascript
+const _radius = new WeakMap();
+const _draw = new WeakMap();
+class Circle {
+  constructor(radius) {
+    _radius.set(this, radius);
+    // ()=> or function()
+    _draw.set(this, () => {
+      console.log("draw");
+    });
+  }
+
+  accessRadius() {
+    // to access the radius property
+    // we reference the key here
+    return _radius.get(this);
+  }
+  accDraw() {
+    return _draw.get(this)();
+  }
+}
+
+const c = new Circle(1);
+console.log(c.accDraw());
+// in console
+[Log] draw (oop.js, line 8)
+[Log] undefined (oop.js, line 23)
+```
+
+> A good practice is to use a weakmap for each private properties and methods.
+
+## getters and setters
