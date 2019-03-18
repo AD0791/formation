@@ -2135,7 +2135,6 @@ Object Prototype
 
 A weakmap is essentially a dictionary where keys are objects and values can be anything.
 
-
 ```javascript
 const _radius = new WeakMap();
 const _draw = Symbol();
@@ -2192,7 +2191,7 @@ console.log(c.accDraw());
 
 ## getters and setters
 
-Even If we can do some tricks with ```Symbol``` and ```Weakmap``` to create and access private properties and methods. As a best practice we are still able to use the getters and setters.
+Even If we can do some tricks with `Symbol` and `Weakmap` to create and access private properties and methods. As a best practice we are still able to use the getters and setters.
 
 ```javascript
 const _radius = new WeakMap();
@@ -2229,3 +2228,159 @@ console.log(c.radius);
 > c.radius = 10;
 < 10
 ```
+
+## Inheritance
+
+```javascript
+class Shape {
+  move() {
+    console.log("move");
+  }
+}
+
+// we can make Circle inherit from the Shape class
+// with the extends command
+class Circle extends Shape {
+  draw() {
+    console.log("Circle will inherit from Shape Class");
+  }
+}
+
+const c = new Circle();
+console.log(c);
+// as we can see in console,
+// in console
+[Log] Circle (oop.js, line 16)
+No Properties
+Circle Prototype
+constructor: function()
+draw()
+Shape Prototype
+constructor: function()
+move()
+Object Prototype
+```
+
+When you are going to create a constructor for a child Class. Make sure you call first the constructor of the parent class.
+
+```javascript
+// parent class
+class Shape {
+  constructor(color) {
+    this.color = color;
+  }
+  move() {
+    console.log("move");
+  }
+}
+
+// Child Class
+class Circle extends Shape {
+  constructor(radius, color) {
+    // we must used the constructor of the parent
+    // class.
+    super(color);
+    this.radius = radius;
+  }
+  draw() {
+    console.log(" we must use super");
+  }
+}
+
+const c = new Circle(1, "blue");
+console.log(c);
+// in console
+[Log] Circle {color: "blue", radius: 1} (oop.js, line 25)
+```
+
+## method Overriding
+
+```javascript
+// parent class
+class Shape {
+  constructor(color) {
+    this.color = color;
+  }
+  move() {
+    console.log("move");
+  }
+}
+
+// Child Class
+class Circle extends Shape {
+  constructor(radius, color) {
+    // we must used the constructor of the parent
+    // class.
+    super(color);
+    this.radius = radius;
+  }
+  draw() {
+    console.log(" we must use super");
+  }
+  //
+  // see the method override
+  move() {
+    console.log("Circle Move");
+  }
+}
+
+const c = new Circle(1, "blue");
+console.log(c);
+console.log(c.move());
+// in console
+[Log] Circle (oop.js, line 29)
+color: "blue"
+radius: 1
+Circle Prototype
+constructor: function()
+draw()
+move()
+Shape Prototype
+constructor: function()
+move()
+Object Prototype
+[Log] Circle Move (oop.js, line 24)
+```
+
+We can access both of them
+
+```javascript
+// parent class
+class Shape {
+  constructor(color) {
+    this.color = color;
+  }
+  move() {
+    console.log("move");
+  }
+}
+
+// Child Class
+class Circle extends Shape {
+  constructor(radius, color) {
+    // we must used the constructor of the parent
+    // class.
+    super(color);
+    this.radius = radius;
+  }
+  draw() {
+    console.log(" we must use super");
+  }
+  // we can access the moves at the same time
+  move() {
+    super.move(); // for the shape
+    console.log("Circle Move");
+  }
+}
+
+const c = new Circle(1, "blue");
+console.log(c);
+console.log(c.move());
+
+// in console
+[Log] Circle {color: "blue", radius: 1} (oop.js, line 30)
+[Log] move (oop.js, line 7)
+[Log] Circle Move (oop.js, line 25)
+```
+
+# CHapter 4 - Exercise

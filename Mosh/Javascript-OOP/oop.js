@@ -1,27 +1,31 @@
-const _radius = new WeakMap();
-const _draw = new WeakMap();
-class Circle {
-  constructor(radius) {
-    _radius.set(this, radius);
-    // ()=> or function()
-    _draw.set(this, () => {
-      console.log("draw");
-    });
+// parent class
+class Shape {
+  constructor(color) {
+    this.color = color;
   }
-
-  // let's access radius property as read-only
-  // a new way to implement a getters
-  get radius() {
-    return _radius.get(this);
-  }
-  // a setters
-  set radius(value) {
-    if (value <= 0) {
-      throw new Error('Invalid Entry')
-    };
-    _radius.set(this, value);
+  move() {
+    console.log("move");
   }
 }
 
-const c = new Circle(1);
-console.log(c.radius);
+// Child Class
+class Circle extends Shape {
+  constructor(radius, color) {
+    // we must used the constructor of the parent
+    // class.
+    super(color);
+    this.radius = radius;
+  }
+  draw() {
+    console.log(" we must use super");
+  }
+  // we can access the moves at the same time
+  move() {
+    super.move(); // for the shape
+    console.log("Circle Move");
+  }
+}
+
+const c = new Circle(1, "blue");
+console.log(c);
+console.log(c.move());
