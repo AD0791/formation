@@ -2448,3 +2448,134 @@ The modules system from ES5 to ES6:
 - **ES6 native Modules -> Browsers**
 
 ## CommonJS
+
+We have this oop.js that we have run on node
+
+```javascript
+const _radius = new WeakMap();
+class Circle {
+  constructor(radius) {
+    _radius.set(this, radius);
+  }
+  draw() {
+    console.log(`Circle with the radius of ${_radius.get(this)}`);
+  }
+}
+const s = new Circle(10);
+console.log(s);
+console.log(s.draw());
+```
+
+```bash
+$ node oop.js
+Circle {}
+Circle with the radius of 10
+undefined
+```
+
+> Basic rule for modularity: Things that are highly related should go together  (cohesion).
+
+Everything who is build in a module is considered to be private. Unless we explicitly export it.
+
+```javascript
+//////oop.js
+const Circle = require('./easy');
+
+const s = new Circle(10);
+console.log(s);
+console.log(s.draw());
+
+//////easy.js
+// implementation details
+const _radius = new WeakMap();
+
+//  public Interface
+class Circle {
+    constructor(radius) {
+        _radius.set(this, radius);
+    }
+    draw() {
+        console.log(`Circle with the radius of ${_radius.get(this)}`);
+    }
+}
+
+// why because we only have one Class
+module.exports = Circle;
+```
+
+```bash
+$ node oop.js
+Circle {}
+Circle with the radius of 10
+undefined
+```
+
+## ES6 Modules
+
+```javascript
+// OOP.js
+import {
+  Circle
+} from "./easy.js";
+
+const s = new Circle(10);
+console.log(s);
+console.log(s.draw());
+
+// an error console
+// [Error] SyntaxError: Unexpected token '{'. import call expects exactly one argument.
+//	(anonymous function) (oop.js:1)
+
+// without webpack, we will do a quick fix.
+// in oop.html and oop.js
+
+////////////////////////////////////
+
+// easy.js
+// implementation details
+const _radius = new WeakMap();
+
+//  public Interface
+export class Circle {
+    constructor(radius) {
+        _radius.set(this, radius);
+    }
+    draw() {
+        console.log(`Circle with the radius of ${_radius.get(this)}`);
+    }
+}
+```
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Object Oriented Programming</h1>
+    <!-- a quick fix to oop.js -->
+    <script type="module" src="oop.js"></script>
+</body>
+
+</html>
+```
+
+```javascript
+// in console
+[Log] Circle {} (oop.js, line 6)
+[Log] Circle with the radius of 10 (easy.js, line 10)
+[Log] undefined (oop.js, line 7)
+```
+
+## Tooling
+
+These tools are relevsnt for browser application.
+
+- transpiler: translator and compiler. It will convert our modern javascript code to a code that all browser will understand. (like babel)!
+- bundler: it's responsible to convert all our javascript files (modules) into a single javascript file. (Which we call a bundle). (like Webpack)!
