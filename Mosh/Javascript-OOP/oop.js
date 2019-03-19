@@ -1,31 +1,29 @@
-// parent class
-class Shape {
-  constructor(color) {
-    this.color = color;
+const _items = new WeakMap();
+class Stack {
+  constructor() {
+    _items.set(this, []); // private
   }
-  move() {
-    console.log("move");
+  push(obj) {
+    // add obj to the end of the array
+    _items.get(this).push(obj);
+  }
+  pop() {
+    if (_items.get(this).length === 0) {
+      throw new Error('Stack is empty');
+    }
+    return _items.get(this).pop();
+  }
+  peek() {
+    if (_items.get(this).length === 0) {
+      throw new Error('Stack is empty');
+    }
+    return _items.get(this)[_items.get(this).length - 1];
+  }
+  // send this as read only
+  get count() {
+    return _items.get(this).length;
   }
 }
 
-// Child Class
-class Circle extends Shape {
-  constructor(radius, color) {
-    // we must used the constructor of the parent
-    // class.
-    super(color);
-    this.radius = radius;
-  }
-  draw() {
-    console.log(" we must use super");
-  }
-  // we can access the moves at the same time
-  move() {
-    super.move(); // for the shape
-    console.log("Circle Move");
-  }
-}
-
-const c = new Circle(1, "blue");
-console.log(c);
-console.log(c.move());
+const s = new Stack();
+console.log(s);

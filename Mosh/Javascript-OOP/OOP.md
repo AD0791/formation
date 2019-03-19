@@ -2383,4 +2383,68 @@ console.log(c.move());
 [Log] Circle Move (oop.js, line 25)
 ```
 
-# CHapter 4 - Exercise
+# CHapter 5 - Exercise
+
+```javascript
+const _items = new WeakMap();
+class Stack {
+  constructor() {
+    _items.set(this, []); // private
+  }
+  push(obj) {
+    // add obj to the end of the array
+    _items.get(this).push(obj);
+  }
+  pop() {
+    if (_items.get(this).length === 0) {
+      throw new Error('Stack is empty');
+    }
+    return _items.get(this).pop();
+  }
+  peek() {
+    if (_items.get(this).length === 0) {
+      throw new Error('Stack is empty');
+    }
+    return _items.get(this)[_items.get(this).length - 1];
+  }
+  // send this as read only
+  get count() {
+    return _items.get(this).length;
+  }
+}
+
+const s = new Stack();
+console.log(s);
+// in console
+[Log] Stack (oop.js, line 29)
+No Properties
+Stack Prototype
+constructor: function()
+count
+peek()
+pop()
+push(obj)
+Object Prototype
+```
+
+# Chapter 6 - Tooling
+
+The benefits of using modularity:
+
+- Maintainability
+- Reusability
+- Abstract
+
+The modules system from ES5 to ES6:
+
+1. ES5
+
+- AMD -> Browser
+- **CommonJS -> Node.js**
+- UMD -> Browser/Node.js
+
+2. ES6
+
+- **ES6 native Modules -> Browsers**
+
+## CommonJS
