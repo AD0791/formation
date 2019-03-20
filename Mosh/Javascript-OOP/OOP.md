@@ -2579,3 +2579,22 @@ These tools are relevsnt for browser application.
 
 - transpiler: translator and compiler. It will convert our modern javascript code to a code that all browser will understand. (like babel)!
 - bundler: it's responsible to convert all our javascript files (modules) into a single javascript file. (Which we call a bundle). (like Webpack)!
+
+## Babel
+`
+We need to install nodejs.
+
+```bash
+## Make an new directory
+$ cd new dirname
+## init a node project 
+$ node init -y
+# It create a package.json file
+```
+
+```package.json``` is an indification for an application.
+
+```bash
+npm -i babel-cli babel-core babel-preset-env
+```
+
