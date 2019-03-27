@@ -1,3 +1,9 @@
+---
+output:
+  html_document: default
+  pdf_document: default
+  word_document: default
+---
 # Object Oriented Programming: Javascript
 
 ---
@@ -1071,20 +1077,20 @@ console.log(forme);
 console.log(cercle);
 // in console firefox and safari
 {}
-​
+
 <prototype>: {…}
-​​
-constructor: function Shape()​​
-duplicate: function duplicate()​​
+
+constructor: function Shape()
+duplicate: function duplicate()
 <prototype>: Object { … }
 oop.js:23:1
 {…}
-​
+
 radius: 1
-​
+
 <prototype>: {…}
-​​
-draw: function draw()​​
+
+draw: function draw()
 <prototype>: Object { duplicate: duplicate()
 , … }
 oop.js:24:1
