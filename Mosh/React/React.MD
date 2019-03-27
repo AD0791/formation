@@ -1,3 +1,9 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+
 # React Course
 
 ---
@@ -41,34 +47,46 @@ React reacts to state of changes.
 Let's create our first react app.
 
 ```bash
-# For installation
-# $ create-react-app <project path>
-$ create-react-app React/react-app
+# with the terminal
+$ create-react-app react-app
+```
 
-Creating a new React app in /Users/alexandrodisla/Desktop/repo/formation/Mosh/React/React/react-app.
+By running this command, react will install :
+
+- Development server
+- Webpack
+- Babel
+- and Etc.
+
+All the configuration is done for you
+
+```bash
+Alexandros-MacBook-Pro:React alexandrodisla$ create-react-app react-app
+
+Creating a new React app in /Users/alexandrodisla/Desktop/repo/formation/Mosh/React/react-app.
 
 Installing packages. This might take a couple of minutes.
 Installing react, react-dom, and react-scripts...
 
 
-> fsevents@1.2.7 install /Users/alexandrodisla/Desktop/repo/formation/Mosh/React/React/react-app/node_modules/chokidar/node_modules/fsevents
+> fsevents@1.2.7 install /Users/alexandrodisla/Desktop/repo/formation/Mosh/React/react-app/node_modules/chokidar/node_modules/fsevents
 > node install
 
-[fsevents] Success: "/Users/alexandrodisla/Desktop/repo/formation/Mosh/React/React/react-app/node_modules/chokidar/node_modules/fsevents/lib/binding/Release/node-v64-darwin-x64/fse.node" is installed via remote
+[fsevents] Success: "/Users/alexandrodisla/Desktop/repo/formation/Mosh/React/react-app/node_modules/chokidar/node_modules/fsevents/lib/binding/Release/node-v64-darwin-x64/fse.node" is installed via remote
 
-> fsevents@1.2.4 install /Users/alexandrodisla/Desktop/repo/formation/Mosh/React/React/react-app/node_modules/fsevents
+> fsevents@1.2.4 install /Users/alexandrodisla/Desktop/repo/formation/Mosh/React/react-app/node_modules/fsevents
 > node install
 
-[fsevents] Success: "/Users/alexandrodisla/Desktop/repo/formation/Mosh/React/React/react-app/node_modules/fsevents/lib/binding/Release/node-v64-darwin-x64/fse.node" already installed
+[fsevents] Success: "/Users/alexandrodisla/Desktop/repo/formation/Mosh/React/react-app/node_modules/fsevents/lib/binding/Release/node-v64-darwin-x64/fse.node" already installed
 Pass --update-binary to reinstall or --build-from-source to recompile
-+ react-dom@16.8.4
-+ react@16.8.4
++ react-dom@16.8.5
++ react@16.8.5
 + react-scripts@2.1.8
-added 1973 packages from 735 contributors and audited 36228 packages in 351.694s
+added 1977 packages from 735 contributors and audited 36240 packages in 264.395s
 found 63 low severity vulnerabilities
   run `npm audit fix` to fix them, or `npm audit` for details
 
-Success! Created react-app at /Users/alexandrodisla/Desktop/repo/formation/Mosh/React/React/react-app
+Success! Created react-app at /Users/alexandrodisla/Desktop/repo/formation/Mosh/React/react-app
 Inside that directory, you can run several commands:
 
   npm start
@@ -86,23 +104,29 @@ Inside that directory, you can run several commands:
 
 We suggest that you begin by typing:
 
-  cd /Users/alexandrodisla/Desktop/repo/formation/Mosh/React/React/react-app
+  cd react-app
   npm start
 
 Happy hacking!
 ```
 
-we will get a lightweight developpment server, webpack for bundeling our files and babel for compiling our javscript code etc. However if you need to do some configuration on your code, ou can do `npm run eject`.
+> `npm run eject` If you aren’t satisfied with the build tool and configuration choices, you can eject at any time. This command will remove the single build dependency from your project. Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except eject will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own. You don’t have to ever use eject. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-To start the app
+Now let's start the application
 
 ```bash
-# on the directory of the app
-$ npm start
-# to quit
-$ control + c
+Alexandros-MacBook-Pro:react-app alexandrodisla$ npm start
+
+> react-app@0.1.0 start /Users/alexandrodisla/Desktop/repo/formation/Mosh/React/react-app
+> react-scripts start
+
+Compiled successfully!
+
+You can now view react-app in the browser.
+
+  Local:            http://localhost:3000/
+  On Your Network:  http://172.20.10.9:3000/
+
+Note that the development build is not optimized.
+To create a production build, use npm run build.
 ```
-
-> In our react-app folder, we have the node_modules which contains the third party libraries and react itself. The public folder is where we have the public asset of our application.
-
-In the index.html, we will see the div tag `<div id='root'></div>`. It's the container for running our application.
