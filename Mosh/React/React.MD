@@ -622,3 +622,205 @@ we can see how the html beahaves
 ```
 
 The zero had been put dynamicaly.
+
+### Setting Attributes
+
+we started to find the simple way to add a random 200 by 200 images in our frontend.
+
+```javascript
+import React, { Component } from "react";
+
+class Counter extends Component {
+  state = {
+    count: 0,
+    // will generate a random 200X200 images
+    imageUrl: "http://picsum.photos/200"
+  };
+  render() {
+    // let's add an image dynamicaly
+    return (
+      <React.Fragment>
+        <img src={this.state.imageUrl} alt="Random" />
+        <span>{this.formatCount()}</span>
+        <button>Increment</button>
+      </React.Fragment>
+    );
+  }
+
+  formatCount() {
+    const { count } = this.state;
+    // check if it's 0
+    return count === 0 ? "Zero" : count;
+  }
+}
+
+export default Counter;
+```
+
+Bootstrap classes in our jsx
+
+```javascript
+import React, { Component } from "react";
+
+class Counter extends Component {
+  state = {
+    count: 0 //,
+    //imageUrl: "http://picsum.photos/200"
+  };
+  render() {
+    return (
+      // <img src={this.state.imageUrl} alt="Random" />
+      // bootstrap classes as attributes
+      // we can't use class as attribute of the span
+      // after the ClassName we pass 3 bootstrap classes
+      // same logic for the button element
+      <React.Fragment>
+        <span className="badge badge-primary m-2">{this.formatCount()}</span>
+        <button className="btn btn-secondary btn-sml">Increment</button>
+      </React.Fragment>
+    );
+  }
+
+  formatCount() {
+    const { count } = this.state;
+    // check if it's 0
+    return count === 0 ? "Zero" : count;
+  }
+}
+
+export default Counter;
+```
+
+> Note that we use classes for performance and maintainability. But sometimes you may won't to break the rules and applied your style to a specific element.
+
+Applying styles
+
+```javascript
+import React, { Component } from "react";
+
+class Counter extends Component {
+  state = {
+    count: 0 //,
+    //imageUrl: "http://picsum.photos/200"
+  };
+
+  //property of that syles object are css properties
+  styles = {
+    fontSize: 10,
+    fontWeight: "bold"
+  };
+  render() {
+    // applying styles
+    // add a style attributes
+    // and pass it's value dynamicaly
+    return (
+      <React.Fragment>
+        <span style={this.styles} className="badge badge-primary m-2">
+          {this.formatCount()}
+        </span>
+        <button className="btn btn-secondary btn-sml">Increment</button>
+      </React.Fragment>
+    );
+  }
+
+  formatCount() {
+    const { count } = this.state;
+    // check if it's 0
+    return count === 0 ? "Zero" : count;
+  }
+}
+
+export default Counter;
+```
+
+look at the html on the browser
+
+```html
+<div id="root">
+  <span
+    class="badge badge-primary m-2"
+    style="font-size: 10px; font-weight: bold;"
+    >Zero</span
+  ><button class="btn btn-secondary btn-sml">Increment</button>
+</div>
+```
+
+But if we don't want to apply styles to multiple tags
+we can use inline styles.
+
+```javascript
+ render() {
+    // applying styles inlines
+    return (
+      <React.Fragment>
+        <span
+          style={{ fontSize: 12, fontWeight: "bold" }}
+          className="badge badge-primary m-2"
+        >
+          {this.formatCount()}
+        </span>
+        <button className="btn btn-secondary btn-sml">Increment</button>
+      </React.Fragment>
+    );
+  }
+```
+
+```html
+<div id="root">
+  <span
+    class="badge badge-primary m-2"
+    style="font-size: 12px; font-weight: bold;"
+    >Zero</span
+  ><button class="btn btn-secondary btn-sml">Increment</button>
+</div>
+```
+
+### Rendering Classes Dynamically
+
+Essentially here we have to understand that the bootstrap class `badge-primary` gives the blue color to our span. But when we hit the 0 (zero), we need the bootstrap class to change to '''badge-warning```. we will need to implemented this behavior dynamically.
+
+```javascript
+import React, { Component } from "react";
+
+class Counter extends Component {
+  state = {
+    count: 0 //,
+    //imageUrl: "http://picsum.photos/200"
+  };
+  render() {
+    // one way to do it
+    // play with strings
+    return (
+      <React.Fragment>
+        <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
+        <button className="btn btn-secondary btn-sml">Increment</button>
+      </React.Fragment>
+    );
+  }
+
+  getBadgeClasses() {
+    let classes = "badge m-2 badge-";
+    classes += this.state.count === 0 ? "warning" : "primary";
+    return classes;
+  }
+
+  formatCount() {
+    const { count } = this.state;
+    // check if it's 0
+    return count === 0 ? "Zero" : count;
+  }
+}
+
+export default Counter;
+```
+
+Done
+
+```javascript
+<div id="root">
+  <span class="badge m-2 badge-warning">Zero</span>
+  <button class="btn btn-secondary btn-sml">Increment</button>
+</div>
+```
+
+### Rendering Lists

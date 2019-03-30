@@ -2,23 +2,27 @@ import React, { Component } from "react";
 
 class Counter extends Component {
   state = {
-    count: 0
+    count: 0 //,
+    //imageUrl: "http://picsum.photos/200"
   };
-  // it's an important property
   render() {
-    // {} to render something dynamcaly
-    // bettween the {} wwe have an expression
-    // an expression will return result
+    // one way to do it
+    // play with strings
     return (
       <React.Fragment>
-        <span>{this.formatCount()}</span>
-        <button>Increment</button>
+        <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
+        <button className="btn btn-secondary btn-sml">Increment</button>
       </React.Fragment>
     );
   }
-  // to check the value of the count we need this method
+
+  getBadgeClasses() {
+    let classes = "badge m-2 badge-";
+    classes += this.state.count === 0 ? "warning" : "primary";
+    return classes;
+  }
+
   formatCount() {
-    // object desconstruction
     const { count } = this.state;
     // check if it's 0
     return count === 0 ? "Zero" : count;
