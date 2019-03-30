@@ -2,16 +2,22 @@ import React, { Component } from "react";
 
 class Counter extends Component {
   state = {
-    count: 0 //,
-    //imageUrl: "http://picsum.photos/200"
+    count: 0
+  };
+
+  handleIncrement = () => {
+    this.setState({ count: this.state.count + 1 });
   };
   render() {
-    // one way to do it
-    // play with strings
     return (
       <React.Fragment>
         <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
-        <button className="btn btn-secondary btn-sml">Increment</button>
+        <button
+          onClick={this.handleIncrement}
+          className="btn btn-secondary btn-sml"
+        >
+          Increment
+        </button>
       </React.Fragment>
     );
   }

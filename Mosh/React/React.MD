@@ -824,3 +824,234 @@ Done
 ```
 
 ### Rendering Lists
+
+we are going to map each element of an array to a react element. we need to specify a key attributes to
+keep the dom in sinc with the virtual dom.
+
+```javascript
+ state = {
+   count: 0,
+   tags: ["tag1", "tag2", "tag3"]
+ };
+ render() {
+   // map an array
+   // use to render dynamically a list of items in react
+   // keep the dom in sinc with the virtual dom
+   // since our tags are not object it will be easy
+   return (
+     <React.Fragment>
+       <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
+       <button className="btn btn-secondary btn-sml">Increment</button>
+       <ul>
+         {this.state.tags.map(tag => (
+           <li key={tag}>{tag}</li>
+         ))}
+       </ul>
+     </React.Fragment>
+   );
+ }
+```
+
+```html
+<div id="root">
+  <span class="badge m-2 badge-warning">Zero</span
+  ><button class="btn btn-secondary btn-sml">Increment</button>
+  <ul>
+    <li>tag1</li>
+    <li>tag2</li>
+    <li>tag3</li>
+  </ul>
+</div>
+```
+
+### Conditional Rendering
+
+JSx is not a templating engine we don't have if and else.
+
+We had to do nested div in this case lol
+
+```javascript
+state = {
+    count: 0,
+    tags: ["tag1", "tag2", "tag3"]
+  };
+  // conditional rendering
+  renderTags() {
+    if (this.state.tags.length === 0) return <p>There is no renderTags</p>;
+    return (
+      <ul>
+        {this.state.tags.map(tag => (
+          <li key={tag}>{tag}</li>
+        ))}
+      </ul>
+    );
+  }
+
+  render() {
+    return (
+      // render an additional
+      // way 1 is the case of truthy and falsy
+      <React.Fragment>
+        <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
+        <button className="btn btn-secondary btn-sml">Increment</button>
+        <div>
+          {this.state.tags.length === 0 && "nOw we will render this message"}
+          {this.renderTags()}
+        </div>
+      </React.Fragment>
+    );
+  }
+```
+
+```html
+<div id="root">
+  <span class="badge m-2 badge-warning">Zero</span
+  ><button class="btn btn-secondary btn-sml">Increment</button>
+  <div>
+    <ul>
+      <li>tag1</li>
+      <li>tag2</li>
+      <li>tag3</li>
+    </ul>
+  </div>
+</div>
+```
+
+### Handeling Events
+
+Properties based on simple doms events.
+it's different from vanilla javascript. we don't to call the method dynamically but only it's reference.
+
+```javascript
+ // dom event
+  handleIncrement() {
+    console.log("Increment Clicked");
+  }
+  render() {
+    return (
+      <React.Fragment>
+        <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
+        <button
+          onClick={this.handleIncrement}
+          className="btn btn-secondary btn-sml"
+        >
+          Increment
+        </button>
+      </React.Fragment>
+    );
+  }
+
+// console output i will click it 3 times
+> 3 counter.jsx:10 Increment Clicked
+```
+
+### Binding events handler
+
+```javascript
+constructor() {
+    super();
+    this.handleIncrement = this.handleIncrement.bind(this);
+  }
+  // dom event
+  handleIncrement() {
+    console.log("Increment Clicked", this);
+  }
+  render() {
+    return (
+      <React.Fragment>
+        <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
+        <button
+          onClick={this.handleIncrement}
+          className="btn btn-secondary btn-sml"
+        >
+          Increment
+        </button>
+      </React.Fragment>
+    );
+  }
+
+// output
+Increment Clicked Counter {props: {…}, context: {…}, refs: {…}, updater: {…}, state: {…}, …}context: {}handleIncrement: ƒ ()props: {}refs: {}state: {count: 0}updater: {isMounted: ƒ, enqueueSetState: ƒ, enqueueReplaceState: ƒ, enqueueForceUpdate: ƒ}_reactInternalFiber: FiberNode {tag: 1, key: null, elementType: ƒ, type: ƒ, stateNode: Counter, …}_reactInternalInstance: {_processChildContext: ƒ}isMounted: (...)replaceState: (...)__proto__: Component
+
+counter.jsx:13 Increment Clicked Counter {props: {…}, context: {…}, refs: {…}, updater: {…}, state: {…}, …}
+
+counter.jsx:13 Increment Clicked Counter {props: {…}, context: {…}, refs: {…}, updater: {…}, state: {…}, …}
+```
+
+when i clicked the button 3 times, we will get the object 3 times. we had to bind the this to avoid it to point to the class counter.
+
+We can set it to an arrow function to do the job:
+
+```javascript
+// constructor() {
+  //   super();
+  //   this.handleIncrement = this.handleIncrement.bind(this);
+  // }
+  // handleIncrement() {
+  //   console.log("Increment Clicked", this);
+  // }
+  handleIncrement = () => {
+    console.log("Increment Clicked", this);
+  };
+  render() {
+    return (
+      <React.Fragment>
+        <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
+        <button
+          onClick={this.handleIncrement}
+          className="btn btn-secondary btn-sml"
+        >
+          Increment
+        </button>
+      </React.Fragment>
+    );
+  }
+// same output when we clicked
+```
+
+### Updating the View
+
+We have to explicitely tell react what we have changed.
+
+Now each time i click the button the state of the span increment automaticaly.
+
+```javascript
+import React, { Component } from "react";
+
+class Counter extends Component {
+  state = {
+    count: 0
+  };
+
+  handleIncrement = () => {
+    this.setState({ count: this.state.count + 1 });
+  };
+  render() {
+    return (
+      <React.Fragment>
+        <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
+        <button
+          onClick={this.handleIncrement}
+          className="btn btn-secondary btn-sml"
+        >
+          Increment
+        </button>
+      </React.Fragment>
+    );
+  }
+
+  getBadgeClasses() {
+    let classes = "badge m-2 badge-";
+    classes += this.state.count === 0 ? "warning" : "primary";
+    return classes;
+  }
+
+  formatCount() {
+    const { count } = this.state;
+    // check if it's 0
+    return count === 0 ? "Zero" : count;
+  }
+}
+
+export default Counter;
+```
