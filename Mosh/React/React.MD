@@ -1120,3 +1120,456 @@ export default App;
 ```
 
 We will add a folder called services to our src directory.
+
+### Building the Movie component (vidly)
+
+When you are building a complexe project. You must start with the sample things. Remember that.
+
+This is interesting i put a Movie class from movies.jsx with `<Movie/>`.
+
+```javascript
+// app.js
+import React, { Component } from "react";
+//import logo from "./logo.svg";
+import "./App.css";
+// import the movie.jsx
+import Movies from "./components/movies";
+
+class App extends Component {
+  render() {
+    return (
+      <main ClassName="container">
+        <Movies />
+      </main>
+    );
+  }
+}
+
+export default App;
+```
+
+```javascript
+//movie.jsx
+import React, { Component } from "react";
+
+class Movies extends Component {
+  state = {};
+  render() {
+    return <h2>Movies Component</h2>;
+  }
+}
+
+export default Movies;
+```
+
+```html
+<div id="root">
+  <main classname="container"><h2>Movies Component</h2></main>
+</div>
+```
+
+for now we just render a message.
+
+> Next step we want to render a bootstrap table.
+
+we will go to the documentation of [bootstrap](www.getbootstrap.com). And look at for bootstrap table.
+
+Vscode will generate the tags with zen Coding:
+
+- `table.table>thead>tr>th*4`
+- `tbody>tr>td*4`
+
+Remmeber the app.js:
+
+```javascript
+import React, { Component } from "react";
+//import logo from "./logo.svg";
+import "./App.css";
+// import the movie.jsx
+import Movies from "./components/movies";
+
+class App extends Component {
+  render() {
+    return (
+      <main ClassName="container">
+        <Movies />
+      </main>
+    );
+  }
+}
+
+export default App;
+```
+
+the movies.jsx in the /src/components:
+
+```javascript
+import React, { Component } from "react";
+import { getMovies } from "../services/fakeMovieService";
+
+class Movies extends Component {
+  state = {
+    movies: getMovies() // it's not a good practice yet
+  };
+  // like the format of the bootstrap table
+  // we need to render the movies dynamically
+  render() {
+    return (
+      <table className="table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Genre</th>
+            <th>Stock</th>
+            <th>Rate</th>
+          </tr>
+        </thead>
+        <tbody>
+          {this.state.movies.map(movie => (
+            <tr>
+              <td>{movie.title}</td>
+              <td>{movie.genre.name}</td>
+              <td>{movie.numberInStock}</td>
+              <td>{movie.dailyRentalRate}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    );
+  }
+}
+
+export default Movies;
+```
+
+In the browser:
+
+```html
+<div id="root">
+  <main classname="container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Genre</th>
+          <th>Stock</th>
+          <th>Rate</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Terminator</td>
+          <td>Action</td>
+          <td>6</td>
+          <td>2.5</td>
+        </tr>
+        <tr>
+          <td>Die Hard</td>
+          <td>Action</td>
+          <td>5</td>
+          <td>2.5</td>
+        </tr>
+        <tr>
+          <td>Get Out</td>
+          <td>Thriller</td>
+          <td>8</td>
+          <td>3.5</td>
+        </tr>
+        <tr>
+          <td>Trip to Italy</td>
+          <td>Comedy</td>
+          <td>7</td>
+          <td>3.5</td>
+        </tr>
+        <tr>
+          <td>Airplane</td>
+          <td>Comedy</td>
+          <td>7</td>
+          <td>3.5</td>
+        </tr>
+        <tr>
+          <td>Wedding Crashers</td>
+          <td>Comedy</td>
+          <td>7</td>
+          <td>3.5</td>
+        </tr>
+        <tr>
+          <td>Gone Girl</td>
+          <td>Thriller</td>
+          <td>7</td>
+          <td>4.5</td>
+        </tr>
+        <tr>
+          <td>The Sixth Sense</td>
+          <td>Thriller</td>
+          <td>4</td>
+          <td>3.5</td>
+        </tr>
+        <tr>
+          <td>The Avengers</td>
+          <td>Action</td>
+          <td>7</td>
+          <td>3.5</td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+</div>
+```
+
+> Next step we need to put a delete button in each row
+
+we will do more code zen:
+
+- `button.btn.btn-danger.btn-sm`
+
+We also need an handler for the **delete event**.
+
+**It's always a good practice to see if the button is doing the action. We assure that the method is bind to the constructor. After that make the object log to the console.**
+
+```javascript
+class Movies extends Component {
+  state = {
+    movies: getMovies() // it's not a good practice yet
+  };
+  // we put the delete button
+  // we need to handle the delete event
+  // arrow function to bind this event handler to the constructor
+  // we will pass an event argument
+  handleDelete = movie => {
+    console.log(movie);
+  };
+
+  render() {
+    return (
+      <table className="table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Genre</th>
+            <th>Stock</th>
+            <th>Rate</th>
+          </tr>
+        </thead>
+        <tbody>
+          {this.state.movies.map(movie => (
+            <tr>
+              <td>{movie.title}</td>
+              <td>{movie.genre.name}</td>
+              <td>{movie.numberInStock}</td>
+              <td>{movie.dailyRentalRate}</td>
+              <td>
+                <button
+                  onClick={() => this.handleDelete(movie)}
+                  className="btn btn-danger btn-sm"
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    );
+  }
+}
+
+export default Movies;
+
+// I click the message 3 times
+// in the browser
+{_id: "5b21ca3eeb7f6fbccd471815", title: "Terminator", genre: {…}, numberInStock: 6, dailyRentalRate: 2.5, …}dailyRentalRate: 2.5genre:
+
+{_id: "5b21ca3eeb7f6fbccd471818", name: "Action"}numberInStock: 6publishDate: "2018-01-03T19:04:28.809Z"title: "Terminator"_id: "5b21ca3eeb7f6fbccd471815"__proto__: Object
+movies.jsx:13
+
+{_id: "5b21ca3eeb7f6fbccd471815", title: "Terminator", genre: {…}, numberInStock: 6, dailyRentalRate: 2.5, …}
+movies.jsx:13 {_id: "5b21ca3eeb7f6fbccd471815", title: "Terminator", genre: {…}, numberInStock: 6, dailyRentalRate: 2.5, …}
+```
+
+We need to update the state of that component
+
+```javascript
+import React, { Component } from "react";
+import { getMovies } from "../services/fakeMovieService";
+
+class Movies extends Component {
+  state = {
+    movies: getMovies() // it's not a good practice yet
+  };
+  // we put the delete button
+  // we need to handle the delete event
+  // arrow function to bind this event handler to the constructor
+  // we will pass an event argument
+  // set the key to each movie id
+  // set the state
+  handleDelete = movie => {
+    const movies = this.state.movies.filter(m => m._id !== movie._id);
+    this.setState({ movies });
+  };
+
+  render() {
+    return (
+      <table className="table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Genre</th>
+            <th>Stock</th>
+            <th>Rate</th>
+          </tr>
+        </thead>
+        <tbody>
+          {this.state.movies.map(movie => (
+            <tr key={movie._id}>
+              <td>{movie.title}</td>
+              <td>{movie.genre.name}</td>
+              <td>{movie.numberInStock}</td>
+              <td>{movie.dailyRentalRate}</td>
+              <td>
+                <button
+                  onClick={() => this.handleDelete(movie)}
+                  className="btn btn-danger btn-sm"
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    );
+  }
+}
+
+export default Movies;
+```
+
+We have delete multiples movies.
+
+```html
+<tbody>
+  <tr>
+    <td>Die Hard</td>
+    <td>Action</td>
+    <td>5</td>
+    <td>2.5</td>
+    <td><button class="btn btn-danger btn-sm">Delete</button></td>
+  </tr>
+  <tr>
+    <td>Get Out</td>
+    <td>Thriller</td>
+    <td>8</td>
+    <td>3.5</td>
+    <td><button class="btn btn-danger btn-sm">Delete</button></td>
+  </tr>
+</tbody>
+```
+
+we have 2 movies left. The delete button work.
+
+> next step we want some conditional rendering
+
+what i looks before we want to refactor the code
+
+```javascript
+render() {
+    if(this.state.movies.length===0) return <p>There are no movies in database</p>;
+ return(
+   <React.fragment>
+    <p> Showing {this.state.movies.length} movies in the database</p>
+```
+
+After refactoring movies.jsx
+
+```javascript
+import React, { Component } from "react";
+import { getMovies } from "../services/fakeMovieService";
+
+class Movies extends Component {
+  state = {
+    movies: getMovies() // it's not a good practice yet
+  };
+
+  handleDelete = movie => {
+    const movies = this.state.movies.filter(m => m._id !== movie._id);
+    this.setState({ movies });
+  };
+
+  render() {
+    // refactor with object deconstruction
+    // object deconstruction logic
+    // we took the length property of this.state.movies
+    // and rename it count
+    const { length: count } = this.state.movies;
+    if (count === 0) return <p>There are no movies in database</p>;
+
+    return (
+      <React.Fragment>
+        <p> Showing {count} movies in the database</p>
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Genre</th>
+              <th>Stock</th>
+              <th>Rate</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.state.movies.map(movie => (
+              <tr key={movie._id}>
+                <td>{movie.title}</td>
+                <td>{movie.genre.name}</td>
+                <td>{movie.numberInStock}</td>
+                <td>{movie.dailyRentalRate}</td>
+                <td>
+                  <button
+                    onClick={() => this.handleDelete(movie)}
+                    className="btn btn-danger btn-sm"
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </React.Fragment>
+    );
+  }
+}
+
+export default Movies;
+```
+
+and we will add some padding in our index.css
+
+```css
+body {
+  margin: 0;
+  padding: 20px 0 0 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+```
+
+> The result is beautiful. The message shows up after, we remove the movies in the table.
+
+Sumarry:
+
+- JSX : for describing the UI
+- Rendering lists
+- Conditional Rendering
+- Handeling Events
+- Updating the State
+
+## Chapitre 3 : Composing Components

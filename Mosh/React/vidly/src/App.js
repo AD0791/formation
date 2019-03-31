@@ -3,13 +3,17 @@ import React, {
 } from "react";
 //import logo from "./logo.svg";
 import "./App.css";
+// import the movie.jsx
+import Movies from "./components/movies"
 
 class App extends Component {
   render() {
     return ( <
-      main ClassName = "container" >
+      main className = "container" >
       <
-      h1 > Hello World < /h1> < /
+      Movies / >
+      <
+      /
       main >
     );
   }
