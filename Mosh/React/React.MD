@@ -1055,3 +1055,68 @@ class Counter extends Component {
 
 export default Counter;
 ```
+
+#### What happen when state changes
+
+react has what we call a virtual dom. in our counter.jsx files. the virtual dom see tree elements. (as a tree) the div and 2 childrens: the span and button.
+
+Now when the state changes. The virtual dom will have an image of the old and new state. react will compare them and figure out where the changes are.
+
+### passing event arguments
+
+A verifier
+
+### Vidly projects
+
+we will create an react project called vidly. we install 2 libraries. Bootstrap and font-awesome.
+
+```bash
+$ create-react-app vidly
+$ npm i bootsrtap font-awesome
+```
+
+we need to import their css, we will do that in index.js.
+
+```javascript
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import * as serviceWorker from "./serviceWorker";
+// bootstrap and font-awesome
+import "bootstrap/dist/css/bootstrap.css";
+import "font-awesome/css/font-awesome.css";
+
+ReactDOM.render(<App />, document.getElementById("root"));
+
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.unregister();
+```
+
+let's start the vidly ptoject with `npm start`.
+
+> We want to make our page similar to the bootstrap starter tmeplate.
+
+We have modify the app.js. Because the app file isn't jsx. the Html element dosn't fit right.
+
+```javascript
+import React, { Component } from "react";
+//import logo from "./logo.svg";
+import "./App.css";
+
+class App extends Component {
+  render() {
+    return (
+      <main ClassName="container">
+        <h1> Hello World </h1>{" "}
+      </main>
+    );
+  }
+}
+
+export default App;
+```
+
+We will add a folder called services to our src directory.
