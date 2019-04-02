@@ -1573,3 +1573,318 @@ Sumarry:
 - Updating the State
 
 ## Chapitre 3 : Composing Components
+
+we will learn How to:
+
+- Pass Data
+
+- Raise and Handle Events
+
+- Multiple Components in Sinc
+
+- Functional Components
+
+- Lifecycle Hooks
+
+### Composing Components
+
+React works as a tree. We will need to compose the multiple components that we will going to have in our applications.
+
+Now will add a new components in our application (counters.jsx).
+
+With counters.jsx we want to render a list of counters. Counters will be on top of counter.
+
+```javascript
+// index.js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+// import App from './App';
+import * as serviceWorker from './serviceWorker';
+//bootstrap
+import 'bootstrap/dist/css/bootstrap.css';
+// Now counters component
+import Counters from "./components/counters";
+
+ReactDOM.render( < Counters / > , document.getElementById('root'));
+
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.unregister();
+```
+
+We will do a first implementation of the Counters.jsx
+
+```javascript
+import React, { Component } from "react";
+// let's get the counter component
+import Counter from "./counter";
+
+class Counters extends Component {
+  state = {};
+
+  // div is going to be a wrapper for all our counters.
+  render() {
+    return (
+      <div>
+        <Counter />
+        <Counter />
+        <Counter />
+        <Counter />
+        <Counter />
+      </div>
+    );
+  }
+}
+
+export default Counters;
+```
+
+For a better implementation we will put an array of counter in the state. And we will render it back with the map method.
+
+In Counter.jsx
+
+``` javascript
+import React, { Component } from "react";
+import Counter from "./counter";
+
+class Counters extends Component {
+  state = {
+    // id and initial value for each counters
+    // the value property in the state isn't working yet
+    counters: [
+      { id: 1, value: 0 },
+      { id: 2, value: 0 },
+      { id: 3, value: 0 },
+      { id: 4, value: 0 },
+      { id: 5, value: 0 }
+    ]
+  };
+
+  // div is going to be a wrapper for all our counters.
+  render() {
+    return (
+      <React.Fragment>
+        {this.state.counters.map(counter => (
+          <Counter key={counter.id} />
+        ))}
+      </React.Fragment>
+    );
+  }
+}
+
+export default Counters;
+```
+
+### Passing Data to components.
+
+With the same method that we use to pass the id for our counters, we can pass the initial values for html elements.
+
+Let's also talk about ```props```.
+
+```javascript
+// counters.jsx
+import React, { Component } from "react";
+import Counter from "./counter";
+
+class Counters extends Component {
+  state = {
+    counters: [
+      { id: 1, value: 0 },
+      { id: 2, value: 0 },
+      { id: 3, value: 0 },
+      { id: 4, value: 0 },
+      { id: 5, value: 0 }
+    ]
+  };
+
+  render() {
+    return (
+      <React.Fragment>
+        {this.state.counters.map(counter => (
+          <Counter key={counter.id} value={counter.value} selected={true} />
+        ))}
+      </React.Fragment>
+    );
+  }
+}
+
+export default Counters;
+```
+
+We will log the ```props``` in counter.jsx
+
+```javascript
+// counter.jsx
+mport React, { Component } from "react";
+
+class Counter extends Component {
+  state = {
+    count: 0
+  };
+
+  handleIncrement = () => {
+    this.setState({ count: this.state.count + 1 });
+  };
+  render() {
+    // show output of props
+    console.log("Props: ", this.props);
+    return (
+      <React.Fragment>
+        <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
+        <button
+          onClick={this.handleIncrement}
+          className="btn btn-secondary btn-sml"
+        >
+          Increment
+        </button>
+      </React.Fragment>
+    );
+  }
+
+  getBadgeClasses() {
+    let classes = "badge m-2 badge-";
+    classes += this.state.count === 0 ? "warning" : "primary";
+    return classes;
+  }
+
+  formatCount() {
+    const { count } = this.state;
+    // check if it's 0
+    return count === 0 ? "Zero" : count;
+  }
+}
+
+export default Counter;
+// output of the console.log
+Props:  Object
+selected: true
+value: 0
+key: (...)
+get key: ƒ warnAboutAccessingKey()
+__proto__: Object
+Props:  Object
+selected: true
+value: 0
+key: (...)
+get key: ƒ warnAboutAccessingKey()
+__proto__: Object
+Props:  Object
+selected: true
+value: 0
+key: (...)
+get key: ƒ warnAboutAccessingKey()
+__proto__: Object
+Props:  Object
+selected: true
+value: 0
+key: (...)
+get key: ƒ warnAboutAccessingKey()
+__proto__: Object
+Props:  Object
+selected: true
+value: 0
+key: (...)
+get key: ƒ warnAboutAccessingKey()
+__proto__: Object
+```
+
+Every react component has a property called ```props```. It's basicaly a plain javascript object that has the attributes that we set in counter components ```<Counter key={counter.id} value={counter.value} selected={true} />```except for the id property. The id is a special attributes that exist uniquely for identifying elements.
+
+Because of that we are going to modify the count property in our counter.jsx files. With the value of our Counter components in our counters.jsx files.
+
+We don't need the selected attributes for now. If we just wrote ```<Counter key={counter.id} value={counter.value} selected/>```. Selected would be set to ```true``` automaticaly.
+
+```javascript
+// index.js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+//import App from './App';
+import * as serviceWorker from './serviceWorker';
+//bootstrap
+import 'bootstrap/dist/css/bootstrap.css';
+// Now counters component
+import Counters from "./components/counters";
+
+ReactDOM.render( < Counters / > , document.getElementById('root'));
+
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.unregister();
+// counters.jsx
+import React, { Component } from "react";
+import Counter from "./counter";
+
+class Counters extends Component {
+  state = {
+    counters: [
+      { id: 1, value: 0 },
+      { id: 2, value: 10 },
+      { id: 3, value: 100 },
+      { id: 4, value: 1000 },
+      { id: 5, value: 10000 }
+    ]
+  };
+
+  render() {
+    return (
+      <React.Fragment>
+        {this.state.counters.map(counter => (
+          <Counter key={counter.id} value={counter.value} />
+        ))}
+      </React.Fragment>
+    );
+  }
+}
+
+export default Counters;
+
+// counter.jsx
+import React, { Component } from "react";
+
+class Counter extends Component {
+  // we will get the props from our counter.jsx files
+  // which is set on the COunter components
+  // we rename the count to value
+  state = {
+    value: this.props.value
+  };
+
+  handleIncrement = () => {
+    this.setState({ value: this.state.value + 1 });
+  };
+  render() {
+    return (
+      <React.Fragment>
+        <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
+        <button
+          onClick={this.handleIncrement}
+          className="btn btn-secondary btn-sml"
+        >
+          Increment
+        </button>
+      </React.Fragment>
+    );
+  }
+
+  getBadgeClasses() {
+    let classes = "badge m-2 badge-";
+    classes += this.state.value === 0 ? "warning" : "primary";
+    return classes;
+  }
+
+  formatCount() {
+    const { value: count } = this.state;
+    // check if it's 0
+    return count === 0 ? "Zero" : count;
+  }
+}
+
+export default Counter;
+```
+
+### Passing Children
+
