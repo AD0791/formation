@@ -1549,9 +1549,9 @@ and we will add some padding in our index.css
 body {
   margin: 0;
   padding: 20px 0 0 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -1596,17 +1596,17 @@ With counters.jsx we want to render a list of counters. Counters will be on top 
 
 ```javascript
 // index.js
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
 // import App from './App';
-import * as serviceWorker from './serviceWorker';
+import * as serviceWorker from "./serviceWorker";
 //bootstrap
-import 'bootstrap/dist/css/bootstrap.css';
+import "bootstrap/dist/css/bootstrap.css";
 // Now counters component
 import Counters from "./components/counters";
 
-ReactDOM.render( < Counters / > , document.getElementById('root'));
+ReactDOM.render(<Counters />, document.getElementById("root"));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
@@ -1645,7 +1645,7 @@ For a better implementation we will put an array of counter in the state. And we
 
 In Counter.jsx
 
-``` javascript
+```javascript
 import React, { Component } from "react";
 import Counter from "./counter";
 
@@ -1681,7 +1681,7 @@ export default Counters;
 
 With the same method that we use to pass the id for our counters, we can pass the initial values for html elements.
 
-Let's also talk about ```props```.
+Let's also talk about `props`.
 
 ```javascript
 // counters.jsx
@@ -1713,7 +1713,7 @@ class Counters extends Component {
 export default Counters;
 ```
 
-We will log the ```props``` in counter.jsx
+We will log the `props` in counter.jsx
 
 ```javascript
 // counter.jsx
@@ -1790,11 +1790,11 @@ get key: ƒ warnAboutAccessingKey()
 __proto__: Object
 ```
 
-Every react component has a property called ```props```. It's basicaly a plain javascript object that has the attributes that we set in counter components ```<Counter key={counter.id} value={counter.value} selected={true} />```except for the id property. The id is a special attributes that exist uniquely for identifying elements.
+Every react component has a property called `props`. It's basicaly a plain javascript object that has the attributes that we set in counter components `<Counter key={counter.id} value={counter.value} selected={true} />`except for the id property. The id is a special attributes that exist uniquely for identifying elements.
 
 Because of that we are going to modify the count property in our counter.jsx files. With the value of our Counter components in our counters.jsx files.
 
-We don't need the selected attributes for now. If we just wrote ```<Counter key={counter.id} value={counter.value} selected/>```. Selected would be set to ```true``` automaticaly.
+We don't need the selected attributes for now. If we just wrote `<Counter key={counter.id} value={counter.value} selected/>`. Selected would be set to `true` automaticaly.
 
 ```javascript
 // index.js
@@ -1888,3 +1888,160 @@ export default Counter;
 
 ### Passing Children
 
+we know that we use the javascript element called props to render html.
+
+A real world example of the direction, we are taking here, is dialog boxes.
+
+After the modification on the counters.jsx. We can see the changes on the console.
+
+let's look at the fwe changes.
+
+```javascript
+// counter.jsx
+render() {
+    // lets see the props property now
+    console.log(this.props);
+    return (
+      <React.Fragment>
+        <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
+        <button
+          onClick={this.handleIncrement}
+          className="btn btn-secondary btn-sml"
+        >
+          Increment
+        </button>
+      </React.Fragment>
+  );
+}
+
+// counters.jsx
+render() {
+    return (
+      // sometimes we wnat to pass more content
+      <React.Fragment>
+        {this.state.counters.map(counter => (
+          <Counter key={counter.id} value={counter.value}>
+            <h4>Title</h4>
+          </Counter>
+        ))}
+      </React.Fragment>
+    );
+  }
+}
+
+// Consol output
+
+Object
+children:
+$$typeof: Symbol(react.element)
+key: null
+props: {children: "Title"}
+ref: null
+type: "h4"
+_owner: FiberNode {tag: 1, key: null, elementType: ƒ, type: ƒ, stateNode: Counters, …}
+_store: {validated: true}
+_self: null
+_source: {fileName: "/Users/alexandrodisla/Desktop/repo/formation/Mosh/React/counter-app/src/components/counters.jsx", lineNumber: 21}
+__proto__: Object
+value: 0
+key: (...)
+get key: ƒ warnAboutAccessingKey()
+__proto__: Object
+
+// 4 more Object outputed from the props
+```
+
+THe newly added children property is essentially a react element.
+
+we can use the benefits of this prrops javasctipt object to render a hard coded html element
+
+```javascript
+// counter.jsx
+render() {
+    // let's render the children now
+    return (
+      <React.Fragment>
+        {this.props.children}
+        <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
+        <button
+          onClick={this.handleIncrement}
+          className="btn btn-secondary btn-sml"
+        >
+          Increment
+        </button>
+      </React.Fragment>
+    );
+  }
+```
+
+or we can render it dynamically
+
+```javascript
+//counters.jsx
+render() {
+    return (
+      // Dynamically
+      <React.Fragment>
+        {this.state.counters.map(counter => (
+          <Counter key={counter.id} value={counter.value}>
+            <h4>Counter #{counter.id}</h4>
+          </Counter>
+        ))}
+      </React.Fragment>
+    );
+  }
+}
+
+// counter.jsx
+render() {
+    // let's render the children now
+    return (
+      <React.Fragment>
+        {this.props.children}
+        <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
+        <button
+          onClick={this.handleIncrement}
+          className="btn btn-secondary btn-sml"
+        >
+          Increment
+        </button>
+      </React.Fragment>
+    );
+  }
+```
+
+> THIS WAY IS RECOMMANDED as we probably are going to render complexe element. Neverthless, we have a lightweigth way of doing the same action.
+
+```javascript
+// counters.jsx
+ render() {
+    return (
+      // We didn't kneed the children in this case.
+      // let's use the attributes.
+      <React.Fragment>
+        {this.state.counters.map(counter => (
+          <Counter key={counter.id} value={counter.value} id={counter.id} />
+        ))}
+      </React.Fragment>
+    );
+  }
+}
+// counter.jsx
+render() {
+    // let's render the children now
+    return (
+      <React.Fragment>
+        <h4>Counter #{this.props.id}</h4>
+        <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
+        <button
+          onClick={this.handleIncrement}
+          className="btn btn-secondary btn-sml"
+        >
+          Increment
+        </button>
+      </React.Fragment>
+    );
+  }
+```
+
+### Debugging React Apps

@@ -12,8 +12,10 @@ class Counter extends Component {
     this.setState({ value: this.state.value + 1 });
   };
   render() {
+    // let's render the children now
     return (
       <React.Fragment>
+        <h4>Counter #{this.props.id}</h4>
         <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
         <button
           onClick={this.handleIncrement}

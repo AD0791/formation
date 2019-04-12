@@ -14,9 +14,11 @@ class Counters extends Component {
 
   render() {
     return (
+      // We didn't kneed the children in this case.
+      // let's use the attributes.
       <React.Fragment>
         {this.state.counters.map(counter => (
-          <Counter key={counter.id} value={counter.value} />
+          <Counter key={counter.id} value={counter.value} id={counter.id} />
         ))}
       </React.Fragment>
     );
