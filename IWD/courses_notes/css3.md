@@ -195,3 +195,31 @@ p .italic {
 some css value doesn't work
 
 ### Complexe selectors
+
+`p .italic` are very different `p.italic`
+
+- `p.italic`: apply a css rules to a p tag that have a class italic.
+
+```html
+<p class="italic">
+  Stefan likes to eat <span>bannas with peanut butter. </span>and something
+  called 'poutine'. We focus on teaching the key basic concepts and techniques
+  of web design and web programming. Learn more:
+</p>
+```
+
+> a tag selector + class selector (no space in between) = tag that has that class is selected
+
+- `p .italic`: apply a css rules to the tag that is inside the p tag.
+
+```html
+<p>
+  Stefan likes to eat <span class="italic">bannas with peanut butter. </span>and
+  something called 'poutine'. We focus on teaching the key basic concepts and
+  techniques of web design and web programming. Learn more:
+</p>
+```
+
+> a tag selector + class selector (with space in between) = class that is inside the tag is selected
+
+### font-weight 2
