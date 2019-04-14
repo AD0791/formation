@@ -23,13 +23,13 @@ Inside the XXX.css we could have
 
 ```css
 h1{
-    "declaration block"
+  "declaration block"
 }
 p {
-    " ; "
+  " ; "
 }
 .function(class){
-    " ;  "
+  " ;  "
 }
 ```
 
@@ -43,29 +43,29 @@ Everthing in the web browser have a default setting.
 
 ```css
 tagselector{
-    property1:value1;value2;...;valueN
-    .
-    .
-    .
-    propertyN:value1;value2;...;valueN
+  property1:value1;value2;...;valueN
+  .
+  .
+  .
+  propertyN:value1;value2;...;valueN
 }
 
 /*id-seclector*/
 #name{
-    property1:value1;value2;...;valueN
-    .
-    .
-    .
-    propertyN:value1;value2;...;valueN
+  property1:value1;value2;...;valueN
+  .
+  .
+  .
+  propertyN:value1;value2;...;valueN
 }
 
 /*class-selector*/
 .name{
-    property1:value1;value2;...;valueN
-    .
-    .
-    .
-    propertyN:value1;value2;...;valueN
+  property1:value1;value2;...;valueN
+  .
+  .
+  .
+  propertyN:value1;value2;...;valueN
 }
 ```
 
