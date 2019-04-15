@@ -223,3 +223,57 @@ some css value doesn't work
 > a tag selector + class selector (with space in between) = class that is inside the tag is selected
 
 ### font-weight 2
+
+```css
+p .italic {
+  font-style: italic;
+  font-weight: bold;
+}
+```
+
+- font-style value: normal
+- font-style value: italic
+- font-style value: oblique
+- font-weigth value: normal
+- font-weigth value: bold
+- font-weigth value: 1 - 900
+
+### font-families 1-2
+
+```css
+h1,
+h3 {
+  color: #9fbbd1;
+  text-transform: capitalize;
+  font-weight: bold;
+  font-family: "Lucida Console", monospace;
+}
+
+p {
+  text-indent: 20px;
+  text-align: justify;
+
+  /* web safe fonts */
+  font-size: 16px;
+  font-family: "Times New Roman", Times, serif;
+}
+
+body {
+  font-size: 14px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  color: #333333;
+  background-color: #fff;
+}
+```
+
+font family = collection of fonts
+
+This is allowed:
+
+> `font-family: option1, option2,..., option(K);`
+
+When you have a font that have more than one word. You must put it in between two `"`. CSS will know that it's uniquely one word, in this case, one font.
+
+> Remember in css the last code wins.
+
+### Font Size
