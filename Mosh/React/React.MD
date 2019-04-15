@@ -2045,3 +2045,26 @@ render() {
 ```
 
 ### Debugging React Apps
+
+React Developer Tools, for firefox and chrome, is an extension that we can use for debugging our react application.
+
+In the case of safari and edge, it's a standalone application.
+
+On the panel we can see the tree of our components.
+
+`$r` we can see an instance of one of our components. We can work with any instance of our compenents
+
+We can found `$0` also if we inspect more of the console. We interact with the dom. We can access any element on the dom.
+
+```javascript
+$r
+Counter {props: {…}, context: {…}, refs: {…}, updater: {…}, state: {…}, …}
+
+$r.render()
+{$$typeof: Symbol(react.element), type: Symbol(react.fragment), key: null, ref: null, props: {…}, …}
+
+$0
+<body>...</body>
+```
+
+### Props and State
