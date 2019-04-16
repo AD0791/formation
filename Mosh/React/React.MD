@@ -2081,5 +2081,3 @@ The state is local and only accessible inside the given components. This local s
 Props is read-only. React doesn't allow to change any value or property of the props.
 
 ### Raising and Handeling events
-
-
