@@ -276,4 +276,18 @@ When you have a font that have more than one word. You must put it in between tw
 
 > Remember in css the last code wins.
 
-### Font Size
+### Font Size 1, 2 and 3
+
+> `font-size:value\[px\]; where value \in N^{\*}
+
+```css
+h1 {
+  color: #9fbbd1;
+  text-transform: capitalize;
+  font-weight: bold;
+  font-family: "Lucida Console", monospace;
+  font-size: 24px;
+}
+```
+
+The defaulf font-size is `16px`
