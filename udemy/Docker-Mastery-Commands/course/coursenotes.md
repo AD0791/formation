@@ -179,11 +179,14 @@ _msql = name of the container._
 
 ## Lecture 5 (docker networks)
 
-> docker run -p  
-> **-p** expose the ports in your machine.  
-> docker port <container>  
-> -> gives a quick output of what port are open for that container on your network.  
-> -> two network : docker network and machine network
+`docker run -p`
+
+**-p** expose the ports in your machine.
+
+docker port <container>
+
+-> gives a quick output of what port are open for that container on your network.  
+-> two network : docker network and machine network
 
 1. Docker Networks defaults
 
@@ -199,17 +202,20 @@ _msql = name of the container._
 - skip v.n and use host ip (--net=host)
 - docker netwok drivers to gain new abilities
 
-> docker container run -p 80:80 --name webhost -d nginx  
-> -> create the webapp
+`docker container run -p 80:80 --name webhost -d nginx`
 
-> docker container port webhost  
-> -> output to the port in-used
+-> create the webapp
 
-> docker container inspect --format '{{ .NetworkSettings.IPAddress }}' webhost  
-> **--format** a common option for formatting the output of command using "go templates", it's a cleaner way to filter (|grep). **"inspect"** is to go inside a container. **{{ .NetworkSettings.IPAddress }}** is the actual node of that json output that we really want to look at.
+`docker container port webhost`
 
-> ifconfig en0  
-> -> To see my active networks on my mac and my ports
+-> output to the port in-used
+
+`docker container inspect --format '{{ .NetworkSettings.IPAddress }}' webhost`
+
+**--format** a common option for formatting the output of command using "go templates", it's a cleaner way to filter (|grep). **"inspect"** is to go inside a container. **{{ .NetworkSettings.IPAddress }}** is the actual node of that json output that we really want to look at.
+
+> `ifconfig en0`  
+> To see my active networks on my mac and my ports
 
 -> Docker network graph:  
 ![Docker Network Explain](../images/Dnetworkexplain.png)
@@ -224,16 +230,19 @@ _the brige is the virtual network._
 - attach a network to a new container
 - detach a network from container
 
-> docker network rm networkid  
-> To remove a network
+`docker network rm networkid`
 
-> docker network ls  
-> Check the avaliable network. In the most basics states, **you have 3 network (bridge (or docker0), host, none)**. **the none network doesn't have a driver**.
+To remove a network
+
+`docker network ls`
+
+Check the avaliable network. In the most basics states, **you have 3 network (bridge (or docker0), host, none)**. **the none network doesn't have a driver**.
 
 -> The bridge network is the default docker network that bridges through the NAT'ed firewall to the physical network that the host is connected to. **(host ip)**
 
-> docker network inspect bridge  
-> it return a json in the Command line. That json show details about this network and show the running containers.
+`docker network inspect bridge`
+
+it return a json in the Command line. That json show details about this network and show the running containers.
 
 -> The host network is a special network that skips the virtual networking of docker and attach a container directly to the host interface. it prevents the security boundaries of containarization to protect the interface of that container.
 
@@ -241,34 +250,41 @@ _the brige is the virtual network._
 
 -> Network driver = built-in 3rd party extensions that give you a virtual network features.
 
-> docker network create my_app_net  
-> spawns a new virtual network for you to attach containers. In this case the new network willl be named my_app_net. you will that the default driver is bridge. It create his own subnet and gateway.
+`docker network create my_app_net`
 
-> docker container run -d --name new_nginx --network my_app_net nginx  
-> **--network** will put the new_nginx app in the my_app_net network
-> docker network inspect my_app_net
+spawns a new virtual network for you to attach containers. In this case the new network willl be named my_app_net. you will that the default driver is bridge. It create his own subnet and gateway.
 
-> docker network --help  
-> see the options.
+`docker container run -d --name new_nginx --network my_app_net nginx`
 
-> docker network connect networkid
-> to connect containers on a network **networkid**. now these containers can be connected to two networks (the bridge and the new network).
+**--network** will put the new_nginx app in the my_app_net network
 
-> docker container disconnect networkid  
-> to disconnect a container from the additionnal network
+`docker network inspect my_app_net`
 
-> docker network create --help  
-> To find help.
+`docker network --help`
 
--> **--driver** to specify a 3rd party driver
+see the options.
 
-Good Practice { - create your app on the same docker network
+`docker network connect networkid`
 
+to connect containers on a network **networkid**. now these containers can be connected to two networks (the bridge and the new network).
+
+`docker container disconnect networkid`
+
+to disconnect a container from the additionnal network
+
+`docker network create --help`
+
+To find help.
+
+**--driver** to specify a 3rd party driver
+
+Good Practice:
+
+- create your app on the same docker network
 - their inter-communication never leaves the host
 - all externallly exposed ports closed by defaults
 - must manually expose via -p, which is better default security
 - get better with swarm and overlay networks
-  }
 
 ## Lecture 7 Docker Networks: DNS
 
