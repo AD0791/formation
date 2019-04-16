@@ -2068,3 +2068,18 @@ $0
 ```
 
 ### Props and State
+
+What's the difference between props and states
+
+- props includes data that we put inside of our components.
+- state include data that is private or local to that component.
+
+The state is local and only accessible inside the given components. This local state is completely invisible to the other components.
+
+> Sometimes a components don't have a state. It uses his data through a props.
+
+Props is read-only. React doesn't allow to change any value or property of the props.
+
+### Raising and Handeling events
+
+
