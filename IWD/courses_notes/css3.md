@@ -291,3 +291,30 @@ h1 {
 ```
 
 The defaulf font-size is `16px`
+
+Resizing the window does not change the font size.
+
+> px or pixels = absolute or fixed length unit = window size does not affect font size.
+
+Another way to set the font-size is with
+
+> relatives = flexes and flows.
+
+We have what we call `vw` viewport width.
+
+```css
+h1 {
+  color: #9fbbd1;
+  text-transform: capitalize;
+  font-weight: bold;
+  font-family: "Lucida Console", monospace;
+  font-size: 5vw;
+}
+```
+
+> The `vw` is relative to the width of the window.
+
+Now we know that we have two types of value for the font size.
+
+- fixed sized = pixels `px`
+- relative = viewport `vw`
