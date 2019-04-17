@@ -11,14 +11,22 @@ class Counters extends Component {
       { id: 5, value: 10000 }
     ]
   };
-
+  // we will get this handleDelete through an event
+  // raise on the counter component.
+  handleDelete = () => {
+    console.log("Raise the events");
+  };
   render() {
     return (
-      // We didn't kneed the children in this case.
-      // let's use the attributes.
+      // our child component here is counter.jsx
       <React.Fragment>
         {this.state.counters.map(counter => (
-          <Counter key={counter.id} value={counter.value} id={counter.id} />
+          <Counter
+            key={counter.id}
+            onDelete={this.handleDelete}
+            value={counter.value}
+            id={counter.id}
+          />
         ))}
       </React.Fragment>
     );

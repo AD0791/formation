@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 
 class Counter extends Component {
-  // we will get the props from our counter.jsx files
-  // which is set on the COunter components
-  // we rename the count to value
+  // we add the delete button
   state = {
     value: this.props.value
   };
@@ -13,15 +11,23 @@ class Counter extends Component {
   };
   render() {
     // let's render the children now
+    // we remove the header:
+    //<h4>Counter #{this.props.id}</h4>
+    // we raise the onDelete events
     return (
       <React.Fragment>
-        <h4>Counter #{this.props.id}</h4>
         <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
         <button
           onClick={this.handleIncrement}
           className="btn btn-secondary btn-sml"
         >
           Increment
+        </button>
+        <button
+          onClick={this.props.onDelete}
+          className="btn btn-danger btn-sm m-2"
+        >
+          Delete
         </button>
       </React.Fragment>
     );

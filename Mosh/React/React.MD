@@ -2081,3 +2081,128 @@ The state is local and only accessible inside the given components. This local s
 Props is read-only. React doesn't allow to change any value or property of the props.
 
 ### Raising and Handeling events
+
+Now we want to add a delete button to our web app.
+We realize that in order to delete a counter, we must delete them from the arrays of counters in the counters.jsx files.
+
+> The components that owns a piece of the state, should be the one modifying it.
+
+In order for this to work, the counter component will raise an event "onDelete". THe counters component will handle this event. In other word, we need to implement the `handleDelete` inside the counters components.
+
+As good practice we are trying to log in the console before wanting to update the state.
+
+```javascript
+//counters.jsx
+import React, { Component } from "react";
+import Counter from "./counter";
+
+class Counters extends Component {
+  state = {
+    counters: [
+      { id: 1, value: 0 },
+      { id: 2, value: 10 },
+      { id: 3, value: 100 },
+      { id: 4, value: 1000 },
+      { id: 5, value: 10000 }
+    ]
+  };
+  // we will get this handleDelete through an event
+  // raise on the counter component.
+  handleDelete = () => {
+    console.log("Raise the events");
+  };
+  render() {
+    return (
+      // our child component here is counter.jsx
+      <React.Fragment>
+        {this.state.counters.map(counter => (
+          <Counter
+            key={counter.id}
+            onDelete={this.handleDelete}
+            value={counter.value}
+            id={counter.id}
+          />
+        ))}
+      </React.Fragment>
+    );
+  }
+}
+
+export default Counters;
+```
+
+```javascript
+// counter.jsx
+import React, { Component } from "react";
+
+class Counter extends Component {
+  // we add the delete button
+  state = {
+    value: this.props.value
+  };
+
+  handleIncrement = () => {
+    this.setState({ value: this.state.value + 1 });
+  };
+  render() {
+    // let's render the children now
+    // we remove the header:
+    //<h4>Counter #{this.props.id}</h4>
+    // we raise the onDelete events
+    return (
+      <React.Fragment>
+        <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
+        <button
+          onClick={this.handleIncrement}
+          className="btn btn-secondary btn-sml"
+        >
+          Increment
+        </button>
+        <button
+          onClick={this.props.onDelete}
+          className="btn btn-danger btn-sm m-2"
+        >
+          Delete
+        </button>
+      </React.Fragment>
+    );
+  }
+
+  getBadgeClasses() {
+    let classes = "badge m-2 badge-";
+    classes += this.state.value === 0 ? "warning" : "primary";
+    return classes;
+  }
+
+  formatCount() {
+    const { value: count } = this.state;
+    // check if it's 0
+    return count === 0 ? "Zero" : count;
+  }
+}
+
+export default Counter;
+```
+
+Let's see how it behaves in our console and the react debugger console on our browser.
+
+```javascript
+// react debugger
+
+// the 1 counter, we look at the state
+Key"1"
+Props
+id:
+1
+onDelete:
+fn()
+value:
+0
+
+// in concole, we will hit a delete button 6 times
+> 6 Raise the events
+```
+
+> We have raise the event in the child component counter and the parent component counters is handling that event.
+
+### Update the State (counter-app)
