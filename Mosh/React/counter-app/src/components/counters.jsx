@@ -11,10 +11,12 @@ class Counters extends Component {
       { id: 5, value: 10000 }
     ]
   };
-  // we will get this handleDelete through an event
-  // raise on the counter component.
-  handleDelete = () => {
-    console.log("Raise the events");
+  // we are going to create a counter object
+  // set it as an attribute
+  // now we can encapsulate the properties.
+  handleDelete = counterid => {
+    const counters = this.state.counters.filter(c => c.id !== counterid);
+    this.setState({ counters });
   };
   render() {
     return (
@@ -24,8 +26,7 @@ class Counters extends Component {
           <Counter
             key={counter.id}
             onDelete={this.handleDelete}
-            value={counter.value}
-            id={counter.id}
+            counter={counter}
           />
         ))}
       </React.Fragment>
