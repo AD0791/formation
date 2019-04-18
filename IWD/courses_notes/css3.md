@@ -318,3 +318,158 @@ Now we know that we have two types of value for the font size.
 
 - fixed sized = pixels `px`
 - relative = viewport `vw`
+
+> vw = relative to the width size of the window. Used when creating websites, iphones, android phones, ipads and tablets.
+
+Now we have another relative called `em`
+
+> em = relative the base size of the font set in the page.
+
+As we can see in our `structure.css` we have set the font for our body tag. The `em` value set in our `h1` will behave accordingly to this base font. BECAUSE the `h1` tag is inside the `body` tag.
+
+```css
+/* Structure.css*/
+body {
+  font-size: 14px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  color: #333333;
+  background-color: #fff;
+}
+
+/* our h1 */
+h1 {
+  color: #9fbbd1;
+  text-transform: capitalize;
+  font-weight: bold;
+  font-family: "Lucida Console", monospace;
+  font-size: 2em;
+}
+```
+
+> `\[K\]em` = K times the base font size, k>0.
+
+### Parent-Child 1,2 et 3
+
+- Parent-Child tags
+- Inheritance
+- Inherited properties and Cleaner code
+
+> Any tags that is inside a tag, is called child tags of this tag. And That tag is refered as the parent tag of these tags. We do have the concept of parent-parent tag or grand parent tag. But it is the same principle but at a higher level.
+
+```html
+<nav id="navigation">
+  <h2>The Main navigation</h2>
+  <ul>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Store</a></li>
+    <li><a href="#">Blog</a></li>
+    <li><a href="#">Contact us</a></li>
+  </ul>
+</nav>
+```
+
+- `h2` and `ul` are both children of the `nav` tag.
+- `li` is the children of the `ul` tag.
+- Then `nav` is the grandparent of the `li` tag.
+- `ul` and `h2` are siblings tags in this case.
+
+Child tags are inside the parents tags.
+
+> Cascade = set of rules that tell you how the rules translate accross the entire site.
+
+Inheritance = The concept is about the way to share property accross grand-parent/parent and child tags.
+
+> There are certain properties that can be inherited by child tags.
+
+```css
+body {
+  font-size: 14px;
+  font-family: "Courier New", Courier, monospace;
+  color: #333333;
+  background-color: #fff;
+}
+
+h1 {
+  font-weight: bold;
+  font-size: 2em;
+  text-transform: capitalize;
+}
+
+h2 {
+  font-weight: bold;
+  text-align: center;
+}
+
+h3 {
+  font-weight: bold;
+  text-align: left; /* remove since left is the default*/
+  margin-top: 30px;
+}
+
+p {
+  text-indent: 20px;
+  text-align: justify;
+  width: 80%;
+}
+```
+
+As an example, `font-family` of `body` will be inherited by `h1`, `h2`, `h3` and `p` since they children tags of `body`.
+
+```html
+<body>
+  <div id="centerDoc">
+    <img id="miamiBuilding" src="images/miami.png" height="350" width="193" />
+
+    <h1>the main heading</h1>
+    <p>
+      Studioweb is an interactive video question and answer training system. We
+      focus on teaching the key basic concepts and techniques of web design and
+      web programming.
+    </p>
+
+    <h3>A Sub Heading</h3>
+    <p>
+      Stefan likes to eat
+      <span class="italic">bannas with peanut butter. </span>and something
+      called 'poutine'. We focus on teaching the key basic concepts and
+      techniques of web design and
+      <span class="italic">web programming.</span> Learn more:
+    </p>
+
+    <ol>
+      <li>
+        Easily track student progress through an easy to read spreadsheet-like
+        layout. Quickly look over your classes to see where students are in the
+        courses.
+      </li>
+      <li>
+        View student profiles to get a detailed view of your student's progress:
+        see scores and the badges the student has earned.
+      </li>
+      <li>
+        Receive a verifiable "Certificate of Completion" with each course you
+        finish. <a href="http://studioweb.com" title="studioweb">LEARN MORE!</a>
+      </li>
+    </ol>
+
+    <h3>Another Sub Heading</h3>
+    <p>
+      And so we have yet another paragraph of text that follows our odered list.
+      The list is called an ordered list because it has an order imposed upon it
+      by the web browser - the list of items are numbered.
+    </p>
+  </div>
+  <!-- closing centerDoc  -->
+
+  <nav id="navigation">
+    <h2>The Main navigation</h2>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Store</a></li>
+      <li><a href="#">Blog</a></li>
+      <li><a href="#">Contact us</a></li>
+    </ul>
+  </nav>
+  <!-- closing navigation  -->
+</body>
+```
