@@ -473,3 +473,107 @@ As an example, `font-family` of `body` will be inherited by `h1`, `h2`, `h3` and
   <!-- closing navigation  -->
 </body>
 ```
+
+Important rule : The less code, the better.
+
+Another property that can be inherited by children tags is `color` (Set the text color of the page).
+
+The last code wins in css. the new properties added in a specific tag will override the defualt or the inherited properties.
+
+## Ch3- Diving deeper into css
+
+### Web Safe Fonts Refresher
+
+We have some basics `font-family`
+
+```css
+/* Some Web safe fonts:
+
+- Serif fonts:
+Georgia, serif;
+"Palatino Linotype", "Book Antiqua", Palatino, serif;
+"Times New Roman", Times, serif
+
+- Sans-Serif Fonts
+Arial, Helvetica, sans-serif;
+"Arial Black", Gadget, sans-serif;
+"Comic Sans MS", cursive, sans-serif;
+Impact, Charcoal, sans-serif;
+
+- Monospace Fonts
+"Courier New", Courier, monospace;
+"Lucida Console", Monaco, monospace;
+*/
+```
+
+### Google font 1,2 and 3
+
+we will need to seek for the [google fonts](https://fonts.google.com/)
+
+> Make sure look at the load time of these fonts:
+
+- green = good
+- yellow = not bad
+- red = not good
+
+why? It will impact on the rendering time of your web page.
+
+here is on of the way to use it:
+
+```html
+<head>
+  <title>Chapter 3 CSS Tutorial - Lesson 2</title>
+  <meta charset="UTF-8" />
+  <!-- google font must be place before our structure-ch3.css-->
+  <!-- Always-->
+  <link
+    href="http://fonts.googleapis.com/css?family=Shadows+Into+Light"
+    rel="stylesheet"
+    type="text/css"
+  />
+  <link href="structure-ch3.css" rel="stylesheet" />
+
+  <style type="text/css">
+    p .italic {
+      font-style: italic;
+      font-weight: bold;
+    }
+  </style>
+</head>
+```
+
+Now we can use it on our `structure-ch3.css`
+
+```css
+body {
+  font-size: 16px;
+  font-family: monospace;
+  color: #000;
+  background-color: #fff;
+}
+
+/* we use the google font here*/
+h1,
+h2,
+h3 {
+  font-family: "Shadows Into Light", cursive;
+  max-width: 500px;
+}
+
+h1 {
+  font-weight: bold;
+  font-size: 2em;
+  text-transform: capitalize;
+}
+
+h2 {
+  font-weight: bold;
+  text-align: center;
+}
+
+h3 {
+  font-weight: bold;
+  text-align: left; /* remove since left is the default*/
+  margin-top: 30px;
+}
+```
