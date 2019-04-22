@@ -577,3 +577,65 @@ h3 {
   margin-top: 30px;
 }
 ```
+
+The browser process the codes in the page top to bottom.
+
+- we load the google font before we load our `.css` files
+- next we use the font inside the `.css` files.
+
+Font help set the mood of the page
+
+> Changes made in the browser developer tools are not permanent.
+
+`@font face` rule
+
+With the [`@font-face`](https://www.w3schools.com/cssref/css3_pr_font-face_rule.asp) rule, web designers do not have to use one of the "web-safe" fonts anymore.
+
+In the @font-face rule you must first define a name for the font (e.g. myFirstFont), and then point to the font file.
+
+```css
+@font-face {
+  font-family: myFirstFont;
+  src: url(sansation_light.woff);
+}
+```
+
+This is what, under the hood, google did for us. And we can easily use the first way that we see earlier.
+
+### Browser Developer tools review
+
+- `max-width` = maximum width
+- `min-width` = minimum width
+
+```css
+#centerDoc {
+  position: absolute;
+  z-index: 15;
+  padding: 0 0 20px 20px;
+  /*top right bottom left*/
+  margin-top: 50px;
+  margin-left: 235px;
+  width: 80%;
+  max-width: 1200px;
+  min-width: 500px;
+}
+```
+
+we see things i already know.
+
+### BAckground color 1, 2
+
+```css
+body {
+  font-size: 16px;
+  font-family: monospace;
+  color: #000;
+  background-color: #fff;
+}
+```
+
+We can use the help of our browser developer tools to test out the color of our web application.
+
+> In the developer tools = shift + click : chage the color format.
+
+### Cascade in CSS
