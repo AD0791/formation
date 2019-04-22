@@ -639,3 +639,110 @@ We can use the help of our browser developer tools to test out the color of our 
 > In the developer tools = shift + click : chage the color format.
 
 ### Cascade in CSS
+
+Way to add css
+
+- inside a tag
+
+```html
+<p class="swengen" style="color:green">
+  Studioweb is an interactive video question and answer training system. We
+  focus on teaching the key basic concepts and techniques of web design and web
+  programming.
+</p>
+```
+
+- style block
+
+```html
+<style type="text/css">
+  p .italic {
+    font-style: italic;
+    font-weight: bold;
+  }
+
+  body {
+    background-image: url("images/tile.jpg");
+    background-repeat: repeat-y;
+    background-position: right top;
+    background-attachment: fixed;
+  }
+</style>
+```
+
+- link to an external stylesheet
+
+```html
+<head>
+  <link href="structure-ch3-l6.css" rel="stylesheet" />
+</head>
+```
+
+1. A style applied to a tag will always win
+2. class selectors overrides tag selectors
+
+> last code or the code that is the most specific wins
+
+### Background-image
+
+```css
+body {
+  background: #ffffff url("images/tile.jpg") no-repeat right top fixed;
+}
+/* or */
+body {
+  background-image: url("images/tile.jpg");
+  background-repeat: repeat-y;
+  background-position: right top;
+  background-attachment: fixed;
+}
+```
+
+`repeat-y` : top to bottom
+
+`repeat-x` : accross (left to right), we have the `no-repeat` value.
+
+`background-attachment: fixed;` : the background image is fixed in place even when you scroll. The default position is in the middle.
+
+### Background image cover
+
+```css
+body {
+  background: #ffffff url("images/tile.jpg") no-repeat right top fixed;
+}
+/* So THis code below is the expanded version */
+body {
+  background-color: #ffffff;
+  background-image: url("images/tile.jpg");
+  background-repeat: no-repeat;
+  background-position: right top;
+  background-attachment: fixed;
+}
+```
+
+`background: #ffffff url("images/tile.jpg") repeat-y right top fixed;` = the order goes like this :
+
+- background: color / link / repeat / position / attachment
+
+```css
+body {
+  background: #ffffff url("images/miami-trans.png") no-repeat right top fixed;
+  background-size: cover;
+}
+```
+
+`background-size: cover;` fit the whole image to the entire background of the page.
+
+### ways to add css code refresher
+
+```css
+/*
+1. external stylesheets
+2. internal stylesheet
+3. inline style
+*/
+```
+
+## Ch4- Box Model
+
+### Box model Introduction
