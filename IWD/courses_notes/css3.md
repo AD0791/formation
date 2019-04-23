@@ -746,3 +746,16 @@ body {
 ## Ch4- Box Model
 
 ### Box model Introduction
+
+The box model is a virtual box that wraps around any html tags or elements. It has padding, marging and borders.
+
+The box model is the foundation of web layout in css.
+
+we know the basics layout:
+
+1. fixed pixel
+2. liquid
+3. adaptative
+4. responsive
+
+The box model is in the developer tool in the browser.
