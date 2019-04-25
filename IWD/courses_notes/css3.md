@@ -759,3 +759,62 @@ we know the basics layout:
 4. responsive
 
 The box model is in the developer tool in the browser.
+
+The composition of the box model:
+
+- The main content "in the middle"
+- padding
+- border
+- margin : the margin is outside the tag/element
+- position
+
+### margin and layouts
+
+```css
+#miamiBuilding {
+  float: right;
+  margin: 10px;
+  margin-bottom: 50px;
+  margin-right: 20%;
+}
+
+#navigation {
+  position: absolute;
+  z-index: 10;
+  width: 210px;
+  height: 600px;
+  margin: 0;
+  border-right: 1px solid #000000;
+  font-weight: normal;
+}
+
+#centerDoc {
+  position: absolute;
+  z-index: 15;
+  padding: 0 0 20px 20px; /*top right bottom left*/
+  margin-top: 50px;
+  margin-left: 235px;
+  width: 80%;
+  max-width: 1200px;
+  min-width: 500px;
+}
+```
+
+CSS margin are used to position tags/elements in the page.
+
+### Borders 1 and 2
+
+Padding creates space between the content of a tag, and the border.
+
+```css
+h1 {
+  border-style: dashed;
+  border-width: 8px;
+  padding: 10px;
+  margin: 50px;
+}
+```
+
+`border-bottom-style: 10px`
+
+### More margin
