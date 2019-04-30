@@ -818,3 +818,111 @@ h1 {
 `border-bottom-style: 10px`
 
 ### More margin
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Chapter 4 CSS Tutorial - Lesson 5</title>
+    <meta charset="UTF-8" />
+
+    <link
+      href="http://fonts.googleapis.com/css?family=Shadows+Into+Light"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <style type="text/css">
+      body,
+      p {
+        margin: 0px;
+        padding: 0px;
+      }
+
+      #div1 {
+        width: 400px;
+        background-color: gray;
+        margin: 10px 100px 10px 100px; /* top-right-bottom-left */
+        padding: 200px 50px; /* (top-bottom) - (right-left)*/
+      }
+
+      #div2 {
+        width: 400px;
+        background-color: green;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="div1">
+      <p>
+        And so we have yet another paragraph of text that follows our odered
+        list. The list is called an ordered list because it has an order imposed
+        upon it by the web browser - the list of items are numbered.
+      </p>
+    </div>
+
+    <div id="div2">
+      <p>
+        And so we have yet another paragraph of text that follows our odered
+        list. The list is called an ordered list because it has an order imposed
+        upon it by the web browser - the list of items are numbered.
+      </p>
+      <p>
+        And so we have yet another paragraph of text that follows our odered
+        list. The list is called an ordered list because it has an order imposed
+        upon it by the web browser - the list of items are numbered.
+      </p>
+    </div>
+  </body>
+</html>
+```
+
+You could use the `margin: 10px 100px 10px 100px; /* top-right-bottom-left */` or `margin-<b,r,l,t>: value` to be a bit more specific.
+
+Web Browsers automatically give the elements paddings and margins.
+
+### Box model shorthand
+
+The margin surrounds the element or tag.
+
+```html
+<style type="text/css">
+/* calculating the element's width properly */
+
+body, p {margin: 0px; padding: 0px;}
+
+#div1 {width: 290px;
+background-color: gray;
+margin: 10px 0px 10px 0px; /* top-right-bottom-left */
+padding: 200px 50px; /* (top-bottom) - (right-left)*/
+border: 5px solid black;
+
+}
+
+#div2 {width: 400px;
+background-color: green;}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="div1">
+	<p>
+	And so we have yet another paragraph of text that follows our odered list. The list is called an ordered list because it has an order imposed upon it by the web browser - the list of items are numbered.
+	</p>
+</div>
+
+<div id="div2">
+	<p>
+	And so we have yet another paragraph of text that follows our odered list. The list is called an ordered list because it has an order imposed upon it by the web browser - the list of items are numbered.
+	</p>
+	<p>
+	And so we have yet another paragraph of text that follows our odered list. The list is called an ordered list because it has an order imposed upon it by the web browser - the list of items are numbered.
+	</p>
+</div>
+```
+
+### Calculate Width
