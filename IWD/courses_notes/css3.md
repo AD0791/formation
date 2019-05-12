@@ -1,7 +1,9 @@
 ---
 title: "CSS3"
 author: "Alexandro Disla"
-output: pdf_document
+output:
+  html_document:
+    df_print: paged
 ---
 
 ## Ch1- The Basics
