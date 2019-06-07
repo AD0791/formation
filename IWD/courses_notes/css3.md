@@ -928,3 +928,74 @@ background-color: green;}
 ```
 
 ### Calculate Width
+
+We need to learn how to calculate proper the width of the page.
+
+> Total Width = margin + border + padding + width
+
+```css
+#div1 {
+			width: 290px;
+			background-color: gray;
+			margin: 10px 0px 10px 0px;
+			/* top-right-bottom-left */
+			padding: 200px 50px;
+			/* (top-bottom) - (right-left)*/
+			border: 5px solid black;
+
+		}
+
+		#div2 {
+			width: 400px;
+			background-color: green;
+		}
+```
+
+The `div` are line up properly. why?
+
+On the div `#div1`:
+
+1. padding  = 2 * 50 px
+2. border = 2 * 5px
+3. width = 290px
+
+total width = 400px
+
+WHich means the divs are line up.
+
+### Centering in css
+
+Use `auto` on left and right margins to center the tags.
+
+```css
+#div1 {width: 290px;
+background-color: gray;
+margin: 10px auto 10px auto; /* top-right-bottom-left */
+padding: 200px 50px; /* (top-bottom) - (right-left)*/
+border: 5px solid black;
+}
+
+#div2 {width: 400px;
+background-color: green;
+margin: 10px auto 10px auto; /* top-right-bottom-left */
+}
+```
+
+margin auto centers tags /elements horizontally.
+
+### color and background images
+
+RGB = red green blue
+
+how!!!!
+
+> hexadecimal_color = ffffff <=> {ff}: red componant + {ff}: green componant + {ff}: blue componant.
+
+A shorthand situation for hexadecimal_color
+
+```ffffff => #fff```
+
+viewport is the browser window.
+
+### Height property
+
