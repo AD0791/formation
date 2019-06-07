@@ -935,28 +935,27 @@ We need to learn how to calculate proper the width of the page.
 
 ```css
 #div1 {
-			width: 290px;
-			background-color: gray;
-			margin: 10px 0px 10px 0px;
-			/* top-right-bottom-left */
-			padding: 200px 50px;
-			/* (top-bottom) - (right-left)*/
-			border: 5px solid black;
+  width: 290px;
+  background-color: gray;
+  margin: 10px 0px 10px 0px;
+  /* top-right-bottom-left */
+  padding: 200px 50px;
+  /* (top-bottom) - (right-left)*/
+  border: 5px solid black;
+}
 
-		}
-
-		#div2 {
-			width: 400px;
-			background-color: green;
-		}
+#div2 {
+  width: 400px;
+  background-color: green;
+}
 ```
 
 The `div` are line up properly. why?
 
 On the div `#div1`:
 
-1. padding  = 2 * 50 px
-2. border = 2 * 5px
+1. padding = 2 \* 50 px
+2. border = 2 \* 5px
 3. width = 290px
 
 total width = 400px
@@ -968,16 +967,18 @@ WHich means the divs are line up.
 Use `auto` on left and right margins to center the tags.
 
 ```css
-#div1 {width: 290px;
-background-color: gray;
-margin: 10px auto 10px auto; /* top-right-bottom-left */
-padding: 200px 50px; /* (top-bottom) - (right-left)*/
-border: 5px solid black;
+#div1 {
+  width: 290px;
+  background-color: gray;
+  margin: 10px auto 10px auto; /* top-right-bottom-left */
+  padding: 200px 50px; /* (top-bottom) - (right-left)*/
+  border: 5px solid black;
 }
 
-#div2 {width: 400px;
-background-color: green;
-margin: 10px auto 10px auto; /* top-right-bottom-left */
+#div2 {
+  width: 400px;
+  background-color: green;
+  margin: 10px auto 10px auto; /* top-right-bottom-left */
 }
 ```
 
@@ -993,9 +994,22 @@ how!!!!
 
 A shorthand situation for hexadecimal_color
 
-```ffffff => #fff```
+`ffffff => #fff`
 
 viewport is the browser window.
 
 ### Height property
 
+`height : x_numberpx` or `height: x_number%`
+
+A containing tags height must be set in pixels, if you want to set a tag's height in percentage.
+
+Height has to be applied to block level element.
+
+### opacity
+
+`border-radius: x_numberpx` gives you rounded corners. # don't forget to add paddings.
+
+`opacity: 0.0<= x_float <=1`. It affects your background color and text.
+
+## Styling link and List
