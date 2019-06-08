@@ -1066,3 +1066,12 @@ Cick Down on the link, to make it active.
 IMPORTANT RULES: **(unvisited)L-V-H-A**
 
 ### Specificity Refresher
+
+```css
+ul li {
+  list-style-type: circle;
+  line-height: 200%;
+}
+```
+
+This is a precise selector.
