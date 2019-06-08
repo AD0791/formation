@@ -1,14 +1,7 @@
 import React, { Component } from "react";
 
 class Counter extends Component {
-  // remove the local sate
-  /*handleIncrement = () => {
-    this.setState({ value: this.state.value + 1 });
-  };*/
   render() {
-    //<h4>Counter #{this.props.id}</h4>
-    // we are making the id of the counter deleted
-    // before updating the state.
     return (
       <React.Fragment>
         <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
