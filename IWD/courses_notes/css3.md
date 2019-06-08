@@ -1063,6 +1063,6 @@ Hover state = hover state is when your mouse is over a tag typically a `p` tag.
 
 Cick Down on the link, to make it active.
 
-IMPORTANT RULES: **(unvisited)L-V -H-A**
+IMPORTANT RULES: **(unvisited)L-V-H-A**
 
 ### Specificity Refresher
