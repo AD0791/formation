@@ -2478,3 +2478,226 @@ export default Counter;
 ```
 
 ### Single source of truth
+
+We don't have a single source of truth yet.
+
+let's look at an interesting behavior! with this code above, we added the reset button. On the react developper tools we can se that change has happen. But it didn't went to the dom.
+
+```javascript
+// counters.jsx
+// A single source of truth situation
+  // the handle reset
+  handleReset = () => {
+    const counters = this.state.counters.map(c => {
+      c.value = 0;
+      return c;
+    });
+    this.setState({ counters });
+  };
+
+  handleDelete = counterid => {
+    const counters = this.state.counters.filter(c => c.id !== counterid);
+    this.setState({ counters });
+  };
+  render() {
+    return (
+      // our child component here is counter.jsx
+      <React.Fragment>
+        <button
+          onClick={this.handleReset}
+          className="btn btn-primary btn-sm m-2"
+        >
+          Reset
+        </button>
+        {this.state.counters.map(counter => (
+          <Counter
+            key={counter.id}
+            onDelete={this.handleDelete}
+            counter={counter}
+          />
+        ))}
+      </React.Fragment>
+    );
+  }
+```
+
+```javascript
+// react devs tools
+/*counters:
+Array[5]
+0:
+{…}
+id:
+1
+value:
+0
+1:
+{…}
+id:
+2
+value:
+0
+2:
+{…}
+id:
+3
+value:
+0
+3:
+{…}
+id:
+4
+value:
+0
+4:
+{…}
+id:
+5
+value:
+0 */
+```
+
+this problem occurs because the local state is not update. we can remove the local state to solve it.
+And have the counter component has a single source of truth.
+
+#### Removing the local state
+
+we want to remove the local state in the `counter.jsx`. And only rely under props to recieve the data the component needs.
+
+```javascript
+state = {
+    value: this.props.counter.value
+  };
+```
+
+we refer to this kind of component. **The controlled component**. It control its own local state. Recieve his data via a props and raise his events when ever data needs to be changed.
+
+Counter.jsx will be the controlled component.
+
+```javascript
+import React, { Component } from "react";
+
+class Counter extends Component {
+  // remove the local sate
+  /*handleIncrement = () => {
+    this.setState({ value: this.state.value + 1 });
+  };*/
+  render() {
+    //<h4>Counter #{this.props.id}</h4>
+    // we are making the id of the counter deleted
+    // before updating the state.
+    return (
+      <React.Fragment>
+        <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
+        <button
+          onClick={() => this.props.onIncrement(this.props.counter)}
+          className="btn btn-secondary btn-sml"
+        >
+          Increment
+        </button>
+        <button
+          onClick={() => this.props.onDelete(this.props.counter.id)}
+          className="btn btn-danger btn-sm m-2"
+        >
+          Delete
+        </button>
+      </React.Fragment>
+    );
+  }
+
+  getBadgeClasses() {
+    let classes = "badge m-2 badge-";
+    classes += this.props.counter.value === 0 ? "warning" : "primary";
+    return classes;
+  }
+
+  formatCount() {
+    const { value: count } = this.props.counter;
+    // check if it's 0
+    return count === 0 ? "Zero" : count;
+  }
+}
+
+export default Counter;
+```
+
+We are relying on the props the allocate the data.
+
+### Multiple components in sync
+
+we are going to change the structure of the app right now.
+
+- #index.js => app
+- #app => N; Cters
+- (navbar; counters) components
+- counter component => controller component
+
+We are going to replace the render method of the `app.js` with a basic bootstrap template.
+
+we are going to create the `navbar.jsx` component.
+
+> NOW
+
+```javascript
+// index.js
+import 'bootstrap/dist/css/bootstrap.css';
+import App from './App';
+
+ReactDOM.render( < App / > , document.getElementById('root'));
+```
+
+```javascript
+// APP.JS
+import React, {
+  Component
+} from "react";
+import NavBar from "./components/navbar";
+import "./App.css";
+import Counters from "./components/counters";
+class App extends Component {
+  render() {
+    return ( <
+      React.Fragment >
+      <
+      NavBar / >
+      <
+      main className = "container" >
+      <
+      Counters / >
+      <
+      /main> < /
+      React.Fragment >
+    );
+  }
+}
+
+export default App;
+```
+
+```javascript
+//navbar
+mport React, { Component } from "react";
+
+class NavBar extends Component {
+  render() {
+    return (
+      // <React.Fragment>
+      <nav className="navbar navbar-light bg-light">
+        <a className="navbar-brand" href="#">
+          Navbar
+        </a>
+      </nav>
+      //</React.Fragment>
+    );
+  }
+}
+
+export default NavBar;
+
+```
+
+> **The counters.jsx is allocating data via props to counter.jsx (controller component). App.js is handling the navbar and the counters. WE are also rendering the app.js in the index.js (root).**
+
+We need to lift up the state, by that, the app.js will handle the allocation to navbar, counters and counter. because navbar and counters aren't parent/child or any kind of association.
+
+### lifting up the state

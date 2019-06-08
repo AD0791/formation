@@ -11,9 +11,22 @@ class Counters extends Component {
       { id: 5, value: 10000 }
     ]
   };
-  // we are going to create a counter object
-  // set it as an attribute
-  // now we can encapsulate the properties.
+  handleIncrement = counter => {
+    const counters = [...this.state.counters];
+    const index = counters.indexOf(counter);
+    counters[index] = { ...counter };
+    counters[index].value++;
+    this.setState({ counters });
+  };
+
+  handleReset = () => {
+    const counters = this.state.counters.map(c => {
+      c.value = 0;
+      return c;
+    });
+    this.setState({ counters });
+  };
+
   handleDelete = counterid => {
     const counters = this.state.counters.filter(c => c.id !== counterid);
     this.setState({ counters });
@@ -22,10 +35,17 @@ class Counters extends Component {
     return (
       // our child component here is counter.jsx
       <React.Fragment>
+        <button
+          onClick={this.handleReset}
+          className="btn btn-primary btn-sm m-2"
+        >
+          Reset
+        </button>
         {this.state.counters.map(counter => (
           <Counter
             key={counter.id}
             onDelete={this.handleDelete}
+            onIncrement={this.handleIncrement}
             counter={counter}
           />
         ))}
