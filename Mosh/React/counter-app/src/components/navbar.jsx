@@ -1,15 +1,15 @@
 import React, { Component } from "react";
-
+// destructuring the props
 // Stateless functional Componant
 // sfc
-const NavBar = props => {
+const NavBar = ({ totalCounters }) => {
   return (
     // <React.Fragment>
     <nav className="navbar navbar-light bg-light">
       <a className="navbar-brand" href="#">
         Navbar
         <span className="badge badge-pill badge-secondary">
-          {props.totalCounters}
+          {totalCounters}
         </span>
       </a>
     </nav>
@@ -17,22 +17,4 @@ const NavBar = props => {
   );
 };
 
-/*
-class NavBar extends Component {
-  render() {
-    return (
-      // <React.Fragment>
-      <nav className="navbar navbar-light bg-light">
-        <a className="navbar-brand" href="#">
-          Navbar
-          <span className="badge badge-pill badge-secondary">
-            {this.props.totalCounters}
-          </span>
-        </a>
-      </nav>
-      //</React.Fragment>
-    );
-  }
-}
-*/
 export default NavBar;

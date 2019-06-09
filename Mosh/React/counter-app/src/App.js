@@ -4,6 +4,8 @@ import React, {
 import NavBar from "./components/navbar";
 import "./App.css";
 import Counters from "./components/counters";
+
+// mounting phase, we need a "constructor, componentDidMount, render"
 class App extends Component {
   state = {
     counters: [{
@@ -28,6 +30,18 @@ class App extends Component {
       }
     ]
   };
+
+  constructor() {
+    super();
+    console.log("APP - Constructor");
+  }
+
+  componentDidMount() {
+    //ajax call
+    // this.setState({new_data})
+    console.log("App - mounted");
+  }
+
   handleIncrement = counter => {
     const counters = [...this.state.counters];
     const index = counters.indexOf(counter);
@@ -56,7 +70,9 @@ class App extends Component {
       counters
     });
   };
+
   render() {
+    console.log("APP render"); //render cycle
     return ( <
       React.Fragment >
       <

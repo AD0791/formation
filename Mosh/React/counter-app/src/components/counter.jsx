@@ -1,6 +1,14 @@
 import React, { Component } from "react";
+// life cycle hooks
 
 class Counter extends Component {
+  componentDidUpdate(prevProps, prevState) {
+    console.log("prevProps ", prevProps);
+    console.log("prevState ", prevState);
+    /*if (prevProps.counter.value != this.props.counter.value){
+      // ajax call
+    }*/
+  }
   render() {
     return (
       <React.Fragment>

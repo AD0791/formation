@@ -2570,6 +2570,436 @@ export default Counter;</code></pre>
 </div>
 <div id="single-source-of-truth" class="section level3">
 <h3>Single source of truth</h3>
+<p>We don’t have a single source of truth yet.</p>
+<p>let’s look at an interesting behavior! with this code above, we added the reset button. On the react developper tools we can se that change has happen. But it didn’t went to the dom.</p>
+<pre class="javascript"><code>// counters.jsx
+// A single source of truth situation
+  // the handle reset
+  handleReset = () =&gt; {
+    const counters = this.state.counters.map(c =&gt; {
+      c.value = 0;
+      return c;
+    });
+    this.setState({ counters });
+  };
+
+  handleDelete = counterid =&gt; {
+    const counters = this.state.counters.filter(c =&gt; c.id !== counterid);
+    this.setState({ counters });
+  };
+  render() {
+    return (
+      // our child component here is counter.jsx
+      &lt;React.Fragment&gt;
+        &lt;button
+          onClick={this.handleReset}
+          className=&quot;btn btn-primary btn-sm m-2&quot;
+        &gt;
+          Reset
+        &lt;/button&gt;
+        {this.state.counters.map(counter =&gt; (
+          &lt;Counter
+            key={counter.id}
+            onDelete={this.handleDelete}
+            counter={counter}
+          /&gt;
+        ))}
+      &lt;/React.Fragment&gt;
+    );
+  }</code></pre>
+<pre class="javascript"><code>// react devs tools
+/*counters:
+Array[5]
+0:
+{…}
+id:
+1
+value:
+0
+1:
+{…}
+id:
+2
+value:
+0
+2:
+{…}
+id:
+3
+value:
+0
+3:
+{…}
+id:
+4
+value:
+0
+4:
+{…}
+id:
+5
+value:
+0 */</code></pre>
+<p>this problem occurs because the local state is not update. we can remove the local state to solve it. And have the counter component has a single source of truth.</p>
+<div id="removing-the-local-state" class="section level4">
+<h4>Removing the local state</h4>
+<p>we want to remove the local state in the <code>counter.jsx</code>. And only rely under props to recieve the data the component needs.</p>
+<pre class="javascript"><code>state = {
+    value: this.props.counter.value
+  };</code></pre>
+<p>we refer to this kind of component. <strong>The controlled component</strong>. It control its own local state. Recieve his data via a props and raise his events when ever data needs to be changed.</p>
+<p>Counter.jsx will be the controlled component.</p>
+<pre class="javascript"><code>import React, { Component } from &quot;react&quot;;
+
+class Counter extends Component {
+  // remove the local sate
+  /*handleIncrement = () =&gt; {
+    this.setState({ value: this.state.value + 1 });
+  };*/
+  render() {
+    //&lt;h4&gt;Counter #{this.props.id}&lt;/h4&gt;
+    // we are making the id of the counter deleted
+    // before updating the state.
+    return (
+      &lt;React.Fragment&gt;
+        &lt;span className={this.getBadgeClasses()}&gt;{this.formatCount()}&lt;/span&gt;
+        &lt;button
+          onClick={() =&gt; this.props.onIncrement(this.props.counter)}
+          className=&quot;btn btn-secondary btn-sml&quot;
+        &gt;
+          Increment
+        &lt;/button&gt;
+        &lt;button
+          onClick={() =&gt; this.props.onDelete(this.props.counter.id)}
+          className=&quot;btn btn-danger btn-sm m-2&quot;
+        &gt;
+          Delete
+        &lt;/button&gt;
+      &lt;/React.Fragment&gt;
+    );
+  }
+
+  getBadgeClasses() {
+    let classes = &quot;badge m-2 badge-&quot;;
+    classes += this.props.counter.value === 0 ? &quot;warning&quot; : &quot;primary&quot;;
+    return classes;
+  }
+
+  formatCount() {
+    const { value: count } = this.props.counter;
+    // check if it&#39;s 0
+    return count === 0 ? &quot;Zero&quot; : count;
+  }
+}
+
+export default Counter;</code></pre>
+<p>We are relying on the props the allocate the data.</p>
+</div>
+</div>
+<div id="multiple-components-in-sync" class="section level3">
+<h3>Multiple components in sync</h3>
+<p>we are going to change the structure of the app right now.</p>
+<ul>
+<li>#index.js =&gt; app</li>
+<li>#app =&gt; N; Cters</li>
+<li>(navbar; counters) components</li>
+<li>counter component =&gt; controller component</li>
+</ul>
+<p>We are going to replace the render method of the <code>app.js</code> with a basic bootstrap template.</p>
+<p>we are going to create the <code>navbar.jsx</code> component.</p>
+<blockquote>
+<p>NOW</p>
+</blockquote>
+<pre class="javascript"><code>// index.js
+import &#39;bootstrap/dist/css/bootstrap.css&#39;;
+import App from &#39;./App&#39;;
+
+ReactDOM.render( &lt; App / &gt; , document.getElementById(&#39;root&#39;));</code></pre>
+<pre class="javascript"><code>// APP.JS
+import React, {
+  Component
+} from &quot;react&quot;;
+import NavBar from &quot;./components/navbar&quot;;
+import &quot;./App.css&quot;;
+import Counters from &quot;./components/counters&quot;;
+class App extends Component {
+  render() {
+    return ( &lt;
+      React.Fragment &gt;
+      &lt;
+      NavBar / &gt;
+      &lt;
+      main className = &quot;container&quot; &gt;
+      &lt;
+      Counters / &gt;
+      &lt;
+      /main&gt; &lt; /
+      React.Fragment &gt;
+    );
+  }
+}
+
+export default App;</code></pre>
+<pre class="javascript"><code>//navbar
+mport React, { Component } from &quot;react&quot;;
+
+class NavBar extends Component {
+  render() {
+    return (
+      // &lt;React.Fragment&gt;
+      &lt;nav className=&quot;navbar navbar-light bg-light&quot;&gt;
+        &lt;a className=&quot;navbar-brand&quot; href=&quot;#&quot;&gt;
+          Navbar
+        &lt;/a&gt;
+      &lt;/nav&gt;
+      //&lt;/React.Fragment&gt;
+    );
+  }
+}
+
+export default NavBar;
+</code></pre>
+<blockquote>
+<p><strong>The counters.jsx is allocating data via props to counter.jsx (controller component). App.js is handling the navbar and the counters. WE are also rendering the app.js in the index.js (root).</strong></p>
+</blockquote>
+<p>We need to lift up the state, by that, the app.js will handle the allocation to navbar, counters and counter. because navbar and counters aren’t parent/child or any kind of association.</p>
+</div>
+<div id="lifting-up-the-state" class="section level3">
+<h3>lifting up the state</h3>
+<p>we have modified a lot of the code.</p>
+<p>we put the state on our <code>app.js</code>, given our app architecture.</p>
+<pre class="javascript"><code>//APPjs
+import React, {
+  Component
+} from &quot;react&quot;;
+import NavBar from &quot;./components/navbar&quot;;
+import &quot;./App.css&quot;;
+import Counters from &quot;./components/counters&quot;;
+class App extends Component {
+  state = {
+    counters: [{
+        id: 1,
+        value: 0
+      },
+      {
+        id: 2,
+        value: 10
+      },
+      {
+        id: 3,
+        value: 100
+      },
+      {
+        id: 4,
+        value: 1000
+      },
+      {
+        id: 5,
+        value: 10000
+      }
+    ]
+  };
+  handleIncrement = counter =&gt; {
+    const counters = [...this.state.counters];
+    const index = counters.indexOf(counter);
+    counters[index] = {
+      ...counter
+    };
+    counters[index].value++;
+    this.setState({
+      counters
+    });
+  };
+
+  handleReset = () =&gt; {
+    const counters = this.state.counters.map(c =&gt; {
+      c.value = 0;
+      return c;
+    });
+    this.setState({
+      counters
+    });
+  };
+
+  handleDelete = counterid =&gt; {
+    const counters = this.state.counters.filter(c =&gt; c.id !== counterid);
+    this.setState({
+      counters
+    });
+  };
+  render() {
+    return ( &lt;
+      React.Fragment &gt;
+      &lt;
+      NavBar totalCounters = {
+        this.state.counters.filter(c =&gt; c.value &gt; 0).length
+      }
+      / &gt; &lt;
+      main className = &quot;container&quot; &gt;
+      &lt;
+      Counters counters = {
+        this.state.counters
+      }
+      onReset = {
+        this.handleReset
+      }
+      onIncrement = {
+        this.handleIncrement
+      }
+      onDelete = {
+        this.handleDelete
+      }
+      / &gt; &lt; /
+      main &gt; &lt; /
+      React.Fragment &gt;
+    );
+  }
+}
+
+export default App;</code></pre>
+<pre class="javascript"><code>// counters
+import React, { Component } from &quot;react&quot;;
+import Counter from &quot;./counter&quot;;
+
+class Counters extends Component {
+  render() {
+    return (
+      // our child component here is counter.jsx
+      &lt;React.Fragment&gt;
+        &lt;button
+          onClick={this.props.onReset}
+          className=&quot;btn btn-primary btn-sm m-2&quot;
+        &gt;
+          Reset
+        &lt;/button&gt;
+        {this.props.counters.map(counter =&gt; (
+          &lt;Counter
+            key={counter.id}
+            onDelete={this.props.onDelete}
+            onIncrement={this.props.onIncrement}
+            counter={counter}
+          /&gt;
+        ))}
+      &lt;/React.Fragment&gt;
+    );
+  }
+}
+
+export default Counters;</code></pre>
+<pre class="javascript"><code>// counter and navbar
+import React, { Component } from &quot;react&quot;;
+
+class NavBar extends Component {
+  render() {
+    return (
+      // &lt;React.Fragment&gt;
+      &lt;nav className=&quot;navbar navbar-light bg-light&quot;&gt;
+        &lt;a className=&quot;navbar-brand&quot; href=&quot;#&quot;&gt;
+          Navbar
+          &lt;span className=&quot;badge badge-pill badge-secondary&quot;&gt;
+            {this.props.totalCounters}
+          &lt;/span&gt;
+        &lt;/a&gt;
+      &lt;/nav&gt;
+      //&lt;/React.Fragment&gt;
+    );
+  }
+}
+
+export default NavBar;
+
+
+import React, { Component } from &quot;react&quot;;
+
+class Counter extends Component {
+  render() {
+    return (
+      &lt;React.Fragment&gt;
+        &lt;span className={this.getBadgeClasses()}&gt;{this.formatCount()}&lt;/span&gt;
+        &lt;button
+          onClick={() =&gt; this.props.onIncrement(this.props.counter)}
+          className=&quot;btn btn-secondary btn-sml&quot;
+        &gt;
+          Increment
+        &lt;/button&gt;
+        &lt;button
+          onClick={() =&gt; this.props.onDelete(this.props.counter.id)}
+          className=&quot;btn btn-danger btn-sm m-2&quot;
+        &gt;
+          Delete
+        &lt;/button&gt;
+      &lt;/React.Fragment&gt;
+    );
+  }
+
+  getBadgeClasses() {
+    let classes = &quot;badge m-2 badge-&quot;;
+    classes += this.props.counter.value === 0 ? &quot;warning&quot; : &quot;primary&quot;;
+    return classes;
+  }
+
+  formatCount() {
+    const { value: count } = this.props.counter;
+    // check if it&#39;s 0
+    return count === 0 ? &quot;Zero&quot; : count;
+  }
+}
+
+export default Counter;
+</code></pre>
+<p>Now the state is on the parent component</p>
+<ul>
+<li>app.js</li>
+</ul>
+<p>the children component in association using <code>this.props</code></p>
+<ul>
+<li>navbar and {counters, counter}</li>
+</ul>
+<div id="stateless-fonctional-component" class="section level4">
+<h4>Stateless fonctional component</h4>
+<p>The Navbar is the perfect spot to implement a stateless functional componant.</p>
+<pre class="javascript"><code>import React, { Component } from &quot;react&quot;;
+
+// Stateless functional Componant
+// sfc
+const NavBar = props =&gt; {
+  return (
+    // &lt;React.Fragment&gt;
+    &lt;nav className=&quot;navbar navbar-light bg-light&quot;&gt;
+      &lt;a className=&quot;navbar-brand&quot; href=&quot;#&quot;&gt;
+        Navbar
+        &lt;span className=&quot;badge badge-pill badge-secondary&quot;&gt;
+          {props.totalCounters}
+        &lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/nav&gt;
+    //&lt;/React.Fragment&gt;
+  );
+};
+
+/*
+class NavBar extends Component {
+  render() {
+    return (
+      // &lt;React.Fragment&gt;
+      &lt;nav className=&quot;navbar navbar-light bg-light&quot;&gt;
+        &lt;a className=&quot;navbar-brand&quot; href=&quot;#&quot;&gt;
+          Navbar
+          &lt;span className=&quot;badge badge-pill badge-secondary&quot;&gt;
+            {this.props.totalCounters}
+          &lt;/span&gt;
+        &lt;/a&gt;
+      &lt;/nav&gt;
+      //&lt;/React.Fragment&gt;
+    );
+  }
+}
+*/
+export default NavBar;</code></pre>
+</div>
+</div>
+<div id="destructuring-arguments" class="section level3">
+<h3>Destructuring Arguments</h3>
 </div>
 </div>
 </div>

@@ -4,6 +4,7 @@ author: "Alexandro Disla"
 output:
   html_document:
     df_print: paged
+  pdf_document: default
 ---
 
 ## Ch1- The Basics

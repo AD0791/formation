@@ -2488,6 +2488,127 @@ background-color: green;}
 </div>
 <div id="calculate-width" class="section level3">
 <h3>Calculate Width</h3>
+<p>We need to learn how to calculate proper the width of the page.</p>
+<blockquote>
+<p>Total Width = margin + border + padding + width</p>
+</blockquote>
+<pre class="css"><code>#div1 {
+  width: 290px;
+  background-color: gray;
+  margin: 10px 0px 10px 0px;
+  /* top-right-bottom-left */
+  padding: 200px 50px;
+  /* (top-bottom) - (right-left)*/
+  border: 5px solid black;
+}
+
+#div2 {
+  width: 400px;
+  background-color: green;
+}</code></pre>
+<p>The <code>div</code> are line up properly. why?</p>
+<p>On the div <code>#div1</code>:</p>
+<ol style="list-style-type: decimal">
+<li>padding = 2 * 50 px</li>
+<li>border = 2 * 5px</li>
+<li>width = 290px</li>
+</ol>
+<p>total width = 400px</p>
+<p>WHich means the divs are line up.</p>
+</div>
+<div id="centering-in-css" class="section level3">
+<h3>Centering in css</h3>
+<p>Use <code>auto</code> on left and right margins to center the tags.</p>
+<pre class="css"><code>#div1 {
+  width: 290px;
+  background-color: gray;
+  margin: 10px auto 10px auto; /* top-right-bottom-left */
+  padding: 200px 50px; /* (top-bottom) - (right-left)*/
+  border: 5px solid black;
+}
+
+#div2 {
+  width: 400px;
+  background-color: green;
+  margin: 10px auto 10px auto; /* top-right-bottom-left */
+}</code></pre>
+<p>margin auto centers tags /elements horizontally.</p>
+</div>
+<div id="color-and-background-images" class="section level3">
+<h3>color and background images</h3>
+<p>RGB = red green blue</p>
+<p>how!!!!</p>
+<blockquote>
+<p>hexadecimal_color = ffffff &lt;=&gt; {ff}: red componant + {ff}: green componant + {ff}: blue componant.</p>
+</blockquote>
+<p>A shorthand situation for hexadecimal_color</p>
+<p><code>ffffff =&gt; #fff</code></p>
+<p>viewport is the browser window.</p>
+</div>
+<div id="height-property" class="section level3">
+<h3>Height property</h3>
+<p><code>height : x_numberpx</code> or <code>height: x_number%</code></p>
+<p>A containing tags height must be set in pixels, if you want to set a tag’s height in percentage.</p>
+<p>Height has to be applied to block level element.</p>
+</div>
+<div id="opacity" class="section level3">
+<h3>opacity</h3>
+<p><code>border-radius: x_numberpx</code> gives you rounded corners. # don’t forget to add paddings.</p>
+<p><code>opacity: 0.0&lt;= x_float &lt;=1</code>. It affects your background color and text.</p>
+</div>
+</div>
+<div id="styling-link-and-list" class="section level2">
+<h2>Styling link and List</h2>
+<div id="pseudo-class-1-2-and-3" class="section level3">
+<h3>pseudo class (1, 2 and 3)</h3>
+<p>refactoring = code clean up</p>
+<p>Clean code is easier to update and mantain.</p>
+<p>Pseudo Class Selectors = select element on your page based on an event.</p>
+<pre class="css"><code>/* unvisited link */
+a:link {
+  color: green;
+  text-decoration: none;
+}
+
+/* visited link */
+a:visited {
+  color: red;
+  background: red;
+}
+
+/* mouse over link */
+a:hover {
+  color: blue;
+  text-decoration: underline;
+  font-family: arial;
+  font-size: 30px;
+  background-color: #00ff00;
+}
+
+/* selected link */
+a:active {
+  color: green;
+  font-weight: bold;
+}
+
+#centerDoc a:link {
+  color: green;
+  text-decoration: underline;
+}
+#centerDoc a:hover {
+  color: blue;
+}</code></pre>
+<p>Hover state = hover state is when your mouse is over a tag typically a <code>p</code> tag.</p>
+<p>Cick Down on the link, to make it active.</p>
+<p>IMPORTANT RULES: <strong>(unvisited)L-V-H-A</strong></p>
+</div>
+<div id="specificity-refresher" class="section level3">
+<h3>Specificity Refresher</h3>
+<pre class="css"><code>ul li {
+  list-style-type: circle;
+  line-height: 200%;
+}</code></pre>
+<p>This is a precise selector.</p>
 </div>
 </div>
 

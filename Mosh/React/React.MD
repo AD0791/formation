@@ -2894,7 +2894,7 @@ export default Counter;
 
 ```
 
-Now the state is on the parent component 
+Now the state is on the parent component
 
 - app.js
 
@@ -2948,3 +2948,130 @@ export default NavBar;
 ```
 
 ### Destructuring Arguments
+
+We are going to use object destructuring to handle our `props`.
+
+```javascript
+// navbar
+const NavBar = ({ totalCounters }) => {
+  return (
+    // <React.Fragment>
+    <nav className="navbar navbar-light bg-light">
+      <a className="navbar-brand" href="#">
+        Navbar
+        <span className="badge badge-pill badge-secondary">
+          {totalCounters}
+        </span>
+      </a>
+    </nav>
+    //</React.Fragment>
+  );
+};
+```
+
+It is implemented differently in the counters.jsx class.
+
+```javascript
+class Counters extends Component {
+  render() {
+    // destructuring the props
+    const { onReset, counters, onDelete, onIncrement } = this.props;
+    return (
+      // our child component here is counter.jsx
+      <React.Fragment>
+        <button onClick={onReset} className="btn btn-primary btn-sm m-2">
+          Reset
+        </button>
+        {counters.map(counter => (
+          <Counter
+            key={counter.id}
+            onDelete={onDelete}
+            onIncrement={onIncrement}
+            counter={counter}
+          />
+        ))}
+      </React.Fragment>
+    );
+  }
+}
+```
+
+### Life Cycle Hooks
+
+we have 3 life cycle in React
+
+1. Mount
+
+- constructor
+- render
+- componentDidMount
+
+2. Update
+
+- render
+- componentDidUpdate
+
+3. Unmount
+
+- componentWillUnmount
+
+### Mounting Phase
+
+We are going to the top of our architecture `App.js`. Then we will implement our mounting phase.
+
+```javascript
+// APP.js
+constructor() {
+  super();
+  console.log("APP - Constructor");
+}
+
+componentDidMount() {
+    //ajax call
+    // this.setState({new_data}) // receive new data
+    console.log("App - mounted");
+}
+  
+ 
+render() {
+    console.log("APP render");
+...}
+/*
+APP - Constructor
+App.js:75 APP render
+App.js:42 App - mounted
+*?
+```
+
+render = virtual Dom situation of the component
+mounted = Actual DOM situation of the component
+
+**When a component is rendered, all his children are rendered recursively**
+
+You can't use lyfe cycle hooks in a stateless functional component.
+
+### Updating Phase
+
+This phase happen when ever our states or props change.
+
+WHen the component tree is rendered that doesn't mean the DOM is updated. We have essentially a react element, updating our virtual DOM.
+
+WE ARE GOING TO ADD a life cycle in our controller component `counter.jsx`.
+
+```javascript
+// counter.jsx
+
+class Counter extends Component {
+  componentDidUpdate(prevProps, prevState) {
+    console.log("prevProps ", prevProps);
+    console.log("prevState ", prevState);
+    /*if (prevProps.counter.value != this.props.counter.value){
+      // ajax call
+    }*/
+  }
+  ...
+```
+
+Based on on this life cycle we can decide whether or not to get ask from our server new data.
+
+### Unmounting Phase
