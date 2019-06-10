@@ -1572,7 +1572,7 @@ Sumarry:
 - Handeling Events
 - Updating the State
 
-## Chapitre 3 : Composing Components
+## Chapitre 4 : Composing Components
 
 we will learn How to:
 
@@ -3075,3 +3075,26 @@ class Counter extends Component {
 Based on on this life cycle we can decide whether or not to get ask from our server new data.
 
 ### Unmounting Phase
+
+When we delete a counter the state just of the component just change.
+
+We have a new virtual dom with one less counter. React will compare this virtual dom to the actual dom. ANd it will call `componentWillUnmount` before removing this counter.
+
+This will gives us the opportunity to do some clean-up.
+
+```javascript
+componentWillUnmount() {
+    console.log("Component unmount");
+}
+/*
+APP render
+counter.jsx:14 Component unmount
+counter.jsx:6 prevProps  {onDelete: ƒ, onIncrement: ƒ, counter: {…}}
+counter.jsx:7 prevState  null
+counter.jsx:6 prevProps  {onDelete: ƒ, onIncrement: ƒ, counter: {…}}
+counter.jsx:7 prevState  nul
+*/
+```
+
+#### Exercise (Decrementation - Solution LIke component)
+

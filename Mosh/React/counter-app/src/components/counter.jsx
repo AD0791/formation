@@ -9,6 +9,10 @@ class Counter extends Component {
       // ajax call
     }*/
   }
+
+  componentWillUnmount() {
+    console.log("Component unmount");
+  }
   render() {
     return (
       <React.Fragment>
