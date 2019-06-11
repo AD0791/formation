@@ -63,3 +63,86 @@ ul li {
 ```
 
 This is a precise selector.
+
+### Creating Buttons (1,2,3)
+
+we basically making a button of a tag
+
+```css
+a:link,
+a:visited {
+  color: #000;
+  text-decoration: none;
+  background-color: #a2b7cf;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+/* mouse over link */
+a:hover {
+  color: blue;
+  text-decoration: underline;
+  background-color: #a2b7cf;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+/* selected link */
+a:active {
+  color: green;
+  font-weight: bold;
+}
+
+#centerDoc a:link {
+  color: #000;
+  text-decoration: underline;
+}
+#centerDoc a:hover {
+  color: blue;
+}
+```
+
+More specific css selectors, win over LESS specific css selectors.
+
+```css
+a:link,
+a:visited {
+  color: #000;
+  text-decoration: none;
+  background-color: #a2b7cf;
+  padding-left: 10px;
+  display: block; /* make it expand*/
+  width: 145px; /* change the width of the display*/
+  margin-bottom: 10px;
+  border-radius: 10px;
+  transition: margin-bottom 0.45s ease-in; /* effect on margin  ease-in ease-out*/
+}
+
+/* mouse over link */
+a:hover {
+  color: #ffffff;
+  background-color: #000;
+  margin-bottom: 45px;
+}
+
+/* selected link */
+a:active {
+  color: green;
+  font-weight: bold;
+}
+
+#centerDoc a {
+  background-color: transparent;
+}
+#centerDoc a:link,
+#centerDoc a:visited {
+  color: #000;
+  text-decoration: underline;
+}
+#centerDoc a:hover {
+  color: #ff0000;
+  margin-bottom: 0px;
+}
+```
+
+### Styling link with Image
