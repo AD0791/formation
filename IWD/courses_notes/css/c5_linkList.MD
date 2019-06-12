@@ -166,3 +166,206 @@ li {
 ```
 
 ### Block level tags.
+
+Block level tags extends to the entire width of the containing tag.
+
+```html
+<style type="text/css">
+
+		body {padding: 0; margin: 0;}
+
+			ul, ol {list-style-type: none;}
+
+			li {
+				background-image: url("images/red-star-bullet.png");
+				background-repeat: no-repeat;
+				padding-left: 25px;
+				padding-top: 10px;
+				background-position: 0px 9px;
+
+				background-color: #00ff00;
+				margin-bottom: 10px;
+			}
+
+			#tainer {
+
+					width: 50%;
+
+				}
+		</style>
+
+	</head>
+	<body>
+
+	<h1>CSS Lists</h1>
+
+	<div id="tainer">
+		<ul>
+			<li>Fish</li>
+			<li>Sticks</li>
+			<li>Snacks</li>
+		</ul>
+
+
+		<ol>
+			<li>General</li>
+			<li>Major</li>
+			<li>Private</li>
+		</ol>
+	</div>
+
+	</body>
+```
+
+### CSS LIST styles
+
+```html
+<style type="text/css">
+
+		/*
+
+	See all the list style types:
+	http://www.w3schools.com/cssref/tryit.asp?filename=trycss_list-style-type_all
+
+		*/
+
+		body {font-size: 1.5em;}
+
+			ul.none, ol.none {list-style-type: none;}
+
+			ul.a {list-style-type: circle;}
+			ul.b {list-style-type: disc;}
+			ul.c {list-style-type: square;}
+
+			ol.d {list-style-type: lower-alpha;}
+			ol.e {list-style-type: lower-greek;}
+			ol.f {list-style-type: lower-latin;}
+			ol.g {list-style-type: lower-roman;}
+
+			ol.h {list-style-type: upper-alpha;}
+			ol.i {list-style-type: upper-latin;}
+			ol.j {list-style-type: upper-roman;}
+
+		</style>
+
+	</head>
+	<body>
+
+	<h1>CSS ordered List Types</h1>
+
+		<ol class="h">
+			<li>General</li>
+			<li>Major</li>
+			<li>Private</li>
+		</ol>
+
+		<ol class="none">
+			<li>General</li>
+			<li>Major</li>
+			<li>Private</li>
+		</ol>
+
+
+	<h1>CSS unordered List Types</h1>
+
+		<ul class="a">
+			<li>Fish</li>
+			<li>Sticks</li>
+			<li>Snacks</li>
+		</ul>
+
+		<ul class="b">
+			<li>Fish</li>
+			<li>Sticks</li>
+			<li>Snacks</li>
+		</ul>
+
+		<ul class="c">
+			<li>Fish</li>
+			<li>Sticks</li>
+			<li>Snacks</li>
+		</ul>
+
+		<!-- HTML type attribute - this is NOT CSS -->
+		<ol type="A">
+		  <li>Coffee</li>
+		  <li>Eggs</li>
+		  <li>Lion Sticks</li>
+		</ol>
+
+	</body>
+```
+
+### css navbar
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Beginners CSS - Lesson 10 - Navbars</title>
+
+    <style type="text/css">
+      /*
+
+	Check out the w3cschools original:
+	http://www.w3schools.com/css/tryit.asp?filename=trycss_navbar_horizontal_float
+
+		*/
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+
+      li {
+        float: left;
+        margin-left: 0px;
+      }
+
+      a {
+        display: block;
+        width: 80px;
+        background-color: #dddddd;
+        text-align: center;
+        padding: 4px;
+        text-decoration: none;
+        text-transform: uppercase;
+      }
+
+      a:hover {
+        background-color: #ddff00;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>CSS Navbars</h1>
+
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#news">News</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+
+    <p>
+      <b>Note:</b> Be sure to put your !DOCTYPE, because if you don't, floating
+      items can produce crazy results.
+    </p>
+    <p>
+      Because we set the 'a' tag to block, the whole link area is now clickable,
+      not just the text.
+    </p>
+    <p>
+      <b>Note:</b> overflow:hidden is added to the ul element to prevent li
+      elements from going outside of the list.
+    </p>
+  </body>
+</html>
+```
+
+`float` is the key to make the menu horizontal.
+
+When creating a horizontal (left to right) menu with `<li>` tags, what CSS property (and value) do you need to add, to have the list position itself left to right?
+
+You have to add the CSS: 'float: left'.
