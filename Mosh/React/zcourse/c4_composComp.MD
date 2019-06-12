@@ -1507,4 +1507,689 @@ counter.jsx:7 prevState  nul
 */
 ```
 
-#### Exercise (Decrementation - Solution LIke component)
+### Exercise (Decrementation - Solution LIke component)
+
+#### Decrement
+
+the buttons, new boostrap implementation
+
+```javascript
+// counter
+      <React.Fragment className="row">
+        <div className="col-1">
+          <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
+        </div>
+        <div className="col">
+          <button
+            onClick={() => this.props.onIncrement(this.props.counter)}
+            className="btn btn-secondary btn-sml"
+          >
+            +
+          </button>
+          <button
+            onClick={() => this.props.onDecrement(this.props.counter)}
+            className="btn btn-secondary btn-sml m-2"
+            disabled={this.props.counter.value === 0 ? "disabled" : ""}
+          >
+            -
+          </button>
+          <button
+            onClick={() => this.props.onDelete(this.props.counter.id)}
+            className="btn btn-danger btn-sm"
+          >
+            Delete
+          </button>
+        </div>
+      </React.Fragment>
+    );
+  }
+```
+
+start the situation of ondecrement
+
+```javascript
+// counters
+// destructuring the props
+    const {
+      onReset,
+      counters,
+      onDelete,
+      onIncrement,
+      onDecrement
+    } = this.props;
+    return (
+      // our child component here is counter.jsx
+      <React.Fragment>
+        <button onClick={onReset} className="btn btn-primary btn-sm m-2">
+          Reset
+        </button>
+        {counters.map(counter => (
+          <Counter
+            key={counter.id}
+            onDelete={onDelete}
+            onIncrement={onIncrement}
+            onDecrement={onDecrement}
+            counter={counter}
+          />
+        ))}
+      </React.Fragment>
+    );
+  }
+}
+```
+
+and we will have the handler on the app.js
+
+```javascript
+handleDecrement = counter => {
+  const counters = [...this.state.counters];
+  const index = counters.indexOf(counter);
+  counters[index] = {
+    ...counter
+  };
+  counters[index].value--;
+  this.setState({
+    counters
+  });
+};
+
+return (
+  <React.Fragment>
+    <NavBar
+      totalCounters={this.state.counters.filter(c => c.value > 0).length}
+    />{" "}
+    <main className="container">
+      <Counters
+        counters={this.state.counters}
+        onReset={this.handleReset}
+        onIncrement={this.handleIncrement}
+        onDelete={this.handleDelete}
+        onDecrement={this.handleDecrement}
+      />{" "}
+    </main>{" "}
+  </React.Fragment>
+);
+```
+
+##### Now the final solution of our counter app.
+
+> INDEX.JS
+
+```javascript
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+//import App from './App';
+import * as serviceWorker from "./serviceWorker";
+//bootstrap
+import "bootstrap/dist/css/bootstrap.css";
+import App from "./App";
+
+ReactDOM.render(<App />, document.getElementById("root"));
+
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.unregister();
+```
+
+> App.js -- counter AND counters //appart/ navbar
+
+```javascript
+import React, { Component } from "react";
+import NavBar from "./components/navbar";
+import "./App.css";
+import Counters from "./components/counters";
+
+// mounting phase, we need a "constructor, componentDidMount, render"
+class App extends Component {
+  state = {
+    counters: [
+      {
+        id: 1,
+        value: 0
+      },
+      {
+        id: 2,
+        value: 10
+      },
+      {
+        id: 3,
+        value: 100
+      },
+      {
+        id: 4,
+        value: 1000
+      },
+      {
+        id: 5,
+        value: 10000
+      }
+    ]
+  };
+
+  constructor() {
+    super();
+    console.log("APP - Constructor");
+  }
+
+  componentDidMount() {
+    //ajax call
+    // this.setState({new_data})
+    console.log("App - mounted");
+  }
+
+  handleIncrement = counter => {
+    const counters = [...this.state.counters];
+    const index = counters.indexOf(counter);
+    counters[index] = {
+      ...counter
+    };
+    counters[index].value++;
+    this.setState({
+      counters
+    });
+  };
+
+  handleDecrement = counter => {
+    const counters = [...this.state.counters];
+    const index = counters.indexOf(counter);
+    counters[index] = {
+      ...counter
+    };
+    counters[index].value--;
+    this.setState({
+      counters
+    });
+  };
+
+  handleReset = () => {
+    const counters = this.state.counters.map(c => {
+      c.value = 0;
+      return c;
+    });
+    this.setState({
+      counters
+    });
+  };
+
+  handleDelete = counterid => {
+    const counters = this.state.counters.filter(c => c.id !== counterid);
+    this.setState({
+      counters
+    });
+  };
+
+  render() {
+    console.log("APP render"); //render cycle
+    return (
+      <React.Fragment>
+        <NavBar
+          totalCounters={this.state.counters.filter(c => c.value > 0).length}
+        />{" "}
+        <main className="container">
+          <Counters
+            counters={this.state.counters}
+            onReset={this.handleReset}
+            onIncrement={this.handleIncrement}
+            onDelete={this.handleDelete}
+            onDecrement={this.handleDecrement}
+          />{" "}
+        </main>{" "}
+      </React.Fragment>
+    );
+  }
+}
+
+export default App;
+```
+
+> counters AND counter
+
+```javascript
+//counters
+import React, { Component } from "react";
+import Counter from "./counter";
+
+class Counters extends Component {
+  render() {
+    // destructuring the props
+    const {
+      onReset,
+      counters,
+      onDelete,
+      onIncrement,
+      onDecrement
+    } = this.props;
+    return (
+      // our child component here is counter.jsx
+      <React.Fragment>
+        <button onClick={onReset} className="btn btn-primary btn-sm m-2">
+          Reset
+        </button>
+        {counters.map(counter => (
+          <Counter
+            key={counter.id}
+            onDelete={onDelete}
+            onIncrement={onIncrement}
+            onDecrement={onDecrement}
+            counter={counter}
+          />
+        ))}
+      </React.Fragment>
+    );
+  }
+}
+
+export default Counters;
+```
+
+```javascript
+// counter
+import React, { Component } from "react";
+// life cycle hooks
+
+class Counter extends Component {
+  componentDidUpdate(prevProps, prevState) {
+    console.log("prevProps ", prevProps);
+    console.log("prevState ", prevState);
+    /*if (prevProps.counter.value != this.props.counter.value){
+      // ajax call
+    }*/
+  }
+
+  componentWillUnmount() {
+    console.log("Component unmount");
+  }
+  render() {
+    return (
+      <React.Fragment className="row">
+        <div className="col-1">
+          <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
+        </div>
+        <div className="col">
+          <button
+            onClick={() => this.props.onIncrement(this.props.counter)}
+            className="btn btn-secondary btn-sml"
+          >
+            +
+          </button>
+          <button
+            onClick={() => this.props.onDecrement(this.props.counter)}
+            className="btn btn-secondary btn-sml m-2"
+            disabled={this.props.counter.value === 0 ? "disabled" : ""}
+          >
+            -
+          </button>
+          <button
+            onClick={() => this.props.onDelete(this.props.counter.id)}
+            className="btn btn-danger btn-sm"
+          >
+            Delete
+          </button>
+        </div>
+      </React.Fragment>
+    );
+  }
+
+  getBadgeClasses() {
+    let classes = "badge m-2 badge-";
+    classes += this.props.counter.value === 0 ? "warning" : "primary";
+    return classes;
+  }
+
+  formatCount() {
+    const { value: count } = this.props.counter;
+    // check if it's 0
+    return count === 0 ? "Zero" : count;
+  }
+}
+
+export default Counter;
+```
+
+> We have the Navbar as sfc
+
+```javascript
+import React, { Component } from "react";
+// destructuring the props
+// Stateless functional Componant
+// sfc
+const NavBar = ({ totalCounters }) => {
+  return (
+    // <React.Fragment>
+    <nav className="navbar navbar-light bg-light">
+      <a className="navbar-brand" href="#">
+        Navbar
+        <span className="badge badge-pill badge-secondary">
+          {totalCounters}
+        </span>
+      </a>
+    </nav>
+    //</React.Fragment>
+  );
+};
+
+export default NavBar;
+```
+
+### VIdly app final exercise
+
+we will create a folder name common to put all the reusable components That are not specific to the domain of the vidly application such as like component, pagination and forms.
+
+the codes for the vidly projects so far.
+
+```javascript
+//index
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import * as serviceWorker from "./serviceWorker";
+// bootstrap and font-awesome
+import "bootstrap/dist/css/bootstrap.css";
+import "font-awesome/css/font-awesome.css";
+
+ReactDOM.render(<App />, document.getElementById("root"));
+
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.unregister();
+```
+
+```javascript
+// App
+import React, { Component } from "react";
+//import logo from "./logo.svg";
+import "./App.css";
+// import the movie.jsx
+import Movies from "./components/movies";
+
+class App extends Component {
+  render() {
+    return (
+      <main className="container">
+        <Movies />
+      </main>
+    );
+  }
+}
+
+export default App;
+```
+
+```javascript
+// movies
+import React, { Component } from "react";
+import { getMovies } from "../services/fakeMovieService";
+import Like from "./common/like";
+
+class Movies extends Component {
+  state = {
+    movies: getMovies() // it's not a good practice yet
+  };
+
+  handleDelete = movie => {
+    const movies = this.state.movies.filter(m => m._id !== movie._id);
+    this.setState({ movies });
+  };
+
+  handleLike = movie => {
+    //console.log("Event", movie);
+    const movies = [...this.state.movies];
+    const index = movies.indexOf(movie);
+    // the cloning
+    movies[index] = { ...movies[index] };
+    movies[index].liked = !movies[index].liked;
+    this.setState({ movies });
+  };
+
+  render() {
+    // refactor with object deconstruction
+    // object deconstruction logic
+    // we took the length property of this.state.movies
+    // and rename it count
+    const { length: count } = this.state.movies;
+    if (count === 0) return <p>There are no movies in database</p>;
+
+    return (
+      <React.Fragment>
+        <p> Showing {count} movies in the database</p>
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Genre</th>
+              <th>Stock</th>
+              <th>Rate</th>
+              <th />
+              <th />
+            </tr>
+          </thead>
+          <tbody>
+            {this.state.movies.map(movie => (
+              <tr key={movie._id}>
+                <td>{movie.title}</td>
+                <td>{movie.genre.name}</td>
+                <td>{movie.numberInStock}</td>
+                <td>{movie.dailyRentalRate}</td>
+                <td>
+                  <Like
+                    liked={movie.liked}
+                    onClick={() => this.handleLike(movie)}
+                  />
+                </td>
+                <td>
+                  <button
+                    onClick={() => this.handleDelete(movie)}
+                    className="btn btn-danger btn-sm"
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </React.Fragment>
+    );
+  }
+}
+
+export default Movies;
+```
+
+```javascript
+import React, { Component } from "react";
+// As input
+// liked = boolean
+// will raise
+// As output
+// onClick event
+// this component is responsible for rendering empty or full heart
+// class Like extends Component {
+//   //state = {  }
+//   render() {
+//     let coeur = "fa fa-heart";
+//     if (!this.props.liked) coeur += "-o";
+//     // onClick here is a custom event not a DOM event
+//     return (
+//       <i
+//         onClick={this.props.onClick}
+//         style={{ cursor: "pointer" }}
+//         className={coeur}
+//         aria-hidden="true"
+//       />
+//     );
+//   }
+// }
+
+// SFC
+const Like = props => {
+  let coeur = "fa fa-heart";
+  if (!props.liked) coeur += "-o";
+  return (
+    <i
+      onClick={props.onClick}
+      style={{ cursor: "pointer" }}
+      className={coeur}
+      aria-hidden="true"
+    />
+  );
+};
+
+export default Like;
+```
+
+the fake services from our imaginary databases
+
+```javascript
+// fakeGenreService
+export const genres = [
+  { _id: "5b21ca3eeb7f6fbccd471818", name: "Action" },
+  { _id: "5b21ca3eeb7f6fbccd471814", name: "Comedy" },
+  { _id: "5b21ca3eeb7f6fbccd471820", name: "Thriller" }
+];
+
+export function getGenres() {
+  return genres.filter(g => g);
+}
+```
+
+```javascript
+// fakemovieService
+import * as genresAPI from "./fakeGenreService";
+
+const movies = [
+  {
+    _id: "5b21ca3eeb7f6fbccd471815",
+    title: "Terminator",
+    genre: {
+      _id: "5b21ca3eeb7f6fbccd471818",
+      name: "Action"
+    },
+    numberInStock: 6,
+    dailyRentalRate: 2.5,
+    publishDate: "2018-01-03T19:04:28.809Z",
+    liked: true
+  },
+  {
+    _id: "5b21ca3eeb7f6fbccd471816",
+    title: "Die Hard",
+    genre: {
+      _id: "5b21ca3eeb7f6fbccd471818",
+      name: "Action"
+    },
+    numberInStock: 5,
+    dailyRentalRate: 2.5
+  },
+  {
+    _id: "5b21ca3eeb7f6fbccd471817",
+    title: "Get Out",
+    genre: {
+      _id: "5b21ca3eeb7f6fbccd471820",
+      name: "Thriller"
+    },
+    numberInStock: 8,
+    dailyRentalRate: 3.5
+  },
+  {
+    _id: "5b21ca3eeb7f6fbccd471819",
+    title: "Trip to Italy",
+    genre: {
+      _id: "5b21ca3eeb7f6fbccd471814",
+      name: "Comedy"
+    },
+    numberInStock: 7,
+    dailyRentalRate: 3.5
+  },
+  {
+    _id: "5b21ca3eeb7f6fbccd47181a",
+    title: "Airplane",
+    genre: {
+      _id: "5b21ca3eeb7f6fbccd471814",
+      name: "Comedy"
+    },
+    numberInStock: 7,
+    dailyRentalRate: 3.5
+  },
+  {
+    _id: "5b21ca3eeb7f6fbccd47181b",
+    title: "Wedding Crashers",
+    genre: {
+      _id: "5b21ca3eeb7f6fbccd471814",
+      name: "Comedy"
+    },
+    numberInStock: 7,
+    dailyRentalRate: 3.5
+  },
+  {
+    _id: "5b21ca3eeb7f6fbccd47181e",
+    title: "Gone Girl",
+    genre: {
+      _id: "5b21ca3eeb7f6fbccd471820",
+      name: "Thriller"
+    },
+    numberInStock: 7,
+    dailyRentalRate: 4.5
+  },
+  {
+    _id: "5b21ca3eeb7f6fbccd47181f",
+    title: "The Sixth Sense",
+    genre: {
+      _id: "5b21ca3eeb7f6fbccd471820",
+      name: "Thriller"
+    },
+    numberInStock: 4,
+    dailyRentalRate: 3.5
+  },
+  {
+    _id: "5b21ca3eeb7f6fbccd471821",
+    title: "The Avengers",
+    genre: {
+      _id: "5b21ca3eeb7f6fbccd471818",
+      name: "Action"
+    },
+    numberInStock: 7,
+    dailyRentalRate: 3.5
+  }
+];
+
+export function getMovies() {
+  return movies;
+}
+
+export function getMovie(id) {
+  return movies.find(m => m._id === id);
+}
+
+export function saveMovie(movie) {
+  let movieInDb = movies.find(m => m._id === movie._id) || {};
+  movieInDb.name = movie.name;
+  movieInDb.genre = genresAPI.genres.find(g => g._id === movie.genreId);
+  movieInDb.numberInStock = movie.numberInStock;
+  movieInDb.dailyRentalRate = movie.dailyRentalRate;
+
+  if (!movieInDb._id) {
+    movieInDb._id = Date.now();
+    movies.push(movieInDb);
+  }
+
+  return movieInDb;
+}
+
+export function deleteMovie(id) {
+  let movieInDb = movies.find(m => m._id === id);
+  movies.splice(movies.indexOf(movieInDb), 1);
+  return movieInDb;
+}
+```
+
+### Summary
+
+1. props : share the data
+2. Raising and Handeling Events
+3. Lifting the State
+4. Functional Components
+5. Lyfe Cycle Hooks

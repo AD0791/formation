@@ -4,7 +4,13 @@ import Counter from "./counter";
 class Counters extends Component {
   render() {
     // destructuring the props
-    const { onReset, counters, onDelete, onIncrement } = this.props;
+    const {
+      onReset,
+      counters,
+      onDelete,
+      onIncrement,
+      onDecrement
+    } = this.props;
     return (
       // our child component here is counter.jsx
       <React.Fragment>
@@ -16,6 +22,7 @@ class Counters extends Component {
             key={counter.id}
             onDelete={onDelete}
             onIncrement={onIncrement}
+            onDecrement={onDecrement}
             counter={counter}
           />
         ))}
