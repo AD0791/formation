@@ -146,3 +146,23 @@ a:active {
 ```
 
 ### Styling link with Image
+
+```css
+ul,
+ol {
+  list-style-type: none;
+}
+
+li {
+  background-image: url("images/red-star-bullet.png");
+  background-repeat: no-repeat;
+  padding-left: 25px;
+  padding-top: 10px;
+  background-position: 0px 9px;
+
+  background-color: #00ff00;
+  margin-bottom: 10px; /**/
+}
+```
+
+### Block level tags.
