@@ -1,6 +1,5 @@
-import pdb
-a = 10
+#import pdb
 # pdb.run("test")
-print("Hello World!")
-print("*"*a)
-b = 20
+x = input("x: ")
+y = int(x) + 1
+print(f"{x} et {y}")
