@@ -1,0 +1,240 @@
+# Python Mastery
+
+## : Beginner Grid-2
+
+List, Tuples, Set, Dictionaries
+
+### List
+
+```python
+matrix = [[1,2],[34,45]]
+zeros = [0]*5
+splitStrings = list("Hello World!")
+combined = zeros + splitStrings
+list(range(100))
+len(list(range(100)))
+```
+
+#### Accessing elements
+
+```bash
+Alexandros-MacBook-Pro:Beg-Python alexandrodisla$ ipython
+Python 3.7.4 (v3.7.4:e09359112e, Jul  8 2019, 14:54:52)
+Type 'copyright', 'credits' or 'license' for more information
+IPython 6.5.0 -- An enhanced Interactive Python. Type '?' for help.
+
+In [1]: letters  = ["hello"] + [0]*2 + [2]*4 + [5]*5 + [6]*4
+
+In [2]: letters
+Out[2]: ['hello', 0, 0, 2, 2, 2, 2, 5, 5, 5, 5, 5, 6, 6, 6, 6]
+
+In [3]: letters[:]
+Out[3]: ['hello', 0, 0, 2, 2, 2, 2, 5, 5, 5, 5, 5, 6, 6, 6, 6]
+
+In [4]: letters[::1]
+Out[4]: ['hello', 0, 0, 2, 2, 2, 2, 5, 5, 5, 5, 5, 6, 6, 6, 6]
+
+In [5]: letters[::2]
+Out[5]: ['hello', 0, 2, 2, 5, 5, 6, 6]
+
+In [6]: letters[::3]
+Out[6]: ['hello', 2, 2, 5, 6, 6]
+
+In [7]: letters[::4]
+Out[7]: ['hello', 2, 5, 6]
+
+In [8]: letters[::5
+   ...: ]
+Out[8]: ['hello', 2, 5, 6]
+
+In [9]: letters[::6]
+Out[9]: ['hello', 2, 6]
+
+In [10]: letters[::7]
+Out[10]: ['hello', 5, 6]
+
+In [11]: letters[::8]
+Out[11]: ['hello', 5]
+
+In [12]: letters[::9]
+Out[12]: ['hello', 5]
+
+In [13]: letters[::10]
+Out[13]: ['hello', 5]
+
+In [14]: letters[::11]
+Out[14]: ['hello', 5]
+
+In [15]: letters[::12]
+Out[15]: ['hello', 6]
+
+In [16]: letters[::13]
+Out[16]: ['hello', 6]
+
+In [17]: letters[::14]
+Out[17]: ['hello', 6]
+
+In [18]: letters[::15]
+Out[18]: ['hello', 6]
+
+In [19]: letters[::16]
+Out[19]: ['hello']
+
+In [20]: letters[::17]
+Out[20]: ['hello']
+
+In [21]: letters[::18]
+Out[21]: ['hello']
+```
+
+`::number` with `number>0` is a step
+
+```bash
+In [1]: n = list(range(20))
+
+In [2]: n
+Out[2]: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+
+In [3]: n[::-1]
+Out[3]: [19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+
+In [4]: n[::-2]
+Out[4]: [19, 17, 15, 13, 11, 9, 7, 5, 3, 1]
+
+In [5]: n[::2]
+Out[5]: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
+
+In [6]: n[::3]
+Out[6]: [0, 3, 6, 9, 12, 15, 18]
+
+In [7]: n[1::3]
+Out[7]: [1, 4, 7, 10, 13, 16, 19]
+
+In [8]: n[::3]
+Out[8]: [0, 3, 6, 9, 12, 15, 18]
+
+In [9]: n[::-3]
+Out[9]: [19, 16, 13, 10, 7, 4, 1]
+
+```
+
+#### Unpacking
+
+```python
+#possibility 1
+numbers = [1,2,3]
+first = numbers[0]
+second = numbers[1]
+third = numbers[2]
+
+# possibility 2
+first, second, third = numbers
+```
+
+```bash
+In [13]: num = [1,2,3]
+
+In [14]: un, *deux = num
+
+In [15]: un
+Out[15]: 1
+
+In [16]: deux
+Out[16]: [2, 3]
+```
+
+#### looping over list properly
+
+we can get index and value with a build-in fonction named `enumerate`.
+
+```python
+n = ["letter", 12, 33]
+for i in enumerate(n):
+    print(i)
+    print(i[0], i[1])
+```
+
+```bash
+[Running] python3 "/Users/alexandrodisla/Desktop/repo/formation/Mosh/Beg-Python/app.py"
+(0, 'letter')
+0 letter
+(1, 12)
+1 12
+(2, 33)
+2 33
+
+[Done] exited with code=0 in 0.077 seconds
+```
+
+#### Adding and Removing items
+
+- add at the end `append`
+- add at a specific position `insert`
+
+* remove element at the end `pop`
+* remove an element with all his occurence `remove`
+* `del letters[1:2]` remove these slice element
+* `letters.clear` remove all elements.
+
+#### find
+
+`.index` find index of element
+
+```python
+In [18]: letters = [1,2,34,5,"sarita"]
+
+In [19]: letters.count('sarita')
+Out[19]: 1
+
+In [20]: if "sarita" in letters:
+    ...:     print(letters.index("sarita"))
+    ...:
+4
+```
+
+#### Sorting List
+
+- `list.sort()`
+- `list.sort(reverse=True)`
+
+```python
+numbers = [12, 32, 43, 25, 56, 76, 90]
+print(sorted(numbers, reverse=True))
+
+numbers = [12, 32, 43, 25, 56, 76, 90]
+print(sorted(numbers))
+```
+
+```bash
+[Running] python3 "/Users/alexandrodisla/Desktop/repo/formation/Mosh/Beg-Python/app.py"
+[90, 76, 56, 43, 32, 25, 12]
+
+[Done] exited with code=0 in 0.082 seconds
+#########################################################################################################################################################
+[Running] python3 "/Users/alexandrodisla/Desktop/repo/formation/Mosh/Beg-Python/app.py"
+[12, 25, 32, 43, 56, 76, 90]
+
+[Done] exited with code=0 in 0.069 seconds
+```
+
+```python
+numbers = [12, 32, 43, 25, 56, 76, 90]
+numbers.sort()
+print(numbers)
+numbers.sort(reverse=True)
+print(numbers)
+```
+
+```bash
+Running] python3 "/Users/alexandrodisla/Desktop/repo/formation/Mosh/Beg-Python/app.py"
+[12, 25, 32, 43, 56, 76, 90]
+
+[Done] exited with code=0 in 0.069 seconds
+
+[Running] python3 "/Users/alexandrodisla/Desktop/repo/formation/Mosh/Beg-Python/app.py"
+[12, 25, 32, 43, 56, 76, 90]
+
+[Done] exited with code=0 in 0.06 seconds
+```
+
+### Lambda
