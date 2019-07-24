@@ -1,5 +1,5 @@
 #import pdb
 # pdb.run("test")
-x = input("x: ")
-y = int(x) + 1
-print(f"{x} et {y}")
+age = 40
+if 18 <= age < 50:
+    print("you are full of life")
