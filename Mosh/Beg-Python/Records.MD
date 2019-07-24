@@ -107,3 +107,140 @@ if 18<=age<50:
 ```
 
 ### LOOPS
+
+#### for-in
+
+```python
+age = [1, 2, 3, 4, 5, 6, 8, 9]
+for number in range(len(age)):
+    print("we get the index of the list")
+    print(f"This is the index: {number}")
+    print("Let's get the proper age using the index")
+    print(f'The age is: {age[number]}')
+```
+
+```bash
+[Running] python3 "/Users/alexandrodisla/Desktop/repo/formation/Mosh/Beg-Python/app.py"
+we get the index of the list
+This is the index: 0
+Let's get the proper age using the index
+The age is: 1
+we get the index of the list
+This is the index: 1
+Let's get the proper age using the index
+The age is: 2
+we get the index of the list
+This is the index: 2
+Let's get the proper age using the index
+The age is: 3
+we get the index of the list
+This is the index: 3
+Let's get the proper age using the index
+The age is: 4
+we get the index of the list
+This is the index: 4
+Let's get the proper age using the index
+The age is: 5
+we get the index of the list
+This is the index: 5
+Let's get the proper age using the index
+The age is: 6
+we get the index of the list
+This is the index: 6
+Let's get the proper age using the index
+The age is: 8
+we get the index of the list
+This is the index: 7
+Let's get the proper age using the index
+The age is: 9
+
+[Done] exited with code=0 in 0.059 seconds
+```
+
+```python
+age = [1, 2, 3, 4, 5, 6, 8, 9]
+for ages in age:
+    print("Loop over the elements directly")
+    print(f'The age is: {ages}')
+```
+
+```bash
+[Running] python3 "/Users/alexandrodisla/Desktop/repo/formation/Mosh/Beg-Python/app.py"
+Loop over the elements directly
+The age is: 1
+Loop over the elements directly
+The age is: 2
+Loop over the elements directly
+The age is: 3
+Loop over the elements directly
+The age is: 4
+Loop over the elements directly
+The age is: 5
+Loop over the elements directly
+The age is: 6
+Loop over the elements directly
+The age is: 8
+Loop over the elements directly
+The age is: 9
+
+[Done] exited with code=0 in 0.056 seconds
+```
+
+#### For-else
+
+```python
+#import pdb
+# pdb.run("test")
+age = [1, 2, 3, 4, 5, 6, 8, 9]
+needAge = 10
+for ages in age:
+    print(f'The current age is: {ages}')
+    if ages == needAge:
+        print(f"We find the desired age: {ages}")
+        break
+else:
+    print(f"The needed age {needAge} is not there.")
+```
+
+```bash
+[Running] python3 "/Users/alexandrodisla/Desktop/repo/formation/Mosh/Beg-Python/app.py"
+The current age is: 1
+The current age is: 2
+The current age is: 3
+The current age is: 4
+The current age is: 5
+The current age is: 6
+The current age is: 8
+The current age is: 9
+The needed age 10 is not there.
+
+[Done] exited with code=0 in 0.059 seconds
+```
+
+```python
+age = [1, 2, 3, 4, 5, 6, 8, 9,10,11]
+needAge = 10
+for ages in age:
+    print(f'The current age is: {ages}')
+    if ages == needAge:
+        print(f"We find the desired age: {ages}")
+        break
+else:
+    print(f"The needed age {needAge} is not there.")
+```
+
+```bash
+[Running] python3 "/Users/alexandrodisla/Desktop/repo/formation/Mosh/Beg-Python/app.py"
+The current age is: 1
+The current age is: 2
+The current age is: 3
+The current age is: 4
+The current age is: 5
+The current age is: 6
+The current age is: 8
+The current age is: 9
+The current age is: 10
+We find the desired age: 10
+
+[Done] exited with code=0 in 0.057 seconds
+```
