@@ -1,12 +1,17 @@
-#import pdb
+from pprint import pprint
+sentence = "This is a common interview question"
 
-from collections import deque
 
-queue = deque([])
+def word_count(word):
+    char = {}
+    for mo in sentence:
+        if mo in char:
+            char[mo] += 1
+        else:
+            char[mo] = 1
+    # pprint(char)
+    return char
 
-queue.append(1)
-queue.append(2)
-queue.append(3)
-queue.append(4)
-queue.append(5)
-queue.appendleft(0)
+
+sorted(word_count(sentence).items(),
+       key=lambda kv: kv[1], reverse=True)[0]
