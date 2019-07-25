@@ -237,4 +237,165 @@ Running] python3 "/Users/alexandrodisla/Desktop/repo/formation/Mosh/Beg-Python/a
 [Done] exited with code=0 in 0.06 seconds
 ```
 
-### Lambda
+#### Lambda
+
+```python
+#import pdb
+
+ltuples = [
+    ('jason', 9),
+    ('Verstapen', 2),
+    ('Lecler', 3)
+]
+
+
+ltuples.sort(key=lambda item: item[1])
+
+print(ltuples)
+```
+
+```bash
+[Running] python3 "/Users/alexandrodisla/Desktop/repo/formation/Mosh/Beg-Python/app.py"
+[('Verstapen', 2), ('Lecler', 3), ('jason', 9)]
+```
+
+#### map
+
+```bash
+In [1]: #import pdb
+   ...:
+   ...: lt = [
+   ...:     ('jason', 9),
+   ...:     ('Verstapen', 2),
+   ...:     ('Lecler', 3)
+   ...: ]
+   ...:
+
+In [2]: eml = []
+
+In [3]: for item in lt:
+   ...:     eml.append(item[1])
+   ...:
+
+In [4]: eml
+Out[4]: [9, 2, 3]
+
+In [5]: x = map(lambda item: item[1], lt)
+
+In [6]: x
+Out[6]: <map at 0x10418ac50>
+
+In [7]: list(x)
+Out[7]: [9, 2, 3]
+```
+
+#### Filter
+
+```python
+
+In [1]: f = [
+   ...:     ('Bottas', 9),
+   ...:     ('Verstapen', 2),
+   ...:     ('Lecler', 3)
+   ...: ]
+   ...:
+
+
+In 2: x = filter(lambda item: item[1] < 9, f )
+
+In [3]: x
+Out[3]: <filter at 0x104ef3250>
+
+In [4]: list(x)
+Out[4]: [('Verstapen', 2), ('Lecler', 3)]
+```
+
+#### list comprehension
+
+List comprehension for filtering and mapping data.
+
+```python
+f = [
+    ('Bottas', 9),
+    ('Verstapen', 2),
+    ('Lecler', 3)
+]
+# instead of : prices = list(map(lambda item:item[1],f))
+In [6]: prices = [item[1] for item in f]
+
+In [7]: prices
+Out[7]: [9, 2, 3]
+
+# instead of : new = list(filter(lambda item: item[1] <9,f))
+In [8]: new = [item for item in f if item[1] < 9 ]
+
+In [9]: new
+Out[9]: [('Verstapen', 2), ('Lecler', 3)]
+
+```
+
+#### Zip function
+
+```python
+In [10]: list1 = [1,2,3]
+
+In [11]: list2 = [4,5,6]
+
+In [12]: list(zip("abc",list1,list2))
+Out[12]: [('a', 1, 4), ('b', 2, 5), ('c', 3, 6)]
+
+In [13]: list(zip("abcd",list1,list2))
+Out[13]: [('a', 1, 4), ('b', 2, 5), ('c', 3, 6)]
+
+In [14]: list2 = [4,5,6,7]
+
+In [15]: list(zip("abcd",list1,list2))
+Out[15]: [('a', 1, 4), ('b', 2, 5), ('c', 3, 6)]
+
+In [16]: list1 = [1,2,3,7]
+
+In [17]: list(zip("abcd",list1,list2))
+Out[17]: [('a', 1, 4), ('b', 2, 5), ('c', 3, 6), ('d', 7, 7)]
+```
+
+### Stacks (list)
+
+LIFO : Last In First Out
+
+It's about notion of browsing seesion, we use a list object and built-in methods to make every thing work.
+
+### Queues (list)
+
+FIFO: First In First Out
+
+```python
+In [9]: from collections import deque
+   ...:
+   ...: queue = deque([])
+   ...:
+   ...: queue.append(1)
+   ...: queue.append(2)
+   ...: queue.append(3)
+   ...: queue.append(4)
+   ...: queue.append(5)
+   ...: queue.appendleft(0)
+   ...:
+   ...:
+
+In [10]: queue
+Out[10]: deque([0, 1, 2, 3, 4, 5])
+
+In [11]: queue.pop()
+Out[11]: 5
+
+In [12]: queue
+Out[12]: deque([0, 1, 2, 3, 4])
+
+In [13]: queue.popleft()
+Out[13]: 0
+
+In [14]: queue
+Out[14]: deque([1, 2, 3, 4])
+```
+
+### Tuples

@@ -1,8 +1,12 @@
-# import pdb
-# pdb.run("test")
+#import pdb
 
-numbers = [12, 32, 43, 25, 56, 76, 90]
-numbers.sort()
-print(numbers)
-numbers.sort(reverse=True)
-print(numbers)
+from collections import deque
+
+queue = deque([])
+
+queue.append(1)
+queue.append(2)
+queue.append(3)
+queue.append(4)
+queue.append(5)
+queue.appendleft(0)
