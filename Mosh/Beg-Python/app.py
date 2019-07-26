@@ -1,17 +1,12 @@
-from pprint import pprint
-sentence = "This is a common interview question"
+def calculate(num):
+    if num <= 0:
+        raise ValueError("Number can't be 0 or less")
+    return 10 / num
 
 
-def word_count(word):
-    char = {}
-    for mo in sentence:
-        if mo in char:
-            char[mo] += 1
-        else:
-            char[mo] = 1
-    # pprint(char)
-    return char
-
-
-sorted(word_count(sentence).items(),
-       key=lambda kv: kv[1], reverse=True)[0]
+try:
+    calculate(-1)
+except ValueError as e:
+    print(e)
+else:
+    print("No error")
