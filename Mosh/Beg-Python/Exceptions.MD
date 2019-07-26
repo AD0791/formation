@@ -309,3 +309,175 @@ In [24]: def calculate(num):
     ...:
 No error
 ```
+
+### Cost of Raisings
+
+`from timeit import timeit` allows you to calculate the execution times of a python code.
+
+```python
+from timeit import timeit
+code1 = """
+def calculate(num):
+    if num <= 0:
+        raise ValueError("Number can't be 0 or less")
+    return 10 / num
+
+
+try:
+    calculate(-1)
+except ValueError as e:
+    print(e)
+else:
+    print("No error")
+"""
+
+print("first code=", timeit(code1, number=10000))
+```
+
+```bash
+first code= 2.5747960899999995
+```
+
+The `pass` doesn't print anything.
+
+```python
+from timeit import timeit
+code1 = """
+def calculate(num):
+    if num <= 0:
+        raise ValueError("Number can't be 0 or less")
+    return 10 / num
+
+
+try:
+    calculate(-1)
+except ValueError as e:
+    #print(e)
+    pass
+else:
+    #print("No error")
+    pass
+"""
+
+print("first code=", timeit(code1, number=10000))
+```
+
+```bash
+Alexandros-MacBook-Pro:Beg-Python alexandrodisla$ python3 app.py
+first code= 0.006526881000000002
+```
+
+`None`: means absence of a value.
+
+```python
+from timeit import timeit
+code1 = """
+def calculate(num):
+    if num <= 0:
+        raise ValueError("Number can't be 0 or less")
+    return 10 / num
+
+
+try:
+    calculate(-1)
+except ValueError as e:
+    #print(e)
+    pass
+else:
+    #print("No error")
+    pass
+"""
+
+print("First code=", timeit(code1, number=10000))
+
+code2 = """
+def calculate(num):
+    if num <= 0:
+        #raise ValueError("Number can't be 0 or less")
+        return None
+    return 10 / num
+
+
+try:
+    calculate(-1)
+except ValueError as e:
+    #print(e)
+    pass
+else:
+    #print("No error")
+    pass
+"""
+
+print("Second code=", timeit(code2, number=10000))
+```
+
+```bash
+Alexandros-MacBook-Pro:Beg-Python alexandrodisla$ python3 app.py
+First code= 0.008425797999999998
+Second code= 0.002646031
+```
+
+A 3rd Test
+
+```python
+from timeit import timeit
+code1 = """
+def calculate(num):
+    if num <= 0:
+        raise ValueError("Number can't be 0 or less")
+    return 10 / num
+
+
+try:
+    calculate(-1)
+except ValueError as e:
+    #print(e)
+    pass
+else:
+    #print("No error")
+    pass
+"""
+
+print("First code=", timeit(code1, number=10000))
+
+code2 = """
+def calculate(num):
+    if num <= 0:
+        #raise ValueError("Number can't be 0 or less")
+        return None
+    return 10 / num
+
+
+try:
+    calculate(-1)
+except ValueError as e:
+    #print(e)
+    pass
+else:
+    #print("No error")
+    pass
+"""
+
+print("Second code=", timeit(code2, number=10000))
+
+code3 = """
+def calculate(num):
+    if num <= 0:
+        return None
+    return 10 / num
+
+
+
+x = calculate(-1)
+if x == None:
+    pass
+"""
+
+print("Third code=", timeit(code3, number=10000))
+```
+
+```bash
+First code= 0.007797992999999996
+Second code= 0.003105726000000003
+Third code= 0.0031480250000000057
+```

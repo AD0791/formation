@@ -1,12 +1,7 @@
-def calculate(num):
-    if num <= 0:
-        raise ValueError("Number can't be 0 or less")
-    return 10 / num
+class TagCloud:
+    def __init__(self):
+        self.tags = {}
 
-
-try:
-    calculate(-1)
-except ValueError as e:
-    print(e)
-else:
-    print("No error")
+    # ajouter tags
+    def add_tags(self, tag):
+        self.tags[tag] = self.tags.get(tag, 0) + 1
