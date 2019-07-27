@@ -650,3 +650,263 @@ class Point:
 ```
 
 ### Making CUstom Containers
+
+```python
+In [12]:     # ajouter tags
+    ...:     def add_tags(self, tag):
+    ...:         self.tags[tag.lower()] = self.tags.get(tag.lower(), 0) + 1
+    ...:
+    ...:     # read a tag like this instance["tag"].
+    ...:     # __getitem__ seems to be on the documentation.
+    ...:     # In [9]: cloud["python"]
+    ...:     # Out[9]: 6
+    ...:     # We can only read only
+    ...:     def __getitem__(self, tag):
+    ...:         return self.tags.get(tag.lower(), 0)
+    ...:
+    ...:     # we need to implement that behavior instance["tag"] = value/count
+    ...:     # __setitem__ method need to be implemented
+    ...:     def __setitem__(self, tag, count):
+    ...:         self.tags[tag.lower()] = count
+    ...:
+    ...:
+
+In [13]: cloud = TagCloud()
+
+In [14]: cloud.add_tags("Python")
+
+In [15]: cloud.add_tags("Python")
+
+In [16]: cloud.add_tags("Python")
+
+In [17]: cloud.add_tags("Python")
+
+In [18]: cloud.add_tags("Python")
+
+In [19]: cloud.add_tags("Python")
+
+In [20]: cloud.add_tags("Python")
+
+In [21]: cloud.add_tags("Javascript")
+
+In [22]: cloud.add_tags("Javascript")
+
+In [23]: cloud.add_tags("Javascript")
+
+In [24]: cloud.add_tags("Javascript")
+
+In [25]: cloud.add_tags("Javascript")
+
+In [26]: cloud.tags
+Out[26]: {'python': 7, 'javascript': 5}
+
+In [27]: cloud["python"]
+Out[27]: 7
+
+In [28]: cloud["Javascript"]
+Out[28]: 5
+
+In [29]: cloud["Ruby"] = 6
+
+In [30]: cloud.tags
+Out[30]: {'python': 7, 'javascript': 5, 'ruby': 6}
+
+In [31]: cloud["Javascript"] = 7
+
+In [32]: cloud.tags
+Out[32]: {'python': 7, 'javascript': 7, 'ruby': 6}
+
+In [33]: cloud["Ruby"] = 7
+
+In [34]: cloud.tags
+Out[34]: {'python': 7, 'javascript': 7, 'ruby': 7}
+
+In [35]: cloud.__getitem__("ruby")
+Out[35]: 7
+
+In [36]: cloud.__setitem__("R",3)
+
+In [37]: cloud.tags
+Out[37]: {'python': 7, 'javascript': 7, 'ruby': 7, 'r': 3}
+
+
+In [3]: cloud.tags
+   ...: cloud["python"]
+   ...: cloud["Javascript"]
+   ...: cloud["Ruby"] = 6
+   ...: cloud.tags
+   ...: cloud["Javascript"] = 7
+   ...: cloud.tags
+   ...: cloud["Ruby"] = 7
+   ...: cloud.tags
+   ...: cloud.__getitem__("ruby")
+   ...: cloud.__setitem__("R", 3)
+   ...: cloud.tags
+   ...: len(cloud)
+
+In [5]:
+   ...: cloud["Ruby"] = 7
+   ...:
+   ...: cloud.tags
+   ...:
+   ...: cloud.__getitem__("ruby")
+   ...:
+
+In [7]:     # Out[9]: 6
+   ...:     # We can only read only
+   ...:     def __getitem__(self, tag):
+   ...:         return self.tags.get(tag.lower(), 0)
+   ...:
+   ...:     # we need to implement that behavior instance["tag"] = value/count
+   ...:     # __setitem__ method need to be implemented
+   ...:     def __setitem__(self, tag, count):
+   ...:         self.tags[tag.lower()] = count
+   ...:
+   ...:     # get the lenght of the instance
+   ...:     def __len__(self):
+   ...:         return len(self.tags)
+   ...:
+   ...:     # allow the instance to be iterable.
+   ...:     def __iter__(self):
+   ...:         return iter(self.tags)
+   ...:
+
+In [8]: cloud = TagCloud()
+
+In [9]: cloud.add_tags("Python")
+   ...: cloud.add_tags("Python")
+   ...: cloud.add_tags("Python")
+   ...: cloud.add_tags("Python")
+   ...: cloud.add_tags("Python")
+   ...: cloud.add_tags("Python")
+   ...: cloud.add_tags("Python")
+   ...: cloud.add_tags("Javascript")
+   ...: cloud.add_tags("Javascript")
+   ...: cloud.add_tags("Javascript")
+   ...: cloud.add_tags("Javascript")
+   ...: cloud.add_tags("Javascript")
+   ...:
+   ...:
+
+In [10]: cloud.tags
+Out[10]: {'python': 7, 'javascript': 5}
+
+In [11]: cloud["python"]
+Out[11]: 7
+
+In [12]: cloud["Javascript"]
+Out[12]: 5
+
+In [13]: cloud["Ruby"] = 6
+
+In [14]: cloud.tags
+Out[14]: {'python': 7, 'javascript': 5, 'ruby': 6}
+
+In [15]: cloud["Ruby"] = 7
+
+In [16]: cloud.tags
+Out[16]: {'python': 7, 'javascript': 5, 'ruby': 7}
+
+In [17]: cloud.__getitem__("ruby")
+Out[17]: 7
+
+In [18]: cloud.__setitem__("R", 3)
+    ...:
+
+In [19]: cloud.tags
+Out[19]: {'python': 7, 'javascript': 5, 'ruby': 7, 'r': 3}
+
+In [20]: len(cloud)
+Out[20]: 4
+
+In [21]: # Iteration
+    ...: for val in cloud:
+    ...:     print(val, cloud.tags[val])
+    ...:
+python 7
+javascript 5
+ruby 7
+r 3
+```
+
+#### The TagCloud class (+)
+
+```python
+class TagCloud:
+    def __init__(self):
+        self.tags = {}
+
+    # ajouter tags
+    def add_tags(self, tag):
+        self.tags[tag.lower()] = self.tags.get(tag.lower(), 0) + 1
+
+    # read a tag like this instance["tag"].
+    # __getitem__ seems to be on the documentation.
+    # In [9]: cloud["python"]
+    # Out[9]: 6
+    # We can only read only
+    def __getitem__(self, tag):
+        return self.tags.get(tag.lower(), 0)
+
+    # we need to implement that behavior instance["tag"] = value/count
+    # __setitem__ method need to be implemented
+    def __setitem__(self, tag, count):
+        self.tags[tag.lower()] = count
+
+    # get the lenght of the instance
+    def __len__(self):
+        return len(self.tags)
+
+    # allow the instance to be iterable.
+    def __iter__(self):
+        return iter(self.tags)
+
+
+# Testing the class
+cloud = TagCloud()
+
+cloud.add_tags("Python")
+cloud.add_tags("Python")
+cloud.add_tags("Python")
+cloud.add_tags("Python")
+cloud.add_tags("Python")
+cloud.add_tags("Python")
+cloud.add_tags("Python")
+cloud.add_tags("Javascript")
+cloud.add_tags("Javascript")
+cloud.add_tags("Javascript")
+cloud.add_tags("Javascript")
+cloud.add_tags("Javascript")
+
+cloud.tags
+
+cloud["python"]
+
+cloud["Javascript"]
+
+cloud["Ruby"] = 6
+
+cloud.tags
+
+cloud["Javascript"] = 7
+
+cloud.tags
+
+cloud["Ruby"] = 7
+
+cloud.tags
+
+cloud.__getitem__("ruby")
+
+cloud.__setitem__("R", 3)
+
+cloud.tags
+
+len(cloud)
+
+# Iteration
+for val in cloud:
+    print(val, cloud.tags[val])
+```
+
+### Private members
