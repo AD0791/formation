@@ -910,3 +910,293 @@ for val in cloud:
 ```
 
 ### Private members
+
+The class that we build has a huge flow: `cloud.tags["Python"]`
+
+1. Public variable: `self.tags`
+2. Private variable: `self.__tags`
+
+Class after refactoring
+
+```python
+class TagCloud:
+    def __init__(self):
+        self.__tags = {}
+
+    # ajouter __tags
+    def add(self, tag):
+        self.__tags[tag.lower()] = self.__tags.get(tag.lower(), 0) + 1
+
+    # read a tag like this instance["tag"].
+    # __getitem__ seems to be on the documentation.
+    # In [9]: cloud["python"]
+    # Out[9]: 6
+    # We can only read only
+    def __getitem__(self, tag):
+        return self.__tags.get(tag.lower(), 0)
+
+    # we need to implement that behavior instance["tag"] = value/count
+    # __setitem__ method need to be implemented
+    def __setitem__(self, tag, count):
+        self.__tags[tag.lower()] = count
+
+    # get the lenght of the instance
+    def __len__(self):
+        return len(self.__tags)
+
+    # allow the instance to be iterable.
+    def __iter__(self):
+        return iter(self.__tags)
+```
+
+But we technically still can access the private member
+
+```python
+In [2]: cloud.tags
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-2-8af470852f82> in <module>()
+----> 1 cloud.tags
+
+AttributeError: 'TagCloud' object has no attribute 'tags'
+
+In [3]: cloud.__tags
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-3-72230a52544b> in <module>()
+----> 1 cloud.__tags
+
+AttributeError: 'TagCloud' object has no attribute '__tags'
+
+# Class still work perfectly
+In [4]: cloud["python"]
+Out[4]: 7
+
+# the magic of __dict__ (built-in magic method)
+In [6]: cloud.__dict__
+Out[6]: {'_TagCloud__tags': {'python': 7, 'javascript': 5}}
+
+# We see how to access the private member now
+In [7]: cloud._TagCloud__tags
+Out[7]: {'python': 7, 'javascript': 5}
+```
+
+#### TagCloud Class
+
+```python
+class TagCloud:
+    def __init__(self):
+        self.__tags = {}
+
+    # ajouter __tags
+    def add(self, tag):
+        self.__tags[tag.lower()] = self.__tags.get(tag.lower(), 0) + 1
+
+    # read a tag like this instance["tag"].
+    # __getitem__ seems to be on the documentation.
+    # In [9]: cloud["python"]
+    # Out[9]: 6
+    # We can only read only
+    def __getitem__(self, tag):
+        return self.__tags.get(tag.lower(), 0)
+
+    # we need to implement that behavior instance["tag"] = value/count
+    # __setitem__ method need to be implemented
+    def __setitem__(self, tag, count):
+        self.__tags[tag.lower()] = count
+
+    # get the lenght of the instance
+    def __len__(self):
+        return len(self.__tags)
+
+    # allow the instance to be iterable.
+    def __iter__(self):
+        return iter(self.__tags)
+
+
+# Testing the class
+cloud = TagCloud()
+
+cloud.add("Python")
+cloud.add("Python")
+cloud.add("Python")
+cloud.add("Python")
+cloud.add("Python")
+cloud.add("Python")
+cloud.add("Python")
+
+cloud.add("Javascript")
+cloud.add("Javascript")
+cloud.add("Javascript")
+cloud.add("Javascript")
+cloud.add("Javascript")
+```
+
+### Properties
+
+Control over an attribute in a class.
+
+```python
+In [1]: class Product:
+   ...:
+   ...:     def __init__(self, price):
+   ...:         self.price = price
+   ...:
+   ...:
+
+In [2]: Product(-50)
+Out[2]: <__main__.Product at 0x109fc63d0>
+
+In [3]: Product(-50).price
+Out[3]: -50
+```
+
+> But as a real example that doesn't make any sense.
+
+A way to fixed it:
+
+- make price private.
+- use a custom getter and setter
+
+```python
+In [6]:     def __init__(self, price):
+   ...:         # make it private
+   ...:         self.set_price(price)
+   ...:
+   ...:     # getter
+   ...:     def get_price(self):
+   ...:         return self.__price
+   ...:
+   ...:     # setter
+   ...:     def set_price(self, value):
+   ...:         if value < 0:
+   ...:             raise ValueError("can't be negative number")
+   ...:         self.__price = value
+   ...:
+   ...:
+   ...: Product(-50)
+   ...:
+   ...:
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+<ipython-input-6-6465e0cfb18e> in <module>()
+     16
+     17
+---> 18 Product(-50)
+
+<ipython-input-6-6465e0cfb18e> in __init__(self, price)
+      3     def __init__(self, price):
+      4         # make it private
+----> 5         self.set_price(price)
+      6
+      7     # getter
+
+<ipython-input-6-6465e0cfb18e> in set_price(self, value)
+     12     def set_price(self, value):
+     13         if value < 0:
+---> 14             raise ValueError("can't be negative number")
+     15         self.__price = value
+     16
+
+ValueError: can't be negative number
+```
+
+> In Python we have a built-in `property` method that wrap up our getter and setter.
+
+#### RAPPEL on PRivate
+
+1. A private variable: `__price = value`
+2. A private method: `def __price():`
+
+we can use a decorator to create private method also:
+
+Just as the `@classmethod` decorator (custom constructor)
+
+By calling the `price = property(get_price, set_price)` explicit we sill can access the getter and setter. It makes the code noisy.
+
+We need the to use a decorator to simplify our code and hide the custom getter and setter.
+
+#### We set the custom getter and setter with decorator
+
+```python
+In [28]:         self.price = price
+    ...:
+    ...:     # getter
+    ...:     @property
+    ...:     def price(self):
+    ...:         return self.__price
+    ...:
+    ...:     # setter
+    ...:     @price.setter
+    ...:     def price(self, value):
+    ...:         if value < 0:
+
+In [30]:         self.price = price
+    ...:
+    ...:     # getter
+    ...:     @property
+    ...:     def price(self):
+    ...:         return self.__price
+    ...:
+    ...:     # setter
+    ...:     @price.setter
+    ...:     def price(self, value):
+    ...:         if value < 0:
+    ...:             raise ValueError("can't be negative number")
+    ...:         self.__price = value
+    ...:
+    ...:
+    ...: prix = Product(10)
+    ...:
+    ...:
+
+In [31]: prix.price
+Out[31]: 10
+
+In [32]: prix.price = 30
+
+In [33]: prix.price
+Out[33]: 30
+
+In [34]: prix.price  = -50
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+<ipython-input-34-58daa5268f7c> in <module>()
+----> 1 prix.price  = -50
+
+<ipython-input-30-2234c80d5d43> in price(self, value)
+     14     def price(self, value):
+     15         if value < 0:
+---> 16             raise ValueError("can't be negative number")
+     17         self.__price = value
+     18
+
+ValueError: can't be negative number
+```
+
+#### Product class
+
+```python
+class Product:
+
+    def __init__(self, price):
+        # we can use price like a regular property now
+        self.price = price
+
+    # getter
+    @property
+    def price(self):
+        return self.__price
+
+    # setter
+    @price.setter
+    def price(self, value):
+        if value < 0:
+            raise ValueError("can't be negative number")
+        self.__price = value
+
+
+prix = Product(10)
+```
+
+### Inheritance
