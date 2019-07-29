@@ -1,4 +1,4 @@
-# Interactive Web Development: Chapter 5 (Functions)
+# Interactive Web Development: Chapter 5 (Functions) & Chapter 6 (Decision in code)
 
 ## Chapter 5 Functions
 
@@ -107,3 +107,5 @@
   </body>
 </html>
 ```
+
+## Chapter 6 Decision in code
