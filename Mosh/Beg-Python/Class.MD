@@ -1200,3 +1200,108 @@ prix = Product(10)
 ```
 
 ### Inheritance
+
+We can share attributes and methods between classes.
+
+> DRY: DO not repeat yourself
+
+To solve this problem:
+
+1. Inheritance
+2. Composition
+
+```python
+In [1]: class Animal:
+   ...:     def eat(self):
+   ...:         print("EAT")
+   ...:
+   ...: # childrens of animal
+   ...:
+   ...:
+   ...: class Mammal(Animal):
+   ...:
+   ...:     def walk(self):
+   ...:         print('WALK')
+   ...:
+   ...:
+   ...: class Fish(Animal):
+   ...:     def swim(self):
+   ...:         print('SWIM')
+   ...:
+   ...:
+
+In [2]: m = Mammal()
+
+In [3]: m.eat()
+EAT
+
+In [4]: m.walk()
+WALK
+
+In [5]: f = Fish()
+
+In [6]: f.eat()
+EAT
+
+In [7]: f.swim()
+SWIM
+```
+
+```python
+In [8]:
+   ...:     def eat(self):
+   ...:         print("EAT")
+   ...:
+   ...: # childrens of animal
+   ...:
+   ...:
+   ...: class Mammal(Animal):
+   ...:
+   ...:     def walk(self):
+   ...:         print('WALK')
+   ...:
+   ...:
+   ...: class Fish(Animal):
+   ...:     def swim(self):
+   ...:         print('SWIM')
+   ...:
+   ...:
+
+In [9]: f = Fish()
+
+In [10]: f.age
+Out[10]: 1
+
+In [11]: m = Mammal()
+
+In [12]: m.age
+Out[12]: 1
+```
+
+#### inheritance in action - The Class
+
+```python
+# parent or base class
+class Animal:
+    def __init__(self):
+        self.age = 1
+
+    def eat(self):
+        print("EAT")
+
+# childrens of animal
+
+
+class Mammal(Animal):
+
+    def walk(self):
+        print('WALK')
+
+
+class Fish(Animal):
+    def swim(self):
+        print('SWIM')
+
+```
+
+### Object Class

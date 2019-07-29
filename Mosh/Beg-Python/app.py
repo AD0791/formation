@@ -1,20 +1,20 @@
-class Product:
+# parent or base class
+class Animal:
+    def __init__(self):
+        self.age = 1
 
-    def __init__(self, price):
-        # we can use price like a regular property now
-        self.price = price
+    def eat(self):
+        print("EAT")
 
-    # getter
-    @property
-    def price(self):
-        return self.__price
-
-    # setter
-    @price.setter
-    def price(self, value):
-        if value < 0:
-            raise ValueError("can't be negative number")
-        self.__price = value
+# childrens of animal
 
 
-prix = Product(10)
+class Mammal(Animal):
+
+    def walk(self):
+        print('WALK')
+
+
+class Fish(Animal):
+    def swim(self):
+        print('SWIM')
