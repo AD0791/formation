@@ -1512,3 +1512,260 @@ Person speak
 ```
 
 ### Example of Inheritance
+
+Create a Custom exception
+
+```python
+class InvalidOpError(Exception):
+    pass
+
+
+class Stream:
+    def __init__(self):
+        self.opened = False
+
+    def open(self):
+        if self.opened:
+            # custom exception
+            raise IndentationError("Stream is Already Open")
+        self.opened = True
+
+    def close(self):
+        if not self.opened:
+            # custom exception
+            raise IndentationError("Stream is Already closed")
+        self.opened = False
+
+
+class FileStream(Stream):
+    def read(self):
+        print("File is stream")
+
+
+class NetworkStream(Stream):
+    def read(self):
+        print("Network is stream")
+
+```
+
+### Abstract Base Class
+
+We must make the Stream Class purely abstract.
+We can't extantiate an abstract class.
+
+```python
+from abc import ABC, abstractmethod
+
+
+class InvalidOpError(Exception):
+    pass
+
+
+class Stream(ABC):
+    def __init__(self):
+        self.opened = False
+
+    def open(self):
+        if self.opened:
+            # custom exception
+            raise IndentationError("Stream is Already Open")
+        self.opened = True
+
+    def close(self):
+        if not self.opened:
+            # custom exception
+            raise IndentationError("Stream is Already closed")
+        self.opened = False
+
+    @abstractmethod
+    def read(self):
+        pass
+
+# using the abstractmethod to create concrete class
+
+
+class FileStream(Stream):
+    def read(self):
+        print("File is stream")
+
+
+class NetworkStream(Stream):
+    def read(self):
+        print("Network is stream")
+
+
+class MemoryStream(Stream):
+    def read(self):
+        print("Memory is stream")
+
+```
+
+```python
+
+In [2]: s = Stream()
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+<ipython-input-2-f4194fe64929> in <module>()
+----> 1 s = Stream()
+
+TypeError: Can't instantiate abstract class Stream with abstract methods read
+
+In [3]: fichier = FileStream()
+
+In [4]: fichier.read()
+File is stream
+
+In [5]: net = NetworkStream()
+
+In [6]: net.read()
+Network is stream
+
+In [7]: memoire  = MemoryStream()
+
+In [8]: memoire.read()
+Memory is stream
+```
+
+#### The class (ABC + Good Inheritance)
+
+```python
+from abc import ABC, abstractmethod
+
+
+class InvalidOpError(Exception):
+    pass
+
+
+class Stream(ABC):
+    def __init__(self):
+        self.opened = False
+
+    def open(self):
+        if self.opened:
+            # custom exception
+            raise IndentationError("Stream is Already Open")
+        self.opened = True
+
+    def close(self):
+        if not self.opened:
+            # custom exception
+            raise IndentationError("Stream is Already closed")
+        self.opened = False
+
+    @abstractmethod
+    def read(self):
+        pass
+
+# using the abstractmethod to create concrete class
+
+
+class FileStream(Stream):
+    def read(self):
+        print("File is stream")
+
+
+class NetworkStream(Stream):
+    def read(self):
+        print("Network is stream")
+
+
+class MemoryStream(Stream):
+    def read(self):
+        print("Memory is stream")
+```
+
+### Polymorphism
+
+Many forms
+
+```python
+from abc import ABC, abstractmethod
+
+
+class UIcontrol(ABC):
+    @abstractmethod
+    def draw(self):
+        pass
+
+
+class TextBox(UIcontrol):
+    def draw(self):
+        print("dessin")
+
+
+class DropDownList(UIcontrol):
+    def draw(self):
+        print("menu drop")
+
+# A function to draw (Polymorphism)
+
+
+def dessin(controls):
+    for control in controls:
+        control.draw()
+
+
+txt = TextBox()
+menu = DropDownList()
+```
+
+The function `dessin` is acting like a render method.
+
+```python
+
+In [18]: dessin([txt,menu])
+dessin
+menu drop
+```
+
+### Duck Typing
+
+The dessin function work earlier because the object that we send to it is iterable.
+
+### Extending Built-in Types
+
+```python
+class Text(str):
+    def duplicate(self):
+        return f"{self} {self}"
+
+
+python = Text("Python")
+
+
+class TrackLister(list):
+    # overide a build-in method a little bit
+    def append(self, object):
+        print("append called")
+        return super().append(object)
+
+list  = TrackLister()
+
+```
+
+```python
+In [21]: python = Text("Python")
+
+In [22]: python.lower()
+Out[22]: 'python'
+
+In [23]: python.upper()
+Out[23]: 'PYTHON'
+
+In [24]: python.duplicate()
+Out[24]: 'Python Python'
+
+In [26]: list.append("1")
+append called
+
+In [27]: work = TrackLister([1,2,3])
+
+In [28]: work.append(10)
+append called
+
+In [29]: print(work.append(10))
+append called
+None
+```
+
+### Data Classses
