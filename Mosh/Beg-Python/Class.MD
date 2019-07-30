@@ -1305,3 +1305,210 @@ class Fish(Animal):
 ```
 
 ### Object Class
+
+Inheritance:
+
+- An instance of Mammal class is an intance of animal.
+- Animal is an instance of the `Object class`
+
+`isinstance` or `isubclass` two built-in methods that gives you the trick.
+
+### Method Overriding
+
+```python
+class Animal:
+    def __init__(self):
+        self.age = 1
+
+    def eat(self):
+        print("EAT")
+
+# childrens of animal
+
+
+class Mammal(Animal):
+    def __init__(self):
+        self.weight = 2
+
+    def walk(self):
+        print('WALK')
+
+
+class Fish(Animal):
+    def swim(self):
+        print('SWIM')
+
+
+m = Mammal()
+```
+
+```python
+In [2]: m = Mammal()
+
+In [3]: m.age
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-3-e7f45411cdb8> in <module>()
+----> 1 m.age
+
+AttributeError: 'Mammal' object has no attribute 'age'
+
+In [4]: m.weight
+Out[4]: 2
+```
+
+The constructor in the Mammal class replace the contructor of his parent class: `Animal`.
+
+```python
+# parent or base class
+class Animal:
+    def __init__(self):
+        self.age = 1
+
+    def eat(self):
+        print("EAT")
+
+# childrens of animal
+
+
+class Mammal(Animal):
+    def __init__(self):
+        # the parent - class constructor
+        super().__init__()
+        # child class constructor
+        self.weight = 2
+        # we can call the parent-class after also
+        # super().__init__()
+
+    def walk(self):
+        print('WALK')
+
+
+class Fish(Animal):
+    def swim(self):
+        print('SWIM')
+
+
+m = Mammal()
+
+m.age
+
+m.weight
+
+```
+
+With the `super().__init__()` we can access the constructor of the parent class.
+
+```python
+In [6]: m.age
+Out[6]: 1
+
+In [7]: m.weight
+Out[7]: 2
+```
+
+### Multi-level Inheritance
+
+Avoid doing this. Kepp it simple
+
+```python
+# parent or base class
+class Animal:
+    def __init__(self):
+        self.age = 1
+
+    def eat(self):
+        print("EAT")
+
+# childrens of animal
+
+
+class Mammal(Animal):
+    def __init__(self):
+        # the parent - class constructor
+        super().__init__()
+        # child class constructor
+        self.weight = 2
+        # we can call the parent-class after also
+        # super().__init__()
+
+    def walk(self):
+        print('WALK')
+
+
+class Fish(Animal):
+    def swim(self):
+        print('SWIM')
+
+
+class Bird(Animal):
+    def fly(self):
+        print("FLY")
+
+```
+
+### Multiple Inheritance
+
+Look at this behavior
+
+```python
+class Employee:
+    def greet(self):
+        print("Employee Greet")
+
+
+class Person:
+    def greet(self):
+        print("Person greet")
+
+# multi-level inheritance
+
+
+class Manager(Employee, Person):
+    pass
+
+
+man = Manager()
+```
+
+We are going to get the `greet` method form the class you inherit first.
+
+```python
+
+In [10]: man.greet()
+Employee Greet
+
+In [11]: man.greet()
+Employee Greet
+```
+
+A good example of multilevel-inheritance
+
+```python
+In [12]:     def greet(self):
+    ...:         print("Employee Greet")
+    ...:
+    ...:
+    ...: class Person:
+    ...:     def speak(self):
+    ...:         print("Person speak")
+    ...:
+    ...: # multi-level inheritance
+    ...:
+    ...:
+    ...: class Manager(Employee, Person):
+    ...:     pass
+    ...:
+    ...:
+    ...: man = Manager()
+    ...:
+    ...:
+
+In [13]: man.greet()
+Employee Greet
+
+In [14]: man.speak()
+Person speak
+```
+
+### Example of Inheritance

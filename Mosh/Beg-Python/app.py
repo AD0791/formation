@@ -1,20 +1,17 @@
-# parent or base class
-class Animal:
-    def __init__(self):
-        self.age = 1
-
-    def eat(self):
-        print("EAT")
-
-# childrens of animal
+class Employee:
+    def greet(self):
+        print("Employee Greet")
 
 
-class Mammal(Animal):
+class Person:
+    def speak(self):
+        print("Person speak")
 
-    def walk(self):
-        print('WALK')
+# multi-level inheritance
 
 
-class Fish(Animal):
-    def swim(self):
-        print('SWIM')
+class Manager(Employee, Person):
+    pass
+
+
+man = Manager()
