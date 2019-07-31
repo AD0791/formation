@@ -1769,3 +1769,95 @@ None
 ```
 
 ### Data Classses
+
+```python
+class Point:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def __eq__(self, other):
+        return self.x == other.x and self.y == other.y
+
+```
+
+```python
+In [2]: p1 = Point(1,2)
+
+In [3]: p2 = Point(1,2)
+
+In [4]: p1 == p2
+Out[4]: True
+
+In [5]: dict(p1)
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+<ipython-input-5-7ee64c9895f1> in <module>()
+----> 1 dict(p1)
+
+TypeError: 'Point' object is not iterable
+
+In [6]: dic(p1)
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-6-f20708a6fca7> in <module>()
+----> 1 dic(p1)
+
+NameError: name 'dic' is not defined
+
+In [7]: id(p1)
+Out[7]: 4382985488
+
+In [8]: id(p2)
+Out[8]: 4382645392
+
+```
+
+Best practice if we have a class similar to this. We can use a named tuple. (Immutable)
+
+```python
+from collections import namedtuple
+
+Point = namedtuple("Point", ["x", "y"])
+
+p1 = Point(x=1, y=2)
+p2 = Point(x=1, y=2)
+p3 = Point(x=1, y=2)
+```
+
+```python
+In [10]: p1==p2==p3
+Out[10]: True
+
+In [11]: p1.x
+Out[11]: 1
+
+In [12]: p1.y
+Out[12]: 2
+
+In [13]: Point.x
+Out[13]: <property at 0x107c5f470>
+
+In [14]: Point.y
+Out[14]: <property at 0x107c94f50>
+
+In [15]: p1.x = 1
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-15-dbb58f7bb762> in <module>()
+----> 1 p1.x = 1
+
+AttributeError: can't set attribute
+```
+
+#### Named tuple Class
+
+```python
+from collections import namedtuple
+
+Point = namedtuple("Point", ["x", "y"])
+
+p1 = Point(x=1, y=2)
+p2 = Point(x=1, y=2)
+p3 = Point(x=1, y=2)
+```
