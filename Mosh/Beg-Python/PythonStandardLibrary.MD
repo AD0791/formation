@@ -267,3 +267,183 @@ with ZipFile("file.zip") as zip:
 ```
 
 ### Working with csv files
+
+We can create a csv files. (just like a zip file)
+
+```python
+import csv
+
+# Let's ceate a csv files
+
+"""
+#Old Approch
+file = open("data.csv", "w")
+writer = csv.writer(file)
+    writer.writerow(["salle", "examen", "resultat"])
+    writer.writerow(["Oracle", "Math", 50])
+    writer.writerow(["Opak", "Physique", 60])
+    writer.writerow(["Opiumus", "French", 90])
+file.close()
+"""
+
+"""
+with open("data.csv", "w") as file:
+    writer = csv.writer(file)
+    writer.writerow(["salle", "examen", "resultat"])
+    writer.writerow(["Oracle", "Math", 50])
+    writer.writerow(["Opak", "Physique", 60])
+    writer.writerow(["Opiumus", "French", 90])
+"""
+
+# Let's inside that file
+
+with open("data.csv") as file:
+    reader = csv.reader(file)
+    # print(list(reader))
+    for p in reader:
+        print(reader)
+```
+
+```bash
+[Running] python3 "/Users/alexandrodisla/Desktop/repo/formation/Mosh/Beg-Python/anapp.py"
+[['salle', 'examen', 'resultat'], ['Oracle', 'Math', '50'], ['Opak', 'Physique', '60'], ['Opiumus', 'French', '90']]
+
+[Done] exited with code=0 in 0.069 seconds
+
+[Running] python3 "/Users/alexandrodisla/Desktop/repo/formation/Mosh/Beg-Python/anapp.py"
+<_csv.reader object at 0x10cd371d0>
+<_csv.reader object at 0x10cd371d0>
+<_csv.reader object at 0x10cd371d0>
+<_csv.reader object at 0x10cd371d0>
+
+[Done] exited with code=0 in 0.065 seconds
+```
+
+### Working with JSON files
+
+```python
+import json
+from pathlib import Path
+
+movie = [{"id": 1, "great": "bonjour"}, {"id": 2, "great": "Lelex"}]
+data = json.dumps(movie)
+print(data)
+
+# write json files
+# Path("movie.json").write_text(data)
+
+readata = Path("movie.json").read_text()
+newmovies = json.loads(readata)
+print("A proper reading:", newmovies)
+
+
+# it's an list so we can't
+
+print(newmovies[0]["great"], newmovies[1]["great"])
+```
+
+```bash
+[Running] python3 "/Users/alexandrodisla/Desktop/repo/formation/Mosh/Beg-Python/anapp.py"
+[{"id": 1, "great": "bonjour"}, {"id": 2, "great": "Lelex"}]
+A proper reading: [{'id': 1, 'great': 'bonjour'}, {'id': 2, 'great': 'Lelex'}]
+bonjour Lelex
+
+[Done] exited with code=0 in 0.071 seconds
+```
+
+### Working qith a SQLITE3 database
+
+Pass the json to the SQLITE3 database.
+
+#### API to write from json file
+
+```python
+import sqlite3
+import json
+from pathlib import Path
+
+##movie = [{"id": 1, "great": "bonjour"}, {"id": 2, "great": "Lelex"}]
+#data = json.dumps(movie)
+# print(data)
+
+# write json files
+# Path("movie.json").write_text(data)
+
+data = Path("movie.json").read_text()
+movies = json.loads(data)
+# we have the json file
+print("A proper reading:", movies)
+# it's an list so we can't
+print(movies[0]["great"], movies[1]["great"])
+
+
+# establish the connection to sqlite3;
+# AN API
+with sqlite3.connect("db.sqlite3") as conn:
+    # create the tables
+    createTable = """ CREATE TABLE Movies(
+        id INTEGER NOT NULL PRIMARY KEY,
+        great TEXT
+    );"""
+    conn.execute(createTable)
+    # iterate over the json for the values
+    command = "INSERT INTO Movies VALUES(?,?)"
+    for movie in movies:
+        conn.execute(command, tuple(movie.values()))
+    conn.commit()
+
+```
+
+The database was created with taht API
+
+#### CREATE API to read data from DATABASE
+
+```python
+import sqlite3
+import json
+from pathlib import Path
+
+data = Path("movie.json").read_text()
+movies = json.loads(data)
+# we have the json file
+print("A proper reading:", movies)
+# it's an list so we can't
+print(movies[0]["great"], movies[1]["great"])
+
+
+# establish the connection to sqlite3;
+# AN API
+# with sqlite3.connect("db.sqlite3") as conn:
+# create the tables
+#   createTable = """ CREATE TABLE Movies(
+#  id INTEGER NOT NULL PRIMARY KEY,
+# great TEXT
+# )
+# """
+#    conn.execute(createTable)
+# iterate over the json for the values
+#    command = "INSERT INTO Movies VALUES(?,?)"
+#    for movie in movies:
+#        conn.execute(command, tuple(movie.values()))
+#    conn.commit()
+
+
+# Read data from databse
+with sqlite3.connect("db.sqlite3") as conn:
+    command = "SELECT * FROM Movies"
+    cursor = conn.execute(command)
+    # for row in cursor:
+    #    print(row)
+    movies = cursor.fetchall()
+    print(movies)
+    # conn.commit()
+```
+
+```bash
+[Running] python3 "/Users/alexandrodisla/Desktop/repo/formation/Mosh/Beg-Python/anapp.py"
+A proper reading: [{'id': 1, 'great': 'bonjour'}, {'id': 2, 'great': 'Lelex'}]
+bonjour Lelex
+[(1, 'bonjour'), (2, 'Lelex')]
+
+[Done] exited with code=0 in 0.101 seconds
+```

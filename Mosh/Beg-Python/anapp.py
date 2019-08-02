@@ -1,30 +1,38 @@
+import sqlite3
+import json
 from pathlib import Path
-#from time import ctime
-#import shutil
-from zipfile import ZipFile
 
-path = Path("ecommerce")
+data = Path("movie.json").read_text()
+movies = json.loads(data)
+# we have the json file
+print("A proper reading:", movies)
+# it's an list so we can't
+print(movies[0]["great"], movies[1]["great"])
 
-""" same as below
-# open
-zip = ZipFile("file.zip", "w")
 
-for p in path.rglob("*.*"):
-    zip.write(path)
-# close
-zip.close()
-"""
+# establish the connection to sqlite3;
+# AN API
+# with sqlite3.connect("db.sqlite3") as conn:
+# create the tables
+#   createTable = """ CREATE TABLE Movies(
+#  id INTEGER NOT NULL PRIMARY KEY,
+# great TEXT
+# )
+# """
+#    conn.execute(createTable)
+# iterate over the json for the values
+#    command = "INSERT INTO Movies VALUES(?,?)"
+#    for movie in movies:
+#        conn.execute(command, tuple(movie.values()))
+#    conn.commit()
 
-# create a zip file with the sub-directory ecommerce:
-with ZipFile("file.zip", "w") as zip:
-    for p in path.rglob("*.*"):
-        zip.write(p)
 
-# output a certain and do the extraction
-with ZipFile("file.zip") as zip:
-    print(zip.namelist())
-    info = zip.getinfo("ecommerce/__init__.py")
-    print(info.file_size)
-    print(info.compress_size)
-    # extract the zip file inside:  actual directory
-    zip.extractall("extract")
+# Read data from databse
+with sqlite3.connect("db.sqlite3") as conn:
+    command = "SELECT * FROM Movies"
+    cursor = conn.execute(command)
+    # for row in cursor:
+    #    print(row)
+    movies = cursor.fetchall()
+    print(movies)
+    # conn.commit()
