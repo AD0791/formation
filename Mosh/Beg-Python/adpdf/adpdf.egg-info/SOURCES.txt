@@ -1,0 +1,9 @@
+README.md
+setup.py
+adpdf/__init__.py
+adpdf/pdf2image.py
+adpdf/pdf2text.py
+adpdf.egg-info/PKG-INFO
+adpdf.egg-info/SOURCES.txt
+adpdf.egg-info/dependency_links.txt
+adpdf.egg-info/top_level.txt

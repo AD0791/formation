@@ -435,7 +435,7 @@ with sqlite3.connect("db.sqlite3") as conn:
     # for row in cursor:
     #    print(row)
     movies = cursor.fetchall()
-    print(movies)
+    print("pull from database:", movies)
     # conn.commit()
 ```
 
@@ -443,7 +443,326 @@ with sqlite3.connect("db.sqlite3") as conn:
 [Running] python3 "/Users/alexandrodisla/Desktop/repo/formation/Mosh/Beg-Python/anapp.py"
 A proper reading: [{'id': 1, 'great': 'bonjour'}, {'id': 2, 'great': 'Lelex'}]
 bonjour Lelex
-[(1, 'bonjour'), (2, 'Lelex')]
+pull from database: [(1, 'bonjour'), (2, 'Lelex')]
 
-[Done] exited with code=0 in 0.101 seconds
+[Done] exited with code=0 in 0.08 seconds
+```
+
+### Working with Timestamps
+
+```python
+import time
+
+print("Not Human Readable Time", time.time())
+
+# A way to calculate the execution time of a function
+
+
+def send_email():
+    for i in range(10000):
+        pass
+
+
+start = time.time()
+send_email()
+end = time.time()
+
+duration = end - start
+print(duration)
+
+```
+
+### DATETIME
+
+```python
+from datetime import datetime
+from time import time
+
+dt = datetime(2019, 2, 3)
+print(dt)
+dat = datetime.now()
+print(dat)
+data = datetime.strptime("1991/07/10", "%Y/%m/%d")
+print(data)
+td = datetime.fromtimestamp(time())
+print(td)
+print(dt.year)
+print(dt.month)
+print(dt.timestamp())
+print(dt.strftime("%Y/%m"))
+```
+
+```bash
+[Running] python3 "/Users/alexandrodisla/Desktop/repo/formation/Mosh/Beg-Python/anapp.py"
+2019-02-03 00:00:00
+2019-08-02 22:54:49.116442
+1991-07-10 00:00:00
+2019-08-02 22:54:49.125999
+2019
+2
+1549170000.0
+2019/02
+
+[Done] exited with code=0 in 0.071 seconds
+```
+
+### Time Deltas (duration)
+
+```python
+from datetime import datetime, timedelta
+
+dt = datetime(2019, 2, 3)
+print(dt)
+dat = datetime.now()
+print(dat)
+duration = dat - dt
+print(duration)
+print(duration.days)
+print(duration.seconds)
+print(duration.total_seconds())
+print("use of timedelta")
+dt2 = datetime(2019, 2, 3) + timedelta(days=1)
+print(dt2)
+dat2 = datetime.now()
+print(dat2)
+duration2 = dat2 - dt2
+print(duration2)
+print(duration2.days)
+print(duration2.seconds)
+print(duration2.total_seconds())
+```
+
+```bash
+Running] python3 "/Users/alexandrodisla/Desktop/repo/formation/Mosh/Beg-Python/anapp.py"
+2019-02-03 00:00:00
+2019-08-03 08:22:13.176187
+181 days, 8:22:13.176187
+181
+30133
+15668533.176187
+use of timedelta
+2019-02-04 00:00:00
+2019-08-03 08:22:13.176242
+180 days, 8:22:13.176242
+180
+30133
+15582133.176242
+
+[Done] exited with code=0 in 0.069 seconds
+```
+
+### Generate Random Values
+
+```python
+import random
+import string
+
+print(random.random())
+print(random.randint(1, 100))
+print(random.choice([1, 2, 3, 43, 54, 456, 57, 67]))
+print(random.choices([1, 2, 3, 43, 54, 456, 57, 67], k=4))
+print("password generation")
+print(random.choices("sadijcodnvefvneovknevi", k=4))
+print("".join(random.choices("sadijcodnvefvneovknevi", k=4)))
+print("better way to do it")
+print(random.choices(string.ascii_letters+string.digits, k=4))
+print("".join(random.choices(string.ascii_letters+string.digits, k=4)))
+print("change order of number in list")
+numbers = [12, 1, 3, 234, 43, 545, 4, 656, 5]
+random.shuffle(numbers)
+print(numbers)
+```
+
+```bash
+[Running] python3 "/Users/alexandrodisla/Desktop/repo/formation/Mosh/Beg-Python/anapp.py"
+0.7635077522052182
+5
+67
+[43, 2, 67, 54]
+password generation
+['d', 'e', 'n', 'd']
+oodv
+better way to do it
+['P', 'U', '8', 'e']
+2vPc
+change order of number in list
+[545, 3, 656, 5, 4, 43, 234, 1, 12]
+
+[Done] exited with code=0 in 0.073 seconds
+
+```
+
+### Open the web browser
+
+```python
+import webbrowser
+
+print("deployment is complete")
+print("open a new tab")
+webbrowser.open_new_tab("https://learn.co/")
+```
+
+Webbrowser work it open a new tab on our default webbrowser.
+
+### Sending Emails
+
+> Must Enable: **Lesssecureapp on gmail.**
+
+```python
+ffrom email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.image import MIMEImage
+from pathlib import Path
+import smtplib
+
+message = MIMEMultipart()
+message["from"] = "alexdisla1991@gmail.com"
+message["to"] = "larissa.ed17@gmail.com"
+message["subject"] = "Une photo pour expliquer"
+# send text
+message.attach(MIMEText("Ok This the last one. "))
+# send image
+message.attach(MIMEImage(Path("py.png").read_bytes()))
+
+#smtp = smtplib.SMTP(host="smtp.gmail.com", port=587)
+# smtp.ehlo()
+# smtp.starttls()
+#smtp.login("alexdisla1991@gmail.com", "ChantaleJ91")
+# smtp.send_message(message)
+# print("sent...")
+# smtp.close()
+
+with smtplib.SMTP(host="smtp.gmail.com", port=587) as smtp:
+    smtp.ehlo()
+    smtp.starttls()
+    smtp.login("alexdisla1991@gmail.com", "ChantaleJ91")
+    smtp.send_message(message)
+    print("sent...")
+
+```
+
+It work beautifully
+
+```bash
+[Running] python3 "/Users/alexandrodisla/Desktop/repo/formation/Mosh/Beg-Python/anapp.py"
+sent...
+```
+
+### Templates
+
+A better to send our content email.
+
+```html
+<html lang="en">
+  <head> </head>
+
+  <body>
+    <h1>$grateful</h1>
+    Hi <strong>$name</strong>, this is the power of python!!!.
+  </body>
+</html>
+```
+
+```python
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.image import MIMEImage
+from pathlib import Path
+from string import Template
+import smtplib
+
+template = Template(Path("template.html").read_text())
+
+message = MIMEMultipart()
+message["from"] = "alexdisla1991@gmail.com"
+message["to"] = "alexandrodisla13@gmail.com"
+message["subject"] = "Une photo pour expliquer"
+# send text dynamically
+body = template.substitute(
+    {"name": "Alex"}, grateful="I am very grateful to be able to learn")
+message.attach(MIMEText(body, "html"))
+# send image
+message.attach(MIMEImage(Path("py.png").read_bytes()))
+
+#smtp = smtplib.SMTP(host="smtp.gmail.com", port=587)
+# smtp.ehlo()
+# smtp.starttls()
+#smtp.login("alexdisla1991@gmail.com", "ChantaleJ91")
+# smtp.send_message(message)
+# print("sent...")
+# smtp.close()
+
+with smtplib.SMTP(host="smtp.gmail.com", port=587) as smtp:
+    smtp.ehlo()
+    smtp.starttls()
+    smtp.login("alexdisla1991@gmail.com", "ChantaleJ91")
+    smtp.send_message(message)
+    print("sent...")
+```
+
+### Command-line argument
+
+```python
+import sys
+
+print(sys.argv)
+
+if len(sys.argv) == 1:
+    print("Usage: python3 anapp.py <pass>")
+else:
+    password = sys.argv[1]
+    print("password", password)
+```
+
+```bash
+Alexandros-MacBook-Pro:Beg-Python alexandrodisla$ python3 anapp.py o
+['anapp.py', 'o']
+password o
+Alexandros-MacBook-Pro:Beg-Python alexandrodisla$ python3 anapp.py
+['anapp.py']
+Usage: python3 anapp.py <pass>
+Alexandros-MacBook-Pro:Beg-Python alexandrodisla$ python3 anapp.py -slippery
+['anapp.py', '-slippery']
+password -slippery
+```
+
+### Running External Programs
+
+```python
+import subprocess
+
+# subprocess.call()
+# subprocess.check_all()
+# subprocess.check_output()
+# subprocess.Popen()
+# the run is better
+
+try:
+    completed = subprocess.run(["python3", "other.py"],
+                               capture_output=True, text=True, check=True)
+    # print(completed)
+    # print(type(completed))
+    print(completed.args)
+    print(completed.stderr)
+    print(completed.returncode)
+    # if the output is captured
+    print(completed.stdout)
+
+# besides check = True
+# good preactice to check errors
+# if completed.returncode != 0:
+#    print(completed.stderr)
+except subprocess.CalledProcessError as ex:
+    print(ex)
+```
+
+```bash
+[Running] python3 "/Users/alexandrodisla/Desktop/repo/formation/Mosh/Beg-Python/anapp.py"
+['python3', 'other.py']
+
+0
+Python is beautiful and powerful!
+
+
+[Done] exited with code=0 in 0.111 seconds
 ```
