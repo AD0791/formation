@@ -653,3 +653,118 @@ password= "xxxx"
 > It work without errors.
 
 ### PDF
+
+```python
+pip3 install PyPDF2
+```
+
+```python
+import PyPDF2
+
+# rb = read binary
+# num page, rotate and creating new pdf:
+"""
+with open("NameCons.pdf", "rb") as file:
+    reader = PyPDF2.PdfFileReader(file)
+    print("num of page", reader.numPages)
+    page = reader.getPage(0)
+    page.rotateClockwise(90)
+    writer = PyPDF2.PdfFileWriter()
+    writer.addPage(page)
+    # create pdf
+    # write binary
+    with open("rotate.pdf", "wb") as output:
+        writer.write(output)
+"""
+
+# combining pdf:
+merger = PyPDF2.PdfFileMerger()
+files_name = ["rotate.pdf", "NameCons.pdf"]
+for file in files_name:
+    merger.append(file)
+merger.write("combined.pdf")
+```
+
+### Excell
+
+```bash
+pip3 install openpyxl
+```
+
+```python
+import openpyxl
+
+# wb = openxl.workbook()
+wb = openpyxl.load_workbook("transactions.xlsx")
+# print(wb.sheetnames)
+
+sheet = wb["Sheet1"]
+"""
+cell = sheet["a1"]
+print(cell.row)
+print(cell.column)
+print(cell.coordinate)
+"""
+
+"""
+cell = sheet.cell(row=1, column=1)
+
+print(cell.row)
+print(cell.column)
+print(cell.coordinate)
+
+
+print(sheet.max_row)
+print(sheet.max_column)
+"""
+
+
+# iterate of rwo and columns. first row is 1
+for row in range(1, sheet.max_row+1):
+    for col in range(1, sheet.max_column+1):
+        all = sheet.cell(row, col)
+        print(all.value)
+
+
+# sheet["a"]
+# sheet["a:c""]
+# sheet["a1:c4""]
+# sheet["1:4""]
+
+sheet.append([1,2,3])
+
+wb.save("ok.xlsx")
+```
+
+### Command Query Separation Principle
+
+Command is different than Query. Therefore they must be set or implement appart in our programme.
+
+The query must change the state of the system.
+
+### Numpy
+
+Use documentation from data science courses
+
+```python
+import numpy as np
+
+# matrix en autre
+array = np.array([[1, 2, 3], [3, 4, 5]])
+print(array)
+print(array[0, 0])
+print(array > 3)
+print(array[array > 3])
+
+# Differnece between pure python and numpy
+# pure
+inch = [1, 2, 3]
+cm = [inch*2.54 for inch in inch]
+print(cm)
+
+# numpy
+dinch = np.array([1, 2, 3])
+dcm = dinch*2.54
+print(dcm)
+
+```
