@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "/Library/Frameworks/Python.framework/Versions/3.7/bin/python3",
+    "python.pythonPath": "/Users/alexandrodisla/.local/share/virtualenvs/vidly-xhLcunrD/bin/python",
     "code-runner.executorMap": {
         "javascript": "node",
         "java": "cd $dir && javac $fileName && java $fileNameWithoutExt",
