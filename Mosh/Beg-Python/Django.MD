@@ -425,12 +425,8 @@ class Movie(models.Model):
     genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
     # add a new
     date_created = models.DateTimeField(default=timezone.now)
-    # override the default __str__
-
 
 ```
-
-We have override the `__str__` of the 2 classes.
 
 #### Customize the display of the columns
 
@@ -451,7 +447,7 @@ class GenreAdmin(admin.ModelAdmin):
 class MovieAdmin(admin.ModelAdmin):
 
     list_display = ("title", "number_in_stock", "daily_rate")
-    # specify the fields we want to show
+    # specify the fields we want or not to show
     exclude = ('date_created', )
 
     # Register your models here.
@@ -464,3 +460,32 @@ admin.site.register(Movie, MovieAdmin)
 Now we have a perfect representation of our data base inside the admin panel. we can nice administrate the website.
 
 **This is not the public area**
+
+### Database Abstraction Area
+
+We want to view a list of movies in our `/movies` routes.
+
+Go: `movies/views.py`
+
+Just like in ruby, we can pass data from our databse with our models class. `(Class.all)` is avalaible.
+
+```python
+from django.http import HttpResponse
+from django.shortcuts import render
+from .models import Movie
+
+# Create your views here.
+
+
+def index(request):
+    movies = Movie.objects.all()
+    output = " ".join([m.title for m in movies])
+    return HttpResponse(output)
+
+# create a urls.py to mapp this index
+
+```
+
+Npw we must learn to render these logic inside an html. With Templates....
+
+### Templates
