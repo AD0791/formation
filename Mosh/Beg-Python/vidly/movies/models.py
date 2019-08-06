@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.utils import timezone
 # Create your models here.
 
 
@@ -18,3 +18,5 @@ class Movie(models.Model):
     # on delete will tell django how to handle
     # a delete event of a genre given the
     genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
+    # add a new
+    date_created = models.DateTimeField(default=timezone.now)
