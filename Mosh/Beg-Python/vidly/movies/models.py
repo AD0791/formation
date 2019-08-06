@@ -6,6 +6,10 @@ from django.utils import timezone
 class Genre(models.Model):
     # use field
     name = models.CharField(max_length=255)
+    # override the default __str__
+
+    def __str__(self):
+        return self.name
 
 
 class Movie(models.Model):
@@ -20,3 +24,7 @@ class Movie(models.Model):
     genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
     # add a new
     date_created = models.DateTimeField(default=timezone.now)
+    # override the default __str__
+
+    # def __str__(self):
+    #   return self.name

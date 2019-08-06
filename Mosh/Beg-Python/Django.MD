@@ -325,3 +325,142 @@ Running migrations:
 ```
 
 ### Admin
+
+We are going to take advantage of the powerful administration interface.
+
+```bash
+python3 manage.py runserver
+```
+
+As we can see we have an admin panel (application) that is avalaible to us.
+
+WHY?
+
+`vidly/vidly/setting.py`
+
+we have, besides the movies app that we registered earlier, an admin and auth apps.
+
+```python
+(..)
+# Application definition
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'movies.apps.MoviesConfig'
+]
+(..)
+```
+
+To implement users into our application, We will need a **super user**.
+
+```bash
+(vidly)bash3.2$ python3 manage.py createsuperuser
+```
+
+Then enter valid credentials
+
+```bash
+(vidly) bash-3.2$ python3 manage.py createsuperuser
+Username (leave blank to use 'alexandrodisla'): alexandro
+Email address: alexandrodisla@hotmail.com
+Password:
+Password (again):
+Superuser created successfully.
+```
+
+#### We must now move the components of our movies app into the `django_admin_app`
+
+We GO inside our:
+
+`./movies/admin.py` directory
+
+```python
+from django.contrib import admin
+# .models means the models module in our current folder
+from .models import Genre, Movie
+# Register your models here.
+admin.site.register(Genre)
+admin.site.register(Movie)
+```
+
+We are telling django_admin_app to add Movie and Genre to the admin panel.
+
+** you can manage the website with this panel. Which also means administrate the database. because we added the two models above**
+
+### Customizing the admin
+
+We want to modify the representation of our models (Movie; Genre) inside the admin panel.
+
+Go : `movies/models.py'
+
+```python
+from django.db import models
+from django.utils import timezone
+# Create your models here.
+
+
+class Genre(models.Model):
+    # use field
+    name = models.CharField(max_length=255)
+    # override the default __str__
+
+    def __str__(self):
+        return self.name
+
+
+class Movie(models.Model):
+    # use field
+    title = models.CharField(max_length=255)
+    release_year = models.IntegerField()
+    number_in_stock = models.IntegerField()
+    daily_rate = models.FloatField()
+    # association has-many and belongs to
+    # on delete will tell django how to handle
+    # a delete event of a genre given the
+    genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
+    # add a new
+    date_created = models.DateTimeField(default=timezone.now)
+    # override the default __str__
+
+
+```
+
+We have override the `__str__` of the 2 classes.
+
+#### Customize the display of the columns
+
+`movies/admin`:
+
+```python
+from django.contrib import admin
+# .models means the models module in our current folder
+from .models import Genre, Movie
+
+# customize the representation of the models in admin panel
+
+
+class GenreAdmin(admin.ModelAdmin):
+    list_display = ("id", "name")
+
+
+class MovieAdmin(admin.ModelAdmin):
+
+    list_display = ("title", "number_in_stock", "daily_rate")
+    # specify the fields we want to show
+    exclude = ('date_created', )
+
+    # Register your models here.
+
+
+admin.site.register(Genre, GenreAdmin)
+admin.site.register(Movie, MovieAdmin)
+```
+
+Now we have a perfect representation of our data base inside the admin panel. we can nice administrate the website.
+
+**This is not the public area**
