@@ -718,15 +718,15 @@ We are going to create a proper directory outside the **movies directory (app)**
 
 - we have a template global outside the movies directory now.
 
-#### Tell django to look inside that global Template directory.
+#### Tell django to look inside that global Template directory
 
-1. put base.html inside the global template folder.
+1. Put base.html inside the global template folder.
 
-`vidly/templates/base.html`
+- `vidly/templates/base.html`
 
-2. specify the existence of the global templates directory inside of django.
+2. Specify the existence of the global templates directory inside of django.
 
-`vidly/vidly/settings.py`
+- `vidly/vidly/settings.py`
 
 ```python
 TEMPLATES = [
@@ -769,9 +769,203 @@ TEMPLATES = [
                     <td>{{movie.daily_rate}}</td>
                 </tr>
             {% endfor %}
-            </tbody>
-        </table>
+        </tbody>
+    </table>
     {% endblock  %}
 ```
 
 ### URL Parameters
+
+We are about to implement some options of the CRUD.
+
+> A Show Routes: (Read) like sinatra = `/movies/:id`
+
+GO: `vidly/movies/urls.py` ,`vidly/vidly/urls.py`
+AND `vidly/movies/views.py`
+
+To establish the first plumbings
+
+```python
+from django.http import HttpResponse
+from django.shortcuts import render
+from .models import Movie
+
+# Create your views here.
+
+
+def index(request):
+    movies = Movie.objects.all()
+    #output = " ".join([m.title for m in movies])
+    # return HttpResponse(output)
+    return render(request, 'movies/index.html', {'movies': movies})
+
+
+def detail(request, movie_id):
+    return HttpResponse(movie_id)
+
+# we must create our template now
+# create a urls.py to mapp this index
+
+```
+
+```python
+"""vidly URL Configuration
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/2.2/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    # movies/movie.urls
+    path('movies/', include('movies.urls'))
+]
+
+```
+
+```python
+from django.urls import path
+from . import views
+urlpatterns = [
+    path('', views.index, name='movies_index'),
+    # we have set django to apply this behavior:
+    # movies/movie_id
+    # make sure it's an integer
+    path('<int:movie_id>', views.detail, name='movies_detail')
+]
+
+```
+
+### Get a single object
+
+So earlier the piece that was missing was the way to get the id from the models.
+
+- The django urls manager still the same:
+
+```python
+"""vidly URL Configuration
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/2.2/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    # movies/movie.urls
+    path('movies/', include('movies.urls'))
+]
+```
+
+- The real change is implemented in the URLS/VIEWS:
+
+```python
+from django.urls import path
+from . import views
+urlpatterns = [
+    path('', views.index, name='movies_index'),
+    # we have set django to apply this behavior:
+    # movies/movie_id
+    # make sure it's an integer
+    path('<int:movie_id>', views.detail, name='movies_detail')
+]
+```
+
+```python
+from django.http import HttpResponse
+from django.shortcuts import render
+from .models import Movie
+
+# Create your views here.
+
+
+def index(request):
+    movies = Movie.objects.all()
+    #output = " ".join([m.title for m in movies])
+    # return HttpResponse(output)
+    return render(request, 'movies/index.html', {'movies': movies})
+
+
+def detail(request, movie_id):
+    movie = Movie.objects.get(id=movie_id)
+    return render(request, 'movies/detail.html', {'movie': movie})
+
+# we must create our template now
+# create a urls.py to mapp this index
+```
+
+### Raising 404 errors
+
+We must learn to return standard `https: 404` errors.
+
+SEE The BASIC Pattern:
+
+```python
+from django.http import HttpResponse, Http404
+from django.shortcuts import render
+from .models import Movie
+
+(..)
+def detail(request, movie_id):
+    try:
+        movie = Movie.objects.get(id=movie_id)
+        return render(request, 'movies/detail.html', {'movie': movie})
+    except Movie.DoesNotExist:
+        raise Http404()
+
+```
+
+WE CAN IMPLEMENT A BETTER APPROCH
+
+```python
+from django.http import HttpResponse, Http404
+from django.shortcuts import render, get_object_or_404
+from .models import Movie
+
+# Create your views here.
+
+
+def index(request):
+    movies = Movie.objects.all()
+    #output = " ".join([m.title for m in movies])
+    # return HttpResponse(output)
+    return render(request, 'movies/index.html', {'movies': movies})
+
+
+def detail(request, movie_id):
+    #movie = Movie.objects.get(id=movie_id)
+    movie = get_object_or_404(Movie, id=movie_id)
+    return render(request, 'movies/detail.html', {'movie': movie})
+
+
+# we must create our template now
+# create a urls.py to mapp this index
+
+```
+
+### Referencing URLS
+
+We can add anchor tags and reference the links
