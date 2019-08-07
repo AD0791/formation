@@ -652,3 +652,126 @@ WE change the index accordingly:
 ```
 
 ### Customizing the layout
+
+We are going to add a bootstrap navigation bar.
+
+```django-html
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Vidly Movie Application</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-light bg-light">
+      <a class="navbar-brand" href="#">Vidly</a>
+    </nav>
+    <main class="container">
+    {% block content %}
+    {% endblock  %}
+    </main>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
+```
+
+```django-python
+    {% extends 'movies/base.html' %}
+    {% block content %}
+    <table class="table table-bordered table-hover">
+        <thead>
+            <th>Title</th>
+            <th>Genre</th>
+            <th>Stock</th>
+            <th>Daily Rate</th>
+        </thead>
+        <tbody>
+            {% for movie in movies %}
+                <tr>
+                    <td>{{movie.title}}</td>
+                    <td>{{movie.genre}}</td>
+                    <td>{{movie.number_in_stock}}</td>
+                    <td>{{movie.daily_rate}}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endblock  %}
+
+```
+
+WE have modified our table by adding some bootstrap. Next we put our content inside a main element inside our layout.
+
+### Share Template across multiple apps
+
+We are going to create a proper directory outside the **movies directory (app)**.
+
+- we have a template global outside the movies directory now.
+
+#### Tell django to look inside that global Template directory.
+
+1. put base.html inside the global template folder.
+
+`vidly/templates/base.html`
+
+2. specify the existence of the global templates directory inside of django.
+
+`vidly/vidly/settings.py`
+
+```python
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        # DIRS was empty, we set it to see
+        # the templates directory
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+```
+
+3. we implement the change inside our index.html
+
+```django-html
+    {% extends 'base.html' %}
+    {% block content %}
+    <table class="table table-bordered table-hover">
+        <thead>
+            <th>Title</th>
+            <th>Genre</th>
+            <th>Stock</th>
+            <th>Daily Rate</th>
+        </thead>
+        <tbody>
+            {% for movie in movies %}
+                <tr>
+                    <td>{{movie.title}}</td>
+                    <td>{{movie.genre}}</td>
+                    <td>{{movie.number_in_stock}}</td>
+                    <td>{{movie.daily_rate}}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endblock  %}
+```
+
+### URL Parameters
