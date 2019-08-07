@@ -968,4 +968,127 @@ def detail(request, movie_id):
 
 ### Referencing URLS
 
-We can add anchor tags and reference the links
+We can add anchor tags and reference the link, we have created with the magic of our plumbings.
+
+AN Approch possible:
+
+`vidly/movies/templates/movies/index.html`
+
+```django-html
+    {% extends 'base.html' %}
+    {% block content %}
+    <table class="table table-bordered table-hover">
+        <thead>
+            <th>Title</th>
+            <th>Genre</th>
+            <th>Stock</th>
+            <th>Daily Rate</th>
+        </thead>
+        <tbody>
+            {% for movie in movies %}
+                <tr>
+                    <td><a href="/movies/{{movie.id}}">{{movie.title}}</a></td>
+                    <td>{{movie.genre}}</td>
+                    <td>{{movie.number_in_stock}}</td>
+                    <td>{{movie.daily_rate}}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endblock  %}
+```
+
+> WE can do an impementation to prevent our apps from breaking.
+
+we can reference the urls using their names.
+
+`vidly/movies/urls.py`
+
+```python
+from django.urls import path
+from . import views
+urlpatterns = [
+    path('', views.index, name='movies_index'),
+    # we have set django to apply this behavior:
+    # movies/movie_id
+    # make sure it's an integer
+    path('<int:movie_id>', views.detail, name='movies_detail')
+]
+
+```
+
+> Using the name argument of the path methods
+
+We are going to add our **url template tag** inside the anchor tags.
+
+```django-html
+    {% extends 'base.html' %}
+    {% block content %}
+    <table class="table table-bordered table-hover">
+        <thead>
+            <th>Title</th>
+            <th>Genre</th>
+            <th>Stock</th>
+            <th>Daily Rate</th>
+        </thead>
+        <tbody>
+            {% for movie in movies %}
+                <tr>
+                    <td><a href="{% url 'movies_detail' movie.id%}">{{movie.title}}</a></td>
+                    <td>{{movie.genre}}</td>
+                    <td>{{movie.number_in_stock}}</td>
+                    <td>{{movie.daily_rate}}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endblock  %}
+
+```
+
+NOW INSIDE OUR `vidly/movies/urls.py` WE STILL CAN DO A BETTER IMPLEMENTATION and change our templates.
+
+```python
+from django.urls import path
+from . import views
+
+app_name = 'movies'
+
+urlpatterns = [
+    path('', views.index, name='index'),
+    # we have set django to apply this behavior:
+    # movies/movie_id
+    # make sure it's an integer
+    # no need for movies_index and movies_detail
+    # the app_name property insure that django will
+    # know our to deals with these urls.
+
+    path('<int:movie_id>', views.detail, name='detail')
+]
+```
+
+```django-html
+    {% extends 'base.html' %}
+    {% block content %}
+    <table class="table table-bordered table-hover">
+        <thead>
+            <th>Title</th>
+            <th>Genre</th>
+            <th>Stock</th>
+            <th>Daily Rate</th>
+        </thead>
+        <tbody>
+            {% for movie in movies %}
+                <tr>
+                    <td><a href="{% url 'movies:detail' movie.id%}">{{movie.title}}</a></td>
+                    <td>{{movie.genre}}</td>
+                    <td>{{movie.number_in_stock}}</td>
+                    <td>{{movie.daily_rate}}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endblock  %}
+```
+
+### Creating API
