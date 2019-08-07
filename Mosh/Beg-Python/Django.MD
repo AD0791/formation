@@ -461,7 +461,7 @@ Now we have a perfect representation of our data base inside the admin panel. we
 
 **This is not the public area**
 
-### Database Abstraction Area
+### Database Abstraction API
 
 We want to view a list of movies in our `/movies` routes.
 
@@ -489,3 +489,166 @@ def index(request):
 Npw we must learn to render these logic inside an html. With Templates....
 
 ### Templates
+
+We want to return html elements from our `view` functions.
+
+GO: `movies/views.py`
+
+```python
+from django.http import HttpResponse
+from django.shortcuts import render
+from .models import Movie
+
+# Create your views here.
+
+
+def index(request):
+    movies = Movie.objects.all()
+    #output = " ".join([m.title for m in movies])
+    # return HttpResponse(output)
+    return render(request, 'index.html', {'movies': movies})
+
+
+# we must create our template now
+# create a urls.py to mapp this index
+```
+
+Because of the structure of django, it will look the template in all his applications:
+
+`vidly/vidly/settings.py`
+
+```python
+# Application definition
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'movies.apps.MoviesConfig'
+]
+```
+
+Which means if it will look for the template folder in each of these apps. and it will look for `index.html`. As best practice we must use a **name_space**.
+
+HOW?
+
+We add a folder named movies inside our template folder inside our movies app directory.
+
+- `vidly/movies/templates/movies/index.html`
+- Change the code inside the `vidly/movies/views.py`:
+
+```python
+from django.http import HttpResponse
+from django.shortcuts import render
+from .models import Movie
+
+# Create your views here.
+
+
+def index(request):
+    movies = Movie.objects.all()
+    #output = " ".join([m.title for m in movies])
+    # return HttpResponse(output)
+    return render(request, 'movies/index.html', {'movies': movies})
+
+
+# we must create our template now
+# create a urls.py to mapp this index
+```
+
+piece of index.html:
+
+```django_html
+<body>
+  <h1>Vidly</h1>
+  <table class="table">
+    <thead>
+      <th>Title</th>
+      <th>Genre</th>
+      <th>Stock</th>
+      <th>Daily Rate</th>
+    </thead>
+    <tbody>
+      {% for movie in movies %}
+      <tr>
+        <td>{{movie.title}}</td>
+        <td>{{movie.genre}}</td>
+        <td>{{movie.number_in_stock}}</td>
+        <td>{{movie.daily_rate}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</body>
+```
+
+### Adding Bootstrap
+
+1. We get the starter template from the bootstrap website.
+
+2. create an html files `vidly/movies/templates/movies/base.html`
+
+That will be our basic template (layout), we define a **django placeholder**. And we will modify the index.html file.
+
+THE BASE template IS OUR LAYOUT from BOOTSTRAP starter template:
+
+`vidly/movies/templates/movies/base.html`
+
+```django-html
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Vidly Movie Application</title>
+  </head>
+  <body>
+    {% block content %}
+    {% endblock  %}
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
+```
+
+WE change the index accordingly:
+
+`vidly/movies/templates/movies/index.html`
+
+```django-html
+    {% extends 'movies/base.html' %}
+    {% block content %}
+    <table class="table">
+        <thead>
+            <th>Title</th>
+            <th>Genre</th>
+            <th>Stock</th>
+            <th>Daily Rate</th>
+        </thead>
+        <tbody>
+            {% for movie in movies %}
+                <tr>
+                    <td>{{movie.title}}</td>
+                    <td>{{movie.genre}}</td>
+                    <td>{{movie.number_in_stock}}</td>
+                    <td>{{movie.daily_rate}}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endblock  %}
+```
+
+### Customizing the layout
