@@ -33,7 +33,7 @@ Set the vscode pythonPath to path of the virtual environment.
 #### Start Server (default port)
 
 ```bash
- python3 manage.py runserver
+python3 manage.py runserver
 ```
 
 ### First App
@@ -1092,3 +1092,197 @@ urlpatterns = [
 ```
 
 ### Creating API
+
+We are going an API for our movies application. Our goals is to expose end-points for other developoers to work with.
+
+TWO Framework that can help to expose our **consuming api**:
+
+- django-tastypie
+- djangorestframework
+
+```bash
+(vidly) bash-3.2$ pipenv install django-tastypie
+```
+
+We must create another apps inside our `vidly` project.
+
+```bash
+(vidly) bash-3.2$ python3 manage.py startapp api
+```
+
+This app will **be responsible for exposing our api endpoints**
+
+REGISTER:
+
+- we go inside `vidly/vidly/setting.py`
+- reference the config class of the api app (`/vidly/api/apps.py`).
+
+```python
+(..)
+# Application definition
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'movies.apps.MoviesConfig',
+    'api.apps.ApiCongig'
+]
+(..)
+```
+
+```python
+from django.apps import AppConfig
+
+
+class ApiConfig(AppConfig):
+    name = 'api'
+
+```
+
+#### Step2 (REST)
+
+Representational State Transfer API
+
+Go: `vidly/api/models.py`
+
+we are go build of rest api situation
+
+```python
+from django.db import models
+from tastypie.resources import ModelResource
+from movies.models import Movie
+# Build REST API (resources)
+
+
+class MovieResource(ModelResource):
+    class Meta:
+        # lazy loading
+        queryset = Movie.object.all()
+        # will help with `/movie/api/movie`
+        resource_name = "movies"
+        xcludes = ['date_created']
+```
+
+Go: `vidly/vidly/urls.py`
+
+```python
+from django.contrib import admin
+from django.urls import path, include
+from api.models import MovieResource
+
+movie_resource = MovieResource()
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+
+    path('movies/', include('movies.urls')),
+    # api expose
+    path('api/', include(movie_resource.urls))
+]
+
+```
+
+#### Complete API for Genre and Movie
+
+```python
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'movies.apps.MoviesConfig',
+    'api.apps.ApiConfig'
+]
+```
+
+MOVIES MODELS
+
+```python
+from django.db import models
+from django.utils import timezone
+# Create your models here.
+
+
+class Genre(models.Model):
+    # use field
+    name = models.CharField(max_length=255)
+    # override the default __str__
+
+    def __str__(self):
+        return self.name
+
+
+class Movie(models.Model):
+    # use field
+    title = models.CharField(max_length=255)
+    release_year = models.IntegerField()
+    number_in_stock = models.IntegerField()
+    daily_rate = models.FloatField()
+    # association has-many and belongs to
+    # on delete will tell django how to handle
+    # a delete event of a genre given the
+    genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
+    # add a new
+    date_created = models.DateTimeField(default=timezone.now)
+    # override the default __str__
+
+    # def __str__(self):
+    #   return self.name
+```
+
+API MODELS
+
+```python
+from django.db import models
+from tastypie.resources import ModelResource
+from movies.models import Movie, Genre
+# Build REST API (resources)
+
+
+class MovieResource(ModelResource):
+    class Meta:
+        # lazy loading
+        queryset = Movie.objects.all()
+        # will help with `/movie/api/movie`
+        resource_name = "movies"
+        excludes = ['date_created']
+
+
+class GenreResource(ModelResource):
+    class Meta:
+        # lazy loading
+        queryset = Genre.objects.all()
+        # will help with `/movie/api/movie`
+        resource_name = "genres"
+
+```
+
+VIDLY URLS
+
+```python
+from django.contrib import admin
+from django.urls import path, include
+from api.models import MovieResource, GenreResource
+
+movie_resource = MovieResource()
+genre_resource = GenreResource()
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+
+    path('movies/', include('movies.urls')),
+    # api expose
+    path('api/', include(movie_resource.urls)),
+    path('api/', include(genre_resource.urls))
+]
+```
+
+ANd the two api are working!!!!
+
+### The HomePage

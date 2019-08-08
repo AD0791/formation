@@ -15,9 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from api.models import MovieResource, GenreResource
+
+movie_resource = MovieResource()
+genre_resource = GenreResource()
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # movies/movie.urls
-    path('movies/', include('movies.urls'))
+
+    path('movies/', include('movies.urls')),
+    # api expose
+    path('api/', include(movie_resource.urls)),
+    path('api/', include(genre_resource.urls))
 ]

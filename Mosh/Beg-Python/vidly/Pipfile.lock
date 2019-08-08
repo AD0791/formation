@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "705dba3060daf1e221ab6e892adc66f1912e167b77c73f1ae16445d9ae665ccf"
+            "sha256": "fde76fbb20bdc5cfaca1c14c622a0a1c4b25f85c01845ddc6e5831257c102b1e"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -30,6 +30,13 @@
             ],
             "index": "pypi",
             "version": "==2.2.4"
+        },
+        "django-tastypie": {
+            "hashes": [
+                "sha256:a3a2413510009649e0eac885ead96891c783ced788fd94231dc2f72b7a1b4c04"
+            ],
+            "index": "pypi",
+            "version": "==0.14.2"
         },
         "isort": {
             "hashes": [
@@ -89,6 +96,20 @@
             ],
             "version": "==0.5"
         },
+        "python-dateutil": {
+            "hashes": [
+                "sha256:7e6584c74aeed623791615e26efd690f29817a27c73085b78e4bad02493df2fb",
+                "sha256:c89805f6f4d64db21ed966fda138f8a5ed7a4fdbc1a8ee329ce1b74e3c74da9e"
+            ],
+            "version": "==2.8.0"
+        },
+        "python-mimeparse": {
+            "hashes": [
+                "sha256:76e4b03d700a641fd7761d3cd4fdbbdcd787eade1ebfac43f877016328334f78",
+                "sha256:a295f03ff20341491bfe4717a39cd0a8cc9afad619ba44b77e86b0ab8a2b8282"
+            ],
+            "version": "==1.6.0"
+        },
         "pytz": {
             "hashes": [
                 "sha256:26c0b32e437e54a18161324a2fca3c4b9846b74a8dccddd843113109e1116b32",
@@ -133,8 +154,7 @@
         },
         "wrapt": {
             "hashes": [
-                "sha256:565a021fd19419476b9362b05eeaa094178de64f8361e44468f9e9d7843901e1",
-                "sha256:b1d156101d3cc7b8e33633797f2f4b18a4d10dee7d427212d8ff4159c88f2db5"
+                "sha256:565a021fd19419476b9362b05eeaa094178de64f8361e44468f9e9d7843901e1"
             ],
             "version": "==1.11.2"
         }
