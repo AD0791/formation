@@ -1226,14 +1226,11 @@ class Movie(models.Model):
     daily_rate = models.FloatField()
     # association has-many and belongs to
     # on delete will tell django how to handle
-    # a delete event of a genre given the
-    genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
-    # add a new
-    date_created = models.DateTimeField(default=timezone.now)
-    # override the default __str__
+    # a delete event of a genre given.
 
-    # def __str__(self):
-    #   return self.name
+    genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
+
+    date_created = models.DateTimeField(default=timezone.now)
 ```
 
 API MODELS
@@ -1286,3 +1283,129 @@ urlpatterns = [
 ANd the two api are working!!!!
 
 ### The HomePage
+
+We are going to manually create the home page. We are heading to `vidly/vidly/views.py (created)`.
+
+A good approch is to add similar page like the hompage inside the global templates file.
+
+#### the plumbings
+
+- we add the home page `home.html` inside the global templates (`vidly/templates/home.html`).
+- we built the views for the home (`vidly/vidly/views.py (created)`).
+- we register the proper urls (`vidly/vidly/urls.py`)
+- remember how we register the apps = (movies, api) and the gobal templates inside the `vidly/vidly/setting.py`
+
+```django.html
+{% extends 'base.html' %}
+
+{% block content %}
+<h1> Welcome to the Vidly movie application</h1>
+<a href='{% url 'movies:index' %}'>See your movies</a>
+{% endblock  %}
+```
+
+```python
+from django.shortcuts import render
+
+def home(request):
+    return render(request,'home.html')
+
+
+# We need to map this views to our url endpoint
+```
+
+```python
+from django.contrib import admin
+from django.urls import path, include
+from api.models import MovieResource, GenreResource
+from . import views
+
+movie_resource = MovieResource()
+genre_resource = GenreResource()
+
+urlpatterns = [
+    # homepage
+    path('', views.home),
+    # admin and moveis
+    path('admin/', admin.site.urls),
+    path('movies/', include('movies.urls')),
+    # api expose
+    path('api/', include(movie_resource.urls)),
+    path('api/', include(genre_resource.urls))
+]
+```
+
+And The settings
+
+```python
+(..)
+# Application definition
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'movies.apps.MoviesConfig',
+    'api.apps.ApiConfig'
+]
+
+(..)
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+(..)
+```
+
+### Deployment
+
+1. Heroku account
+2. download Heroku cli (do `heroku update`)
+3. Install and use GIT
+4. gunicorn (`pipenv isntall gunicorn`)
+5. At the `vidly/Procfile` add the Procfile file.
+6. resolve the static file situation `vidly/vidly/settings.py` and create a static file `vidly/static`.
+
+- `python3 manage.py collectstatic`
+
+7. to send the static to heroku. `pipenv install whitenoise`
+
+we need to copy and enable the whitenoise middleware inside the settings.py after the security middleware:
+
+```python
+
+MIDDLEWARE = [
+  # 'django.middleware.security.SecurityMiddleware',
+  'whitenoise.middleware.WhiteNoiseMiddleware',
+  # ...
+]
+```
+
+#### THE DEPLOYMENT PROCESS => HEROKU
+
+1. Log to heroku `heroku login`
+2. `heroku create`
+
+- the random app created by heroku:
+
+```bash
+Creating app... done, ? young-taiga-31774
+https://young-taiga-31774.herokuapp.com/ | https://git.heroku.com/young-taiga-31774.git
+```
+
+3. git push heroku master
