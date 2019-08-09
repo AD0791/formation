@@ -25,7 +25,8 @@ SECRET_KEY = 'srw(u1p0_rp%suct@%brpax3rk*0h480a4cjxvxj&-inp_x00&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = ['https://advidlyapp.herokuapp.com']
+ALLOWED_HOSTS = ['']
 
 
 # Application definition

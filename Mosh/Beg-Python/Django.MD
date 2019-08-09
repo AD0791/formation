@@ -1404,8 +1404,58 @@ MIDDLEWARE = [
 - the random app created by heroku:
 
 ```bash
-Creating app... done, ? young-taiga-31774
-https://young-taiga-31774.herokuapp.com/ | https://git.heroku.com/young-taiga-31774.git
+Alexandros-MacBook-Pro:Vidlyapp alexandrodisla$ heroku create advidlyapp
+Creating ? advidlyapp... done
+https://advidlyapp.herokuapp.com/ | https://git.heroku.com/advidlyapp.git
 ```
 
-3. git push heroku master
+3. git push heroku master If you are working only locally. when you are working locally you init the files and commit.
+
+```bash
+Alexandros-MacBook-Pro:Vidlyapp alexandrodisla$ git push heroku master
+Enumerating objects: 178, done.
+Counting objects: 100% (178/178), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (172/172), done.
+Writing objects: 100% (178/178), 576.00 KiB | 6.47 MiB/s, done.
+Total 178 (delta 38), reused 0 (delta 0)
+remote: Compressing source files... done.
+remote: Building source:
+remote:
+remote: -----> Python app detected
+remote: -----> Installing python-3.7.3
+remote: -----> Installing pip
+remote: -----> Installing dependencies with Pipenv 2018.5.18…
+remote:        Installing dependencies from Pipfile.lock (ddc567)…
+remote: -----> Installing SQLite3
+remote: -----> $ python manage.py collectstatic --noinput
+remote:        119 static files copied to '/tmp/build_ac1aad0c738d38ef1a67aa1b1c98d0f7/static'.
+remote:
+remote: -----> Discovering process types
+remote:        Procfile declares types -> web
+remote:
+remote: -----> Compressing...
+remote:        Done: 68.7M
+remote: -----> Launching...
+remote:        Released v5
+remote:        https://advidlyapp.herokuapp.com/ deployed to Heroku
+remote:
+remote: Verifying deploy... done.
+To https://git.heroku.com/advidlyapp.git
+ * [new branch]      master -> master
+```
+
+4. Allocate a web server to the application `heroku ps:scale web=1`
+
+```bash
+Alexandros-MacBook-Pro:Vidlyapp alexandrodisla$ heroku ps:scale web=1
+Scaling dynos... done, now running web at 1:Free
+```
+
+5. `heroku open` we will get an error. solve it 'vidly/vidly/settings.py`
+
+```python
+ALLOWED_HOSTS = ['advidlyapp.herokuapp.com']
+```
+
+6. `git push heroku master`
